@@ -71,6 +71,7 @@ public class UserEntity implements Serializable{
 	}
 	
 	
+	
 	/*public List<NoteProperties> getNotes()
 	{
 		return userNotes;

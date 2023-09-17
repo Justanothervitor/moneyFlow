@@ -1,21 +1,19 @@
 package com.justAnotherVitor.MoneyFlow.Services;
 
 import java.util.List;
-//import java.util.Optional;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.dao.DataIntegrityViolationException;
-//import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.justAnotherVitor.MoneyFlow.Repository.UserRepository;
+import com.justAnotherVitor.MoneyFlow.Services.Exceptions.DatabaseException;
 import com.justAnotherVitor.MoneyFlow.Services.Exceptions.ObjectNotFoundException;
-//import com.justAnotherVitor.MoneyFlow.Services.Exceptions.DatabaseException;
-//import com.justAnotherVitor.MoneyFlow.Services.Exceptions.ResourceNotFoundException;
+import com.justAnotherVitor.MoneyFlow.Services.Exceptions.ResourceNotFoundException;
 import com.justAnotherVitor.MoneyFlow.domain.UserEntity;
 
-//import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ServicesForUser {
@@ -29,24 +27,20 @@ public class ServicesForUser {
 		return repository.findAll();
 	}
 	
+
 	public Optional<UserEntity> findById(String id)
 	{
 		Optional <UserEntity> user = repository.findById(id);
-		
-		if(user.isEmpty())
-		{
-			throw new ObjectNotFoundException("Objeto não encontrado");
-		}
 		return user;
 	}
 	
-	/*
+	
 	public UserEntity insert(UserEntity obj)
 	{
-		return repository.save(obj);
+		return repository.insert(obj);
 	}
 	
-	public void delete (Long id)
+	public void delete (String id)
 	{
 		try {
 			repository.deleteById(id);
@@ -57,23 +51,20 @@ public class ServicesForUser {
 		}
 	}
 	
-	public UserEntity  update(Long id, UserEntity obj)
+	public Optional<UserEntity> update(String id, UserEntity obj)
 	{
-		try {
-			UserEntity entity = repository.getById(id);
-			updateData(entity,obj);
-			return repository.save(entity);
-		}catch(EntityNotFoundException e){
-			throw new ResourceNotFoundException(id);
-		}
 		
-	}
+		Optional<UserEntity> entity = findById(id);
+		entity.stream().filter(x -> x.getId().equals(id)).findAny().ifPresentOrElse(x->
+		{x.setName(obj.getName());
+		x.setLogin(obj.getLogin());
+		x.setPassword(obj.getPassword());
+		},
+		()->{
+			throw new ObjectNotFoundException("Objeto não encontrado");
+		});
+		
+		return entity;
+		}
 	
-	private void updateData(UserEntity entity, UserEntity obj)
-	{
-		entity.setLogin(obj.getLogin());
-		entity.setName(obj.getName());
-		entity.setPassword(obj.getPassword());
-	}
-	*/
 }
