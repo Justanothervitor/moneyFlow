@@ -23,11 +23,11 @@ public class UserEntity implements Serializable{
 	private List<NoteProperties> userNotes = new ArrayList<>();
 	*/
 	
-	public UserEntity()
+	public UserEntity() 
 	{
 		
 	}
-	
+
 	public UserEntity(String id,String name, String login, String password) {
 		super();
 		this.id = id;

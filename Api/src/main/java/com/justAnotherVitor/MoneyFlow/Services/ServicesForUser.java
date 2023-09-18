@@ -51,20 +51,16 @@ public class ServicesForUser {
 		}
 	}
 	
-	public Optional<UserEntity> update(String id, UserEntity obj)
+	public UserEntity update(String id, UserEntity obj)
 	{
+		UserEntity user = this.repository.findById(id).get();
+		user.setName(obj.getName());
+		user.setLogin(obj.getLogin());
+		user.setPassword(obj.getPassword());
 		
-		Optional<UserEntity> entity = findById(id);
-		entity.stream().filter(x -> x.getId().equals(id)).findAny().ifPresentOrElse(x->
-		{x.setName(obj.getName());
-		x.setLogin(obj.getLogin());
-		x.setPassword(obj.getPassword());
-		},
-		()->{
-			throw new ObjectNotFoundException("Objeto não encontrado");
-		});
+		return this.repository.save(user);
+	}
 		
-		return entity;
 		}
 	
-}
+
