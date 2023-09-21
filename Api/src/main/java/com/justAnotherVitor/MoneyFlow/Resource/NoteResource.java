@@ -1,36 +1,62 @@
 package com.justAnotherVitor.MoneyFlow.Resource;
 
+import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.justAnotherVitor.MoneyFlow.Services.NoteServices;
-import com.justAnotherVitor.MoneyFlow.domain.NoteProperties;
+import com.justAnotherVitor.MoneyFlow.domain.NoteEntity;
 
-@RestController
-@RequestMapping(value = "/usernotes")
+
+@RequestMapping
+@RestController(value = "/notes")
 public class NoteResource {
 
 	@Autowired
-	private NoteServices noteFinder;
+	private NoteServices noteServices;
 	
-	@GetMapping
-	public ResponseEntity<List<NoteProperties>> findAll()
-	{
-		List<NoteProperties> list = noteFinder.findAll();
+	@GetMapping("notes")
+	public ResponseEntity<List<NoteEntity>> findAll() {
+		List<NoteEntity> list = this.noteServices.findAll();
 		return ResponseEntity.ok().body(list);
 	}
-	
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<NoteProperties> findById(@PathVariable Long id)
-	{
-		NoteProperties obj = noteFinder.findById(id);
+
+	@GetMapping("notes/{id}")
+	public ResponseEntity<Optional<NoteEntity>> findById(@PathVariable String id) {
+		Optional <NoteEntity> obj = this.noteServices.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
+
+	@PostMapping("notes/")
+	public ResponseEntity<Void> insert(@RequestBody NoteEntity obj) {
+		obj = this.noteServices.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+
+		return ResponseEntity.created(uri).build();
+	}
+
+	@DeleteMapping("notes/{id}")
+	public ResponseEntity<Void> delete(@PathVariable String id) {
+		this.noteServices.delete(id);
+		return ResponseEntity.noContent().build();
+	}
+
+	@PutMapping("notes/{id}")
+	public ResponseEntity<NoteEntity>update(@PathVariable String id, @RequestBody NoteEntity obj) {
+		NoteEntity entity= this.noteServices.update(id,obj);
+		return ResponseEntity.ok(entity);
+	}
+
 }

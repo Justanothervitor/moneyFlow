@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.justAnotherVitor.MoneyFlow.Repository.UserRepository;
 import com.justAnotherVitor.MoneyFlow.Services.Exceptions.DatabaseException;
-import com.justAnotherVitor.MoneyFlow.Services.Exceptions.ObjectNotFoundException;
 import com.justAnotherVitor.MoneyFlow.Services.Exceptions.ResourceNotFoundException;
 import com.justAnotherVitor.MoneyFlow.domain.UserEntity;
 

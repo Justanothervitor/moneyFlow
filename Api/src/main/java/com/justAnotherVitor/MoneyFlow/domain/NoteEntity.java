@@ -4,40 +4,33 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = ("Notes_table"))
-public class NoteProperties implements Serializable {
+@Document(collection ="notes")
+public class NoteEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
-	
+	private String authorName;
 	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-mm-yyyy 'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant date;
-	
 	private Double money;
-	
 	private String tittle;
 	private String description;
 	
-	
-	public NoteProperties ()
+	public NoteEntity ()
 	{
 		
 	}
 
-	public NoteProperties(String id, Instant date, Double money, String tittle, String description) {
+	public NoteEntity(String id, String authorName, Instant date, Double money, String tittle, String description) {
 		super();
 		this.id = id;
+		this.authorName = authorName;
 		this.date = date;
 		this.money = money;
 		this.tittle = tittle;
@@ -52,6 +45,17 @@ public class NoteProperties implements Serializable {
 		this.id = id;
 	}
 
+	
+	public String getAuthor()
+	{
+		return authorName;
+	}
+	
+	public void setAuthor(String authorName)
+	{
+		this.authorName = authorName;
+	}
+	
 	public Instant getDate() {
 		return date;
 	}
@@ -97,7 +101,7 @@ public class NoteProperties implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		NoteProperties other = (NoteProperties) obj;
+		NoteEntity other = (NoteEntity) obj;
 		return Objects.equals(id, other.id);
 	}
 	

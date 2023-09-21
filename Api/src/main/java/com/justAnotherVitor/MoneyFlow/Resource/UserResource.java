@@ -41,7 +41,7 @@ public class UserResource {
 		return ResponseEntity.ok().body(new UserDto(obj));
 	}
 
-	@PostMapping("insert/")
+	@PostMapping("users/")
 	public ResponseEntity<Void> insert(@RequestBody UserEntity obj) {
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();

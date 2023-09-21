@@ -1,11 +1,12 @@
 package com.justAnotherVitor.MoneyFlow.domain;
 
 import java.io.Serializable;
-/*import java.util.ArrayList;
-import java.util.List;*/
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "users")
@@ -15,13 +16,13 @@ public class UserEntity implements Serializable{
 	private String id;
 	
 	private static final long serialVersionUID = 1L;
+	
+	@DBRef(db="notes")
+	private List <NoteEntity> userNotes = new ArrayList<>();
+	
 	private String name;
 	private String login;
 	private String password;
-	
-	/*@OneToMany(mappedBy="users_notes")
-	private List<NoteProperties> userNotes = new ArrayList<>();
-	*/
 	
 	public UserEntity() 
 	{
@@ -69,14 +70,15 @@ public class UserEntity implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	
-	/*public List<NoteProperties> getNotes()
-	{
-		return userNotes;
-	}*/
 
+	public List<NoteEntity> getUserNotes() {
+		return userNotes;
+	}
+
+	public void setUserNotes(List<NoteEntity> userNotes) {
+		this.userNotes = userNotes;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
