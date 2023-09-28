@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.justAnotherVitor.MoneyFlow.Services.Exceptions.ObjectNotFoundException;
 import com.justAnotherVitor.MoneyFlow.domain.NoteEntity;
 import com.justAnotherVitor.MoneyFlow.domain.UserEntity;
@@ -14,10 +15,8 @@ public class UserDto implements Serializable{
 	private String id;
 	private String name;
 	private String login;
-	private String password;
 	
-	
-	private List<NoteEntity> userNotes;
+	private List<NoteEntity> notes;
 	
 	public UserDto(Optional<UserEntity> obj)
 	{
@@ -34,8 +33,7 @@ public class UserDto implements Serializable{
 		id = obj.getId();
 		name = obj.getName();
 		login = obj.getLogin();
-		password = obj.getPassword();
-		userNotes = obj.getUserNotes();
+		notes = obj.getNotes();
 		}
 	
 	public String getId() {
@@ -61,14 +59,14 @@ public class UserDto implements Serializable{
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	
-	public String getPassword() {
-		return password;
-	}
-	
-	public List<NoteEntity> getUserNotes() {
-		return userNotes;
+
+	public List<NoteEntity> getNotes() {
+		return notes;
 	}
 
+	public void setNotes(List<NoteEntity> notes) {
+		this.notes = notes;
+	}
+	
 	
 }

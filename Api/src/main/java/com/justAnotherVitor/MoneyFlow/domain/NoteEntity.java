@@ -15,7 +15,7 @@ public class NoteEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	private String id;
-	private String authorName;
+	private UserEntity user;
 	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-mm-yyyy 'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant date;
 	private Double money;
@@ -27,10 +27,10 @@ public class NoteEntity implements Serializable {
 		
 	}
 
-	public NoteEntity(String id, String authorName, Instant date, Double money, String tittle, String description) {
+	public NoteEntity(String id, UserEntity user, Instant date, Double money, String tittle, String description) {
 		super();
 		this.id = id;
-		this.authorName = authorName;
+		this.user = user;
 		this.date = date;
 		this.money = money;
 		this.tittle = tittle;
@@ -44,18 +44,15 @@ public class NoteEntity implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public UserEntity getUser() {
+		return user;
+	}
 
-	
-	public String getAuthor()
-	{
-		return authorName;
+	public void setUser(UserEntity user) {
+		this.user = user;
 	}
-	
-	public void setAuthor(String authorName)
-	{
-		this.authorName = authorName;
-	}
-	
+
 	public Instant getDate() {
 		return date;
 	}

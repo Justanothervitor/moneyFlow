@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.justAnotherVitor.MoneyFlow.Services.ServicesForUser;
+import com.justAnotherVitor.MoneyFlow.domain.NoteEntity;
 import com.justAnotherVitor.MoneyFlow.domain.UserEntity;
 import com.justAnotherVitor.MoneyFlow.dto.UserDto;
 
@@ -60,5 +61,12 @@ public class UserResource {
 		UserEntity entity= service.update(id,obj);
 		return ResponseEntity.ok(entity);
 	}
+	
+	@GetMapping("users/{id}/notes")
+	public ResponseEntity<Optional<List<NoteEntity>>> findNotes(@PathVariable String id) {
+		Optional<UserEntity> obj = this.service.findById(id);
+		List <NoteEntity> userNotes = obj.stream().map(x-> x.getNotes()).collect(Collectors.toList());
+		return ResponseEntity.ok().body(userNotes);
 
+}
 }

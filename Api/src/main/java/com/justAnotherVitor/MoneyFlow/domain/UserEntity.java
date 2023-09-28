@@ -18,7 +18,7 @@ public class UserEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@DBRef(db="notes")
-	private List <NoteEntity> userNotes = new ArrayList<>();
+	private List <NoteEntity> notes= new ArrayList<>();
 	
 	private String name;
 	private String login;
@@ -71,14 +71,13 @@ public class UserEntity implements Serializable{
 		this.password = password;
 	}
 
-	public List<NoteEntity> getUserNotes() {
-		return userNotes;
+	public void setNotes(List<NoteEntity> notes) {
+		this.notes = notes;
+	}
+	public List<NoteEntity> getNotes() {
+		return notes;
 	}
 
-	public void setUserNotes(List<NoteEntity> userNotes) {
-		this.userNotes = userNotes;
-	}
-	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
