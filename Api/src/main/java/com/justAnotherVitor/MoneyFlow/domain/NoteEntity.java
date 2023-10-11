@@ -2,6 +2,7 @@ package com.justAnotherVitor.MoneyFlow.domain;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
@@ -18,6 +19,7 @@ public class NoteEntity implements Serializable {
 	private UserEntity user;
 	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-mm-yyyy 'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant date;
+	private ZonedDateTime zonedDateTime = ZonedDateTime.now();
 	private Double money;
 	private String tittle;
 	private String description;
@@ -59,6 +61,14 @@ public class NoteEntity implements Serializable {
 
 	public void setDate(Instant date) {
 		this.date = date;
+	}
+
+	public ZonedDateTime getZonedDateTime() {
+		return zonedDateTime;
+	}
+
+	public void setZonedDateTime(ZonedDateTime zonedDateTime) {
+		this.zonedDateTime = zonedDateTime;
 	}
 
 	public Double getMoney() {

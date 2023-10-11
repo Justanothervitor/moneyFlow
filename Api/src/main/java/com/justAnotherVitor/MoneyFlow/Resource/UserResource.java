@@ -1,6 +1,7 @@
 package com.justAnotherVitor.MoneyFlow.Resource;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -65,7 +66,10 @@ public class UserResource {
 	@GetMapping("users/{id}/notes")
 	public ResponseEntity<Optional<List<NoteEntity>>> findNotes(@PathVariable String id) {
 		Optional<UserEntity> obj = this.service.findById(id);
-		List <NoteEntity> userNotes = obj.stream().map(x-> x.getNotes()).collect(Collectors.toList());
+		Optional <List<NoteEntity>> userNotes = obj.stream().map(x-> x.getNotes()).reduce((acc, item) -> {
+			acc.addAll(item);
+			return acc;
+		});
 		return ResponseEntity.ok().body(userNotes);
 
 }

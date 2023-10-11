@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+
+  money-flow-mongodb-dev:
+    restart: always
+    build:
+      dockerfile: ./docker-files/money-flow-mongodb.dockerfile
+      context: ./../
+      args:
+        DATABASE_USERNAME: ${DATABASE_USERNAME:-root}
+        DATABASE_PASSWORD: ${DATABASE_PASSWORD:-12root23@#}
+        DATABASE_NAME: ${DATABASE_NAME:-money-flow}
+    image: money-flow-test/mongodb:${VERSION:-dev}
+    container_name: money-flow-mongodb-dev
+    deploy:
+      resources:
+        limits:
+          memory: 4096M
+        reservations:
+          memory: 768M
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./../../money-flow-data/money-flow-mongo-dev:/data/db
+    networks:
+      - money-flow-network-dev
+
+networks:
+  money-flow-network-dev:
+    driver: bridge
