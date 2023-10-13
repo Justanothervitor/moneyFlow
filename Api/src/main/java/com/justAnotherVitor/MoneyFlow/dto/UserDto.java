@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.justAnotherVitor.MoneyFlow.Services.Exceptions.ObjectNotFoundException;
 import com.justAnotherVitor.MoneyFlow.domain.NoteEntity;
 import com.justAnotherVitor.MoneyFlow.domain.UserEntity;

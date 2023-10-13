@@ -23,14 +23,13 @@ public class ServicesForUser {
 	
 	public List<UserEntity> findAll()
 	{
-		return repository.findAll();
+		return this.repository.findAll();
 	}
 	
 
-	public Optional<UserEntity> findById(String id)
+	public Optional <UserEntity> findById(String id)
 	{
-		Optional <UserEntity> user = repository.findById(id);
-		return user;
+		return this.repository.findById(id);
 	}
 	
 	
@@ -50,7 +49,7 @@ public class ServicesForUser {
 		}
 	}
 	
-	public UserEntity update(String id, UserEntity obj)
+	public UserEntity update(UserEntity obj,String id)
 	{
 		UserEntity user = this.repository.findById(id).get();
 		user.setName(obj.getName());

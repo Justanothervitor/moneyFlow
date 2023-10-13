@@ -1,12 +1,11 @@
 package com.justAnotherVitor.MoneyFlow.Resource;
 
-import java.net.URI;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.justAnotherVitor.MoneyFlow.Services.ServicesForUser;
 import com.justAnotherVitor.MoneyFlow.domain.NoteEntity;
@@ -42,13 +40,20 @@ public class UserResource {
 		Optional <UserEntity> obj = service.findById(id);
 		return ResponseEntity.ok().body(new UserDto(obj));
 	}
+	
+	@GetMapping("users/{id}/notes")
+	public ResponseEntity<Optional<List<NoteEntity>>> findNotes(@PathVariable String id) {
+		Optional<UserEntity> obj = this.service.findById(id);
+		Optional <List<NoteEntity>> notes = obj.stream().map(x-> x.getNotes()).reduce((acc, item) -> {
+			acc.addAll(item);
+			return acc;
+		});
+		return ResponseEntity.ok().body(notes);
+	}
 
 	@PostMapping("users/")
-	public ResponseEntity<Void> insert(@RequestBody UserEntity obj) {
-		obj = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-
-		return ResponseEntity.created(uri).build();
+	public ResponseEntity<UserEntity> insert(@RequestBody UserEntity obj) {
+		return new ResponseEntity<UserEntity>(service.insert(obj),HttpStatus.OK);
 	}
 
 	@DeleteMapping("users/{id}")
@@ -59,18 +64,8 @@ public class UserResource {
 
 	@PutMapping("users/{id}")
 	public ResponseEntity<UserEntity>update(@PathVariable String id, @RequestBody UserEntity obj) {
-		UserEntity entity= service.update(id,obj);
+		UserEntity entity= service.update(obj,id);
 		return ResponseEntity.ok(entity);
 	}
 	
-	@GetMapping("users/{id}/notes")
-	public ResponseEntity<Optional<List<NoteEntity>>> findNotes(@PathVariable String id) {
-		Optional<UserEntity> obj = this.service.findById(id);
-		Optional <List<NoteEntity>> userNotes = obj.stream().map(x-> x.getNotes()).reduce((acc, item) -> {
-			acc.addAll(item);
-			return acc;
-		});
-		return ResponseEntity.ok().body(userNotes);
-
-}
 }

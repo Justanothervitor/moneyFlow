@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 @Document(collection = "users")
 public class UserEntity implements Serializable{
@@ -17,8 +17,8 @@ public class UserEntity implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	@DBRef(db="notes")
-	private List <NoteEntity> notes= new ArrayList<>();
+	@DocumentReference
+	private List <NoteEntity> notes = new ArrayList<>();
 	
 	private String name;
 	private String login;

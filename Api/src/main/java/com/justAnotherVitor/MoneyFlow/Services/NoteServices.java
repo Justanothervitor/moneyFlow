@@ -1,17 +1,21 @@
 package com.justAnotherVitor.MoneyFlow.Services;
 
-import java.util.List;
+/*import java.util.List;
 import java.util.Optional;
-
+*/
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
+/*import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;*/
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import com.justAnotherVitor.MoneyFlow.Repository.NotesRepository;
-import com.justAnotherVitor.MoneyFlow.Services.Exceptions.DatabaseException;
-import com.justAnotherVitor.MoneyFlow.Services.Exceptions.ResourceNotFoundException;
+/*import com.justAnotherVitor.MoneyFlow.Services.Exceptions.DatabaseException;
+import com.justAnotherVitor.MoneyFlow.Services.Exceptions.ResourceNotFoundException;*/
 import com.justAnotherVitor.MoneyFlow.domain.NoteEntity;
+import com.justAnotherVitor.MoneyFlow.domain.UserEntity;
 
 
 @Service
@@ -21,7 +25,22 @@ public class NoteServices {
 	@Autowired
 	private NotesRepository repository;
 	
-	public List<NoteEntity> findAll()
+	@Autowired
+	private MongoTemplate template;
+	
+	public NoteEntity createANewNote(NoteEntity obj,String id)
+	{
+		NoteEntity note = repository.insert(new NoteEntity(obj.getDate(),obj.getMoney(),obj.getTittle(),obj.getDescription()));
+		
+		template.update(UserEntity.class)
+		.matching(Criteria.where("id").is(id))
+		.apply(new Update().push("notes").value(note))
+		.first();
+		
+		return note;
+	}
+	
+/*	public List<NoteEntity> findAll()
 	{
 		return this.repository.findAll();
 	}
@@ -31,12 +50,6 @@ public class NoteServices {
 	{
 		Optional <NoteEntity> note = this.repository.findById(id);
 		return note;
-	}
-	
-	
-	public NoteEntity insert(NoteEntity obj)
-	{
-		return this.repository.insert(obj);
 	}
 	
 	public void delete (String id)
@@ -58,7 +71,7 @@ public class NoteServices {
 		note.setMoney(obj.getMoney());
 		
 		return this.repository.save(note);
-	}
+	}*/
 		
 		}
 

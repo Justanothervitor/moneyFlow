@@ -1,6 +1,6 @@
 package com.justAnotherVitor.MoneyFlow.config;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import com.justAnotherVitor.MoneyFlow.domain.UserEntity;
 
 @Configuration
 public class Instantiation implements CommandLineRunner{
-
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -22,9 +21,9 @@ public class Instantiation implements CommandLineRunner{
 	@Autowired
 	private NotesRepository noteRepository;
 	
+	
 	@Override
 	public void run(String... args) throws Exception {
-		
 		userRepository.deleteAll();
 		noteRepository.deleteAll();
 		
@@ -33,12 +32,11 @@ public class Instantiation implements CommandLineRunner{
 		UserEntity u2 = new UserEntity(null,"Julie dos Santos","fiftyuser","anothersamplepass");
 		userRepository.saveAll(Arrays.asList(u0,u1,u2));
 		
-		NoteEntity n1 = new NoteEntity(null,u0,Instant.parse("2023-08-27T16:35:08Z"),350.0,"SuperMercado","Compra de mantimentos");
-		NoteEntity n2 = new NoteEntity(null,u0,Instant.parse("2023-08-28T11:30:00Z"),120.0,"Abastecimento do carro","Abastecimento de 40 Litros de gasolina");
-		NoteEntity n3 = new NoteEntity(null,u1,Instant.parse("2023-08-27T14:00:00Z"),50.0,"Peças","Compra de peças para conserto de um eletronico");
-		NoteEntity n4 = new NoteEntity(null,u1,Instant.parse("2023-08-31T20:30:00Z"),4350.0,"Hardware","Compra de peças de computador");
-		NoteEntity n5 = new NoteEntity(null,u2,Instant.parse("2023-08-27T20:00:00Z"),110.0,"Conta de energia","Pagamento da conta de energia");
-		
+		NoteEntity n1 = new NoteEntity(null,ZonedDateTime.parse("2023-08-27T16:35:08Z"),350.0,"SuperMercado","Compra de mantimentos");
+		NoteEntity n2 = new NoteEntity(null,ZonedDateTime.parse("2023-08-28 11:30:00"),120.0,"Abastecimento do carro","Abastecimento de 40 Litros de gasolina");
+		NoteEntity n3 = new NoteEntity(null,ZonedDateTime.parse("2023-08-27 14:00:00"),50.0,"Peças","Compra de peças para conserto de um eletronico");
+		NoteEntity n4 = new NoteEntity(null,ZonedDateTime.parse("2023-08-31 20:30:00"),4350.0,"Hardware","Compra de peças de computador");
+		NoteEntity n5 = new NoteEntity(null,ZonedDateTime.parse("2023-08-27 20:00:00"),110.0,"Conta de energia","Pagamento da conta de energia");
 		noteRepository.saveAll(Arrays.asList(n1,n2,n3,n4,n5));
 		
 		u0.getNotes().addAll(Arrays.asList(n1,n2));
@@ -47,5 +45,7 @@ public class Instantiation implements CommandLineRunner{
 		userRepository.saveAll(Arrays.asList(u0,u1,u2));
 		
 	}
+	
 
 }
+//("yyyy-mm-dd 'T'HH:mm:ss'Z'")

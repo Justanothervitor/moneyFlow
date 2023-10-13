@@ -1,25 +1,20 @@
 package com.justAnotherVitor.MoneyFlow.domain;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Document(collection ="notes")
 public class NoteEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	@Id
-	private String id;
-	private UserEntity user;
-	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-mm-yyyy 'T'HH:mm:ss'Z'", timezone = "GMT")
-	private Instant date;
-	private ZonedDateTime zonedDateTime = ZonedDateTime.now();
+	private String noteId;
+	private ZonedDateTime date;
 	private Double money;
 	private String tittle;
 	private String description;
@@ -28,47 +23,38 @@ public class NoteEntity implements Serializable {
 	{
 		
 	}
-
-	public NoteEntity(String id, UserEntity user, Instant date, Double money, String tittle, String description) {
+	public NoteEntity(ZonedDateTime date,Double money, String tittle, String description) {
 		super();
-		this.id = id;
-		this.user = user;
 		this.date = date;
 		this.money = money;
 		this.tittle = tittle;
 		this.description = description;
 	}
 
-	public String getId() {
-		return id;
+
+	public NoteEntity(String noteId, ZonedDateTime date, Double money, String tittle, String description) {
+		super();
+		this.noteId = noteId;
+		this.date = date;
+		this.money = money;
+		this.tittle = tittle;
+		this.description = description;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public String getNoteId() {
+		return noteId;
+	}
+
+	public void setNoteId(String noteId) {
+		this.noteId = noteId;
 	}
 	
-	public UserEntity getUser() {
-		return user;
-	}
-
-	public void setUser(UserEntity user) {
-		this.user = user;
-	}
-
-	public Instant getDate() {
+	public ZonedDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(Instant date) {
+	public void setDate(ZonedDateTime date) {
 		this.date = date;
-	}
-
-	public ZonedDateTime getZonedDateTime() {
-		return zonedDateTime;
-	}
-
-	public void setZonedDateTime(ZonedDateTime zonedDateTime) {
-		this.zonedDateTime = zonedDateTime;
 	}
 
 	public Double getMoney() {
@@ -97,7 +83,7 @@ public class NoteEntity implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(noteId);
 	}
 
 	@Override
@@ -109,7 +95,7 @@ public class NoteEntity implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		NoteEntity other = (NoteEntity) obj;
-		return Objects.equals(id, other.id);
+		return Objects.equals(noteId, other.noteId);
 	}
 	
 	

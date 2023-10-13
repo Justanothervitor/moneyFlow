@@ -1,5 +1,5 @@
 package com.justAnotherVitor.MoneyFlow.config.converters;
-;
+
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -8,11 +8,6 @@ import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-/**
- * @author Joel Rodrigues Moreira on 10/10/2023.
- * e-mail: <a href="mailto:joel.databox@gmail.com">joel.databox@gmail.com</a>
- * @project Api
- */
 public class TimeZoneUtils {
     public static final String TIMEZONE_REGEX = "(([+-]|)([01]?[0-9]|2[0-3]):[0-5][0-9])|(([+-]|)([01]?[0-9]|2[0-3])([0-5][0-9]))";
     public static final Pattern TIMEZONE_PATTERN = Pattern.compile(TIMEZONE_REGEX);

@@ -11,11 +11,6 @@ import java.util.Date;
 
 import static com.justAnotherVitor.MoneyFlow.config.converters.TimeZoneUtils.getTimezoneFromId;
 
-/**
- * @author Joel Rodrigues Moreira on 10/10/2023.
- * e-mail: <a href="mailto:joel.databox@gmail.com">joel.databox@gmail.com</a>
- * @project Api
- */
 public class ZonedDateTimeToBsonDocumentConverter implements Converter<ZonedDateTime, BsonDocument> {
     @Override
     public BsonDocument convert(ZonedDateTime zonedDateTime) {

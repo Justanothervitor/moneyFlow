@@ -9,11 +9,7 @@ import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 
 import java.util.Arrays;
 
-/**
- * @author Joel Rodrigues Moreira on 10/10/2023.
- * e-mail: <a href="mailto:joel.databox@gmail.com">joel.databox@gmail.com</a>
- * @project Api
- */
+
 @Configuration
 public class MongoConfig  {
     /*@Override
@@ -30,8 +26,6 @@ public class MongoConfig  {
         converter.setCustomConversions(customConversions);
         converter.setCodecRegistryProvider(databaseFactory);
         converter.
-
-
         return converter;
     }*/
 
