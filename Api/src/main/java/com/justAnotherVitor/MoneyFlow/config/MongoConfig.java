@@ -6,10 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 
-import com.justAnotherVitor.MoneyFlow.config.converters.BsonDocumentToZonedDateTimeConverter;
-import com.justAnotherVitor.MoneyFlow.config.converters.TimeZoneUtils;
+//import com.justAnotherVitor.MoneyFlow.config.converters.BsonDocumentToZonedDateTimeConverter;
+//import com.justAnotherVitor.MoneyFlow.config.converters.TimeZoneUtils;
 import com.justAnotherVitor.MoneyFlow.config.converters.ZonedDateTimeReadConverter;
-import com.justAnotherVitor.MoneyFlow.config.converters.ZonedDateTimeToBsonDocumentConverter;
+//import com.justAnotherVitor.MoneyFlow.config.converters.ZonedDateTimeToBsonDocumentConverter;
 import com.justAnotherVitor.MoneyFlow.config.converters.ZonedDateTimeWriteConverter;
 
 
@@ -37,8 +37,8 @@ public class MongoConfig  {
     	
     	return new MongoCustomConversions(
                 Arrays.asList(
-                        new ZonedDateTimeToBsonDocumentConverter(),
-                        new BsonDocumentToZonedDateTimeConverter(),
+                       /* new ZonedDateTimeToBsonDocumentConverter(),
+                        new BsonDocumentToZonedDateTimeConverter(),*/
                         new ZonedDateTimeWriteConverter(),
                         new ZonedDateTimeReadConverter()
 

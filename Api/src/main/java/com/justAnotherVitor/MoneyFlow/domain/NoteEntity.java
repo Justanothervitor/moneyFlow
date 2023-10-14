@@ -7,6 +7,12 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.justAnotherVitor.MoneyFlow.config.converters.ZonedDateTimeDeserializer;
+import com.justAnotherVitor.MoneyFlow.config.converters.ZonedDateTimeSerializer;
+import com.justAnotherVitor.MoneyFlow.dto.AuthorDto;
+
 
 @Document(collection ="notes")
 public class NoteEntity implements Serializable {
@@ -14,7 +20,10 @@ public class NoteEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	private String noteId;
-	private ZonedDateTime date;
+	@JsonSerialize(using = ZonedDateTimeSerializer.class)
+	@JsonDeserialize(using = ZonedDateTimeDeserializer.class)
+	private ZonedDateTime date = ZonedDateTime.now();
+	private AuthorDto author;
 	private Double money;
 	private String tittle;
 	private String description;
@@ -23,19 +32,21 @@ public class NoteEntity implements Serializable {
 	{
 		
 	}
-	public NoteEntity(ZonedDateTime date,Double money, String tittle, String description) {
+	public NoteEntity(ZonedDateTime date,AuthorDto author,Double money, String tittle, String description) {
 		super();
 		this.date = date;
+		this.author = author;
 		this.money = money;
 		this.tittle = tittle;
 		this.description = description;
 	}
 
 
-	public NoteEntity(String noteId, ZonedDateTime date, Double money, String tittle, String description) {
+	public NoteEntity(String noteId, ZonedDateTime date,AuthorDto author, Double money, String tittle, String description) {
 		super();
 		this.noteId = noteId;
 		this.date = date;
+		this.author = author;
 		this.money = money;
 		this.tittle = tittle;
 		this.description = description;
@@ -57,6 +68,12 @@ public class NoteEntity implements Serializable {
 		this.date = date;
 	}
 
+	public AuthorDto getAuthor() {
+		return author;
+	}
+	public void setAuthor(AuthorDto author) {
+		this.author = author;
+	}
 	public Double getMoney() {
 		return money;
 	}

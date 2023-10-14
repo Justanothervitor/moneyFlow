@@ -20,8 +20,8 @@ public class NoteResource {
 	private NoteServices noteServices;
 	
 	@PostMapping(value="/notes/")
-	public ResponseEntity<NoteEntity> createANewNote(@RequestBody NoteEntity obj,String id) {
-		return new ResponseEntity<NoteEntity>(noteServices.createANewNote(obj,id),HttpStatus.OK);
+	public ResponseEntity<NoteEntity> insert(@RequestBody NoteEntity obj,String id) {
+		return new ResponseEntity<NoteEntity>(noteServices.insert(obj,id),HttpStatus.OK);
 	}
 
 	
