@@ -97,6 +97,11 @@ public class NoteEntity implements Serializable {
 		NoteEntity other = (NoteEntity) obj;
 		return Objects.equals(noteId, other.noteId);
 	}
+/*@Override
+	public String toString() {
+		return "NoteEntity [noteId=" + noteId + ", date=" + date + ", money=" + money + ", tittle=" + tittle
+				+ ", description=" + description + "]";
+	}
 	
-	
+*/	
 }

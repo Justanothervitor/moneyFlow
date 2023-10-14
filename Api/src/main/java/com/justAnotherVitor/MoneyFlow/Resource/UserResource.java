@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.justAnotherVitor.MoneyFlow.Services.ServicesForUser;
-import com.justAnotherVitor.MoneyFlow.domain.NoteEntity;
+//import com.justAnotherVitor.MoneyFlow.domain.NoteEntity;
 import com.justAnotherVitor.MoneyFlow.domain.UserEntity;
 import com.justAnotherVitor.MoneyFlow.dto.UserDto;
 
@@ -41,7 +41,7 @@ public class UserResource {
 		return ResponseEntity.ok().body(new UserDto(obj));
 	}
 	
-	@GetMapping("users/{id}/notes")
+	/*@GetMapping("users/{id}/notes")
 	public ResponseEntity<Optional<List<NoteEntity>>> findNotes(@PathVariable String id) {
 		Optional<UserEntity> obj = this.service.findById(id);
 		Optional <List<NoteEntity>> notes = obj.stream().map(x-> x.getNotes()).reduce((acc, item) -> {
@@ -49,7 +49,7 @@ public class UserResource {
 			return acc;
 		});
 		return ResponseEntity.ok().body(notes);
-	}
+	}*/
 
 	@PostMapping("users/")
 	public ResponseEntity<UserEntity> insert(@RequestBody UserEntity obj) {

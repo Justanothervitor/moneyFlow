@@ -66,6 +66,11 @@ public class UserDto implements Serializable{
 	public void setNotes(List<NoteEntity> notes) {
 		this.notes = notes;
 	}
+
+	/*@Override
+	public String toString() {
+		return "UserDto [id=" + id + ", name=" + name + ", login=" + login + ", notes=" + notes + "]";
+	}
 	
-	
+*/	
 }

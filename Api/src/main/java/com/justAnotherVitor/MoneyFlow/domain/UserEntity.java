@@ -94,6 +94,8 @@ public class UserEntity implements Serializable{
 		UserEntity other = (UserEntity) obj;
 		return Objects.equals(id, other.id);
 	}
+
+
 	
 	
 	
