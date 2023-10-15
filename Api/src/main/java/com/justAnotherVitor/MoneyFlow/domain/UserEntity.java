@@ -7,7 +7,10 @@ import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
+//import org.springframework.data.mongodb.core.mapping.DocumentReference;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Document(collection = "users")
 public class UserEntity implements Serializable{
@@ -16,13 +19,14 @@ public class UserEntity implements Serializable{
 	private String id;
 	
 	private static final long serialVersionUID = 1L;
-	
-	@DocumentReference
-	private List <NoteEntity> notes = new ArrayList<>();
-	
+		
 	private String name;
 	private String login;
 	private String password;
+	
+	@JsonProperty("Notes")
+	@JsonBackReference
+	private List <NoteEntity> notes = new ArrayList<>();
 	
 	public UserEntity() 
 	{

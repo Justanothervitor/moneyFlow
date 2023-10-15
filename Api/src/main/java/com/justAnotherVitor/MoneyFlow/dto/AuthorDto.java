@@ -3,6 +3,7 @@ package com.justAnotherVitor.MoneyFlow.dto;
 import java.io.Serializable;
 import java.util.Optional;
 
+//import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.justAnotherVitor.MoneyFlow.Services.Exceptions.ObjectNotFoundException;
 import com.justAnotherVitor.MoneyFlow.domain.UserEntity;
 

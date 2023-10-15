@@ -7,9 +7,9 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.justAnotherVitor.MoneyFlow.config.converters.ZonedDateTimeDeserializer;
 import com.justAnotherVitor.MoneyFlow.config.converters.ZonedDateTimeSerializer;
 import com.justAnotherVitor.MoneyFlow.dto.AuthorDto;
 
@@ -21,8 +21,11 @@ public class NoteEntity implements Serializable {
 	@Id
 	private String noteId;
 	@JsonSerialize(using = ZonedDateTimeSerializer.class)
-	@JsonDeserialize(using = ZonedDateTimeDeserializer.class)
 	private ZonedDateTime date = ZonedDateTime.now();
+	@JsonManagedReference
+	@JsonIgnore
+	private UserEntity user;
+	
 	private AuthorDto author;
 	private Double money;
 	private String tittle;
@@ -67,10 +70,20 @@ public class NoteEntity implements Serializable {
 	public void setDate(ZonedDateTime date) {
 		this.date = date;
 	}
-
+	
+	public UserEntity getUser() {
+		return user;
+	}
+	
+	public void setUser(UserEntity user)
+	{
+		this.user = user;
+	}
+	
 	public AuthorDto getAuthor() {
 		return author;
 	}
+	
 	public void setAuthor(AuthorDto author) {
 		this.author = author;
 	}

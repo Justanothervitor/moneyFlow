@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
@@ -26,17 +25,19 @@ public class NoteServices {
 	@Autowired
 	private NotesRepository repository;
 	
+	
 	@Autowired
 	private MongoTemplate template;
 	
-	public NoteEntity insert(NoteEntity obj,String id)
+	public NoteEntity insert(NoteEntity obj)
 	{
 		NoteEntity note = repository.insert(new NoteEntity(obj.getDate(),obj.getAuthor(),obj.getMoney(),obj.getTittle(),obj.getDescription()));
 		
 		template.update(UserEntity.class)
-		.matching(Criteria.where("id").is(id))
-		.apply(new Update().push("notes").value(note))
+		.matching(Criteria.where("user").is(obj.getUser()))
+		.apply(new Update().push("Notes").value(note))
 		.first();
+		
 		
 		return note;
 	}
@@ -46,7 +47,6 @@ public class NoteServices {
 		return this.repository.findAll();
 	}
 	
-
 	public Optional<NoteEntity> findById(String id)
 	{
 		Optional <NoteEntity> note = this.repository.findById(id);
