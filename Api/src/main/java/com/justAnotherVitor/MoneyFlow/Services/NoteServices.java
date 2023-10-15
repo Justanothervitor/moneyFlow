@@ -32,9 +32,8 @@ public class NoteServices {
 	public NoteEntity insert(NoteEntity obj)
 	{
 		NoteEntity note = repository.insert(new NoteEntity(obj.getDate(),obj.getAuthor(),obj.getMoney(),obj.getTittle(),obj.getDescription()));
-		
 		template.update(UserEntity.class)
-		.matching(Criteria.where("user").is(obj.getUser()))
+		.matching(Criteria.where("_id").is(obj.getAuthor().getId()))
 		.apply(new Update().push("Notes").value(note))
 		.first();
 		
