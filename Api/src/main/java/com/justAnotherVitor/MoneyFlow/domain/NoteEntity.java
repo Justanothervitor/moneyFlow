@@ -43,7 +43,13 @@ public class NoteEntity implements Serializable {
 		this.tittle = tittle;
 		this.description = description;
 	}
-
+	
+	public NoteEntity(Double money, String tittle, String description) {
+		super();
+		this.money = money;
+		this.tittle = tittle;
+		this.description = description;
+	}
 
 	public NoteEntity(String noteId, ZonedDateTime date,AuthorDto author, Double money, String tittle, String description) {
 		super();

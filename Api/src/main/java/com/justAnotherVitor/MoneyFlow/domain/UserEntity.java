@@ -8,6 +8,7 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 //import org.springframework.data.mongodb.core.mapping.DocumentReference;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -25,6 +26,7 @@ public class UserEntity implements Serializable{
 	private String password;
 	
 	@JsonProperty("Notes")
+	@DocumentReference
 	@JsonBackReference
 	private List <NoteEntity> notes = new ArrayList<>();
 	
