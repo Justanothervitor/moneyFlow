@@ -1,5 +1,5 @@
 package com.justAnotherVitor.MoneyFlow.dto;
-
+//Classe de Transferencia de dados usado na classe da entidade de notas
 import java.io.Serializable;
 import java.util.Optional;
 

@@ -1,5 +1,5 @@
 package com.justAnotherVitor.MoneyFlow.Resource;
-
+//Classe de recursos relacionados aos  usuários
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

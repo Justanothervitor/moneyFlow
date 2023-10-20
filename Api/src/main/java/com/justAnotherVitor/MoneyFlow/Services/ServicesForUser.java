@@ -1,5 +1,5 @@
 package com.justAnotherVitor.MoneyFlow.Services;
-
+//Classe de serviços disponíveis para a classe de usuários
 import java.util.List;
 import java.util.Optional;
 

@@ -1,5 +1,5 @@
 package com.justAnotherVitor.MoneyFlow.domain;
-
+/*Classe do documento notas da entidade de notas*/
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -20,12 +20,15 @@ public class NoteEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	private String noteId;
+	//Serializador customizado para ZonedDateTime
 	@JsonSerialize(using = ZonedDateTimeSerializer.class)
 	private ZonedDateTime date = ZonedDateTime.now();
+	/*Objeto base para a relação muitos um, e também anottation JsonIgnore para que o mesmo não seja
+	escrito no JSON*/
 	@JsonManagedReference
 	@JsonIgnore
 	private UserEntity user;
-	
+	//Um objeto de transferência de dados para evitar o uso direto da entidade de usuário
 	private AuthorDto author;
 	private Double money;
 	private String tittle;

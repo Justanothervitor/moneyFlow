@@ -1,5 +1,6 @@
 package com.justAnotherVitor.MoneyFlow.Services;
-
+/*Classe de serviços relacionados á entidade de notas e também á relação muitos para um da entidade de notas
+e da entidade de usuários, usando ambos o repósitorio e o mongo template*/
 import java.util.List;
 import java.util.Optional;
 

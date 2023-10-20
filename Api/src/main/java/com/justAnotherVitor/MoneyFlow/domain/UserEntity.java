@@ -1,5 +1,5 @@
 package com.justAnotherVitor.MoneyFlow.domain;
-
+//Essa classe é uma das classes que tem definição de documento que no caso é a classe de usuários
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,8 @@ public class UserEntity implements Serializable{
 	private String name;
 	private String login;
 	private String password;
-	
+/*Relação um com muitos entre Entidade de usuário e Entidade de notas e ao mesmo tempo tem uma annotation
+mostrando o seu nome no documento JSON*/
 	@JsonProperty("Notes")
 	@DocumentReference
 	@JsonBackReference

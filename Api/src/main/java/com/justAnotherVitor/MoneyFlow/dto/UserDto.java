@@ -1,5 +1,5 @@
 package com.justAnotherVitor.MoneyFlow.dto;
-
+//Classe de transferencia de dados usado para retornar usuários na parte de serviços da entidade de usuário.
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;

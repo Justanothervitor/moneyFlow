@@ -1,5 +1,5 @@
 package com.justAnotherVitor.MoneyFlow.config;
-
+//Classe de injeção de dados no banco de dados
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 
@@ -48,4 +48,3 @@ public class Instantiation implements CommandLineRunner{
 	
 
 }
-//("yyyy-mm-dd 'T'HH:mm:ss'Z'")

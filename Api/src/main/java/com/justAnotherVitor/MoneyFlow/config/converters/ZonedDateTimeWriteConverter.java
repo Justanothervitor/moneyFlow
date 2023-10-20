@@ -1,5 +1,5 @@
 package com.justAnotherVitor.MoneyFlow.config.converters;
-
+//Classe de conversão de escrita do ZonedDateTime para Date
 import java.time.ZonedDateTime;
 import java.util.Date;
 

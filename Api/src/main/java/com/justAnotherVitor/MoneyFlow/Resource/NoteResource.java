@@ -1,5 +1,5 @@
 package com.justAnotherVitor.MoneyFlow.Resource;
-
+//Classe de recursos relacionados á entidade de notas
 import java.util.List;
 import java.util.Optional;
 
