@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,12 +25,13 @@ import com.justAnotherVitor.MoneyFlow.dto.UserDto;
 
 @RequestMapping
 @RestController(value ="/users")
+
 public class UserResource {
 	
 	@Autowired
 	private ServicesForUser service;
-
-	@GetMapping("users")
+	@CrossOrigin (origins = "http://localhost:8080/users")
+	@GetMapping(value = "/users")
 	public ResponseEntity<List<UserDto>> findAll() {
 		List<UserEntity> list = service.findAll();
 		List<UserDto> listDto = list.stream().map(x -> new UserDto(x)).collect(Collectors.toList());
