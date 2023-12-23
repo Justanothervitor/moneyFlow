@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,6 +13,7 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.justAnotherVitor.MoneyFlow.domain.roles.RolesEntity;
 
 @Document(collection = "users")
 public class UserEntity implements Serializable{
@@ -21,27 +23,40 @@ public class UserEntity implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 		
-	private String name;
-	private String login;
+	private String username;
+	private String email;
 	private String password;
-/*Relação um com muitos entre Entidade de usuário e Entidade de notas e ao mesmo tempo tem uma annotation
-mostrando o seu nome no documento JSON*/
-	@JsonProperty("Notes")
+	
 	@DocumentReference
-	@JsonBackReference
-	private List <NoteEntity> notes = new ArrayList<>();
+	private Set<RolesEntity> roles;
+	
+	/*Relação um com muitos entre Entidade de usuário e Entidade de notas e ao mesmo tempo tem uma annotation
+	mostrando o seu nome no documento JSON*/
+		@JsonProperty("Notes")
+		@DocumentReference
+		@JsonBackReference
+		private List <NoteEntity> notes = new ArrayList<>();
 	
 	public UserEntity() 
 	{
 		
 	}
 
-	public UserEntity(String id,String name, String login, String password) {
+	public UserEntity(String username, String email, String password)
+	{
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
+	
+	public UserEntity(String id,String username, String email, String password, Set<RolesEntity>roles) {
 		super();
 		this.id = id;
-		this.name = name;
-		this.login = login;
+		this.email = email;
+		this.username = username;
 		this.password = password;
+		this.roles = roles;
 	}
 
 	public String getId()
@@ -53,23 +68,21 @@ mostrando o seu nome no documento JSON*/
 	{
 		this.id = id;
 	}
-	
-	public String getName() {
-		return name;
+
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getEmail() {
+		return email;
 	}
 
-	public String getLogin() {
-		return login;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -78,12 +91,24 @@ mostrando o seu nome no documento JSON*/
 		this.password = password;
 	}
 
+	
+	
+	public Set<RolesEntity> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<RolesEntity> roles) {
+		this.roles = roles;
+	}
+
 	public void setNotes(List<NoteEntity> notes) {
 		this.notes = notes;
 	}
 	public List<NoteEntity> getNotes() {
 		return notes;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {

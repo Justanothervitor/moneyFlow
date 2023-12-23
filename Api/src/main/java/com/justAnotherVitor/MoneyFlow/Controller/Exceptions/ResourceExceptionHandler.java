@@ -1,4 +1,4 @@
-package com.justAnotherVitor.MoneyFlow.Resource.Exceptions;
+package com.justAnotherVitor.MoneyFlow.Controller.Exceptions;
 
 import java.time.Instant;
 

@@ -1,62 +1,62 @@
 package com.justAnotherVitor.MoneyFlow.Services;
-//Classe de serviços disponíveis para a classe de usuários
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Service;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
 
 import com.justAnotherVitor.MoneyFlow.Repository.UserRepository;
-import com.justAnotherVitor.MoneyFlow.Services.Exceptions.DatabaseException;
-import com.justAnotherVitor.MoneyFlow.Services.Exceptions.ResourceNotFoundException;
 import com.justAnotherVitor.MoneyFlow.domain.UserEntity;
 
 
-@Service
-public class ServicesForUser {
+@Repository
+public class ServicesForUser implements UserRepository{
 	
 	@Autowired
-	private UserRepository repository;
+	private MongoTemplate template;
 	
-	
-	public List<UserEntity> findAll()
-	{
-		return this.repository.findAll();
+	@Override
+	public UserEntity FindByUsername(String username) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username));
+		return this.template.findOne(query, UserEntity.class);
 	}
-	
 
-	public Optional <UserEntity> findById(String id)
-	{
-		return this.repository.findById(id);
+	@Override
+	public void DeleteUser(String username) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username));
+		template.findAllAndRemove(query,UserEntity.class);
 	}
-	
-	
-	public UserEntity insert(UserEntity obj)
-	{
-		return repository.insert(obj);
+
+	@Override
+	public UserEntity SaveUser(UserEntity user) {
+		return this.template.save(user);
 	}
-	
-	public void delete (String id)
-	{
-		try {
-			repository.deleteById(id);
-		}catch(EmptyResultDataAccessException e){
-			throw new ResourceNotFoundException(id);
-		}catch(DataIntegrityViolationException e) {
-			throw new DatabaseException(e.getMessage());
+
+	@Override
+	public Boolean UsernameExists(String username) {
+		
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username));
+		if(this.template.findOne(query,UserEntity.class) != null)
+		{
+			return true;
+		}else {
+			return false;
 		}
 	}
-	
-	public UserEntity update(UserEntity obj,String id)
-	{
-		UserEntity user = this.repository.findById(id).get();
-		user.setName(obj.getName());
-		user.setLogin(obj.getLogin());
-		user.setPassword(obj.getPassword());
-		
-		return this.repository.save(user);
+
+	@Override
+	public Boolean EmailExists(String email) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("email").is(email));
+		if(this.template.findOne(query,UserEntity.class) != null)
+		{
+			return true;
+		}else {
+			return false;
+		}
 	}
 		
 		}

@@ -11,9 +11,8 @@ import com.justAnotherVitor.MoneyFlow.domain.UserEntity;
 public class UserDto implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	private String id;
-	private String name;
-	private String login;
+	private String username;
+	private String email;
 	
 	private List<NoteEntity> notes;
 	
@@ -29,34 +28,25 @@ public class UserDto implements Serializable{
 	
 	public UserDto(UserEntity obj)
 	{
-		id = obj.getId();
-		name = obj.getName();
-		login = obj.getLogin();
+		username = obj.getUsername();
+		email = obj.getEmail();
 		notes = obj.getNotes();
 		}
 	
-	public String getId() {
-		return id;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-	
-	public String getName() {
-		return name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getEmail() {
+		return email;
 	}
 
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public List<NoteEntity> getNotes() {

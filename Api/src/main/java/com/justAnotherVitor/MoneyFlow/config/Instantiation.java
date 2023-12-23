@@ -1,31 +1,27 @@
 package com.justAnotherVitor.MoneyFlow.config;
-//Classe de injeção de dados no banco de dados
-import java.time.ZonedDateTime;
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
-import com.justAnotherVitor.MoneyFlow.Repository.NotesRepository;
-import com.justAnotherVitor.MoneyFlow.Repository.UserRepository;
-import com.justAnotherVitor.MoneyFlow.domain.NoteEntity;
-import com.justAnotherVitor.MoneyFlow.domain.UserEntity;
-import com.justAnotherVitor.MoneyFlow.dto.AuthorDto;
+import com.justAnotherVitor.MoneyFlow.Services.RolesServices;
+import com.justAnotherVitor.MoneyFlow.domain.roles.RolesEntity;
 
 @Configuration
 public class Instantiation implements CommandLineRunner{
 	
-	@Autowired
+	/*@Autowired
 	private UserRepository userRepository;
 	
 	@Autowired
-	private NotesRepository noteRepository;
+	private NotesRepository noteRepository;*/
+	
+	@Autowired
+	private RolesServices roleService;
 	
 	@Override
 	public void run(String... args) throws Exception {
-		userRepository.deleteAll();
-		noteRepository.deleteAll();
+		//userRepository.deleteAll();
+		/*noteRepository.deleteAll();
 		
 		UserEntity u0 = new UserEntity(null,"João de Ipiracança","thriduser","anotheronebites");
 		UserEntity u1 = new UserEntity(null,"Bob Marley","fourthuser","anothersampletext");
@@ -42,7 +38,8 @@ public class Instantiation implements CommandLineRunner{
 		u0.getNotes().addAll(Arrays.asList(n1,n2));
 		u1.getNotes().addAll(Arrays.asList(n3,n4));
 		u2.getNotes().addAll(Arrays.asList(n5));
-		userRepository.saveAll(Arrays.asList(u0,u1,u2));
+		userRepository.saveAll(Arrays.asList(u0,u1,u2));*/
+		
 		
 	}
 	
