@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import com.justAnotherVitor.MoneyFlow.Services.RolesServices;
+import com.justAnotherVitor.MoneyFlow.domain.roles.ERole;
 import com.justAnotherVitor.MoneyFlow.domain.roles.RolesEntity;
 
 @Configuration
@@ -39,6 +40,7 @@ public class Instantiation implements CommandLineRunner{
 		u1.getNotes().addAll(Arrays.asList(n3,n4));
 		u2.getNotes().addAll(Arrays.asList(n5));
 		userRepository.saveAll(Arrays.asList(u0,u1,u2));*/
+		
 		
 		
 	}
