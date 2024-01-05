@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value ="api/auth")
+@CrossOrigin(origins="localhost:3000")
 public class AuthController {
 
 
@@ -67,9 +69,9 @@ public class AuthController {
 			
 			return ResponseEntity.ok(new JwtResponse(jwt,
 					userDetails.getId(),
+					"Bearer",
 					userDetails.getUsername(),
 					userDetails.getEmail(),
-					userDetails.getPassword(),
 					roles));
 		}
 		

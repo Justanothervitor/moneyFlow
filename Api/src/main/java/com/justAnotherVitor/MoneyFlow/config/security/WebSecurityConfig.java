@@ -60,8 +60,8 @@ public class WebSecurityConfig
 	    		   .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 	    		   .authorizeHttpRequests(auth->auth.requestMatchers(mvc.pattern("api/auth/**")).permitAll()
 	    	       .requestMatchers(mvc.pattern("api/user/**")).authenticated()
-	    		   .anyRequest().permitAll()
-	    				   );
+	    		   .anyRequest().permitAll()	    		   
+	    			);
 	       return http.build();
 	    }
 
