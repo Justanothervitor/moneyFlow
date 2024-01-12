@@ -33,7 +33,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value ="api/auth")
-@CrossOrigin(origins="localhost:8081" ,maxAge =3600, allowCredentials = "true")
+@CrossOrigin(origins="localhost:4200" ,maxAge =3600, allowCredentials = "true")
 public class AuthController {
 
 
@@ -53,7 +53,7 @@ public class AuthController {
 		JwtUtils jwtUtils;
 		
 		@PostMapping(value="/login")
-		@CrossOrigin(origins="localhost:8081" ,maxAge =3600, allowCredentials = "true")
+		@CrossOrigin(origins="localhost:4200" ,maxAge =3600, allowCredentials = "true")
 		public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest)
 		{
 			Authentication authentication = authenticationManager.authenticate(
@@ -77,7 +77,7 @@ public class AuthController {
 		}
 		
 		@PostMapping(value="/signup")
-		@CrossOrigin(origins="localhost:8081" ,maxAge =3600, allowCredentials = "true")
+		@CrossOrigin(origins="localhost:4200" ,maxAge =3600, allowCredentials = "true")
 		public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupRequest)
 		{
 			if(userService.UsernameExists(signupRequest.getUsername())) {
