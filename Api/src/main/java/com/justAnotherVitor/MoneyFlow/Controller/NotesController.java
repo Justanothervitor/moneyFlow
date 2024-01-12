@@ -21,7 +21,7 @@ import com.justAnotherVitor.MoneyFlow.domain.NoteEntity;
 
 
 @RequestMapping
-@RestController(value = "api/users/")
+@RestController(value = "api/user/")
 @CrossOrigin(origins="htpp://localhost:3000")
 public class NotesController {
 

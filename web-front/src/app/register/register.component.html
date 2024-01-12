@@ -1,0 +1,67 @@
+<div>
+    @if(!isSucessful){
+        <form
+        name="registerForm"
+        (ngSubmit) = "f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <div>
+        <label for="username">Username</label>
+        <input type="text" name="username" [(ngModel)] ="form.username"required
+        minlength="4" maxlength="20" #username="ngModel" [ngClass]="{'is-valid': f.submitted && username.errors}"/>
+        @if (username.errors && f.submitted){
+            <div>
+                @if (username.errors['required']){
+                    <div>Username is required</div>
+                }
+                @if (username.errors['minlength']){
+                    <div>Username must at least 3 characters</div>
+                }
+                @if (username.errors['maxlenght']){
+                    <div>Username must at most 20 characters</div>
+                }
+            </div>
+        }
+        <label for="email">Email</label>
+        <input type="email" name="email" [(ngModel)] ="form.email"required email
+        #email="ngModel" [ngClass]="{'is-valid': f.submitted && email.errors}"/>
+        @if (email.errors && f.submitted){
+            <div>
+                @if (email.errors['required']){
+                    <div>Email is required</div>
+                }
+                @if (email.errors['email']){
+                    <div>Email must be a valid email</div>
+                }
+            </div>
+        }<label for="password">Password</label>
+        <input type="password" name="password" [(ngModel)] ="form.password"required
+        minlength="6" maxlength="40" #password="ngModel" [ngClass]="{'is-valid': f.submitted && password.errors}"/>
+        @if (password.errors && f.submitted){
+            <div>
+                @if (password.errors['required']){
+                    <div>Password is required</div>
+                }
+                @if (password.errors['minlength']){
+                    <div>Password must at least 6 characters</div>
+                }
+                @if (password.errors['maxlenght']){
+                    <div>Password must at most 20 characters</div>
+                }
+            </div>
+        }
+        <div>
+            <div>
+                <button>Sign Up</button>
+            </div>
+
+            @if (f.submitted && isSignUpFailed){
+                <div>
+                    Signup failed!<br/>{{errorMessage}}
+                </div>
+            }
+        </div>
+    </div>
+    </form>
+    }@else{
+        <div>Your registration is sucessful!</div>
+    }
+</div>

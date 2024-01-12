@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/test")
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="http://localhost:8081",maxAge =3600, allowCredentials = "true")
 public class TestController {
 
 		@GetMapping("/all")
@@ -20,7 +20,7 @@ public class TestController {
 		@GetMapping("/user")
 		@PreAuthorize("hasRole('NORMAL') or hasRole('ENTERPRESS') or hasRole('ADMIN')")
 		public String userAccess() {
-			return "Welcome to MoneyFlow.";
+			return "Welcome to MoneyFlow logged User!";
 		}
 		
 		@GetMapping("/enterpress")

@@ -59,8 +59,10 @@ public class WebSecurityConfig
 	    		   .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
 	    		   .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 	    		   .authorizeHttpRequests(auth->auth.requestMatchers(mvc.pattern("api/auth/**")).permitAll()
-	    	       .requestMatchers(mvc.pattern("api/user/**")).authenticated()
-	    		   .anyRequest().permitAll()	    		   
+	    		   .anyRequest().permitAll()
+	    		   /*.requestMatchers(mvc.pattern("api/user/***")).authenticated()
+	    		   .requestMatchers(mvc.pattern("api/test/**")).permitAll()
+	    		   .anyRequest().permitAll()*/
 	    			);
 	       return http.build();
 	    }

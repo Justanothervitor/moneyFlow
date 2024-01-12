@@ -1,0 +1,42 @@
+<div>
+    @if(!isLoggedIn){
+        <form
+        name="registerForm"
+        (ngSubmit) = "f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <div>
+        <label for="username">Username</label>
+        <input type="text" name="username" [(ngModel)] ="form.username"required
+         #username="ngModel" [ngClass]="{'is-valid': f.submitted && username.errors}"/>
+        @if (username.errors && f.submitted){
+        <div>Username is required</div>
+        }
+        <label for="password">Password</label>
+        <input type="password" name="password" [(ngModel)] ="form.password"required
+        minlength="6" #password="ngModel" [ngClass]="{'is-valid': f.submitted && password.errors}"/>
+        @if (password.errors && f.submitted){
+            <div>
+                @if (password.errors['required']){
+                    <div>Password is required</div>
+                }
+                @if (password.errors['minlength']){
+                    <div>Password must at least 6 characters</div>
+                }
+            </div>
+        }
+        <div>
+            <div>
+                <button>Sign Up</button>
+            </div>
+
+            @if (f.submitted && isLoginFailed){
+                <div>
+                    Login failed!<br/>{{errorMessage}}
+                </div>
+            }
+        </div>
+    </div>
+    </form>
+    }@else{
+        <div>Logged in as {{roles}}.</div>
+    }
+</div>
