@@ -11,6 +11,7 @@ import { AuthService } from './_services/auth.service';
 export class AppComponent {
   private roles : string[] = [];
   isLoggedIn = false;
+
   showAdminBoard = false;
   showEnterpressBoard = false;
   username? : string;
@@ -24,25 +25,15 @@ export class AppComponent {
       const user = this.storageService.getUser();
       this.roles = user.roles;
       
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showEnterpressBoard = this.roles.includes('ROLE_ENTERPRESS');
+      this.showAdminBoard = this.roles.includes('ADMIN');
+      this.showEnterpressBoard = this.roles.includes('ENTERPRESS');
 
       this.username = user.username;
     }
   }
 
   logout(): void{
-    this.authService.logout().subscribe({
-      next : res => {
-        console.log(res);
-        this.storageService.clean();
-
-        window.location.reload();
-      },
-      error : err => {
-        console.log(err);
-      }
-    });
+    this.authService.logout();
   }
 
 }

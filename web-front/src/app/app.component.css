@@ -1,0 +1,25 @@
+.principalBody{
+    display:flex;
+    flex-direction: column;
+    position:fixed;
+    background: cornflowerblue;
+    margin: 9mm 5mm 10mm 20mm;
+    width:90%;
+    height: 70%;
+}
+
+.navStyle{
+    font-size: 25px;
+    align-self: flex-end;
+}
+
+.tittleStyle{
+    font-size: 35px;
+    align-self: flex-start;
+}
+
+.imageSpace{
+    background: url("../assets/assets-1-.png");
+    position: relative;
+
+}

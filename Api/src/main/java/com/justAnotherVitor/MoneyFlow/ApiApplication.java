@@ -18,10 +18,10 @@ public class ApiApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/api/user/**").allowedOrigins("http://localhost:4200");
+				registry.addMapping("/api/user/**").allowedOrigins("http://localhost:4200").allowCredentials(true);
 				registry.addMapping("api/auth/login").allowedOrigins("http://localhost:4200").allowCredentials(true).allowedMethods("OPTIONS","POST");
 				registry.addMapping("api/auth/signup").allowedOrigins("http://localhost:4200").allowCredentials(true).allowedMethods("OPTIONS","POST");
-				registry.addMapping("/api/test/**").allowedOrigins("http://localhost:4200");
+				registry.addMapping("/api/test/**").allowedOrigins("http://localhost:4200").allowCredentials(true);
 			}
 
 	};

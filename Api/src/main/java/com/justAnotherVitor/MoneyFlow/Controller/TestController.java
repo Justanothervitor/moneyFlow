@@ -18,15 +18,15 @@ public class TestController {
 		}
 		
 		@GetMapping("/user")
-		@PreAuthorize("hasRole('NORMAL') or hasRole('ENTERPRESS') or hasRole('ADMIN')")
+		@PreAuthorize("hasRole('NORMAL')")
 		public String userAccess() {
 			return "Welcome to MoneyFlow logged User!";
 		}
 		
 		@GetMapping("/enterpress")
-		@PreAuthorize("hasRole('ENTERPRESS') or hasRole('ADMIN')")
+		@PreAuthorize("hasRole('ENTERPRESS')")
 		public String enterpressAcess() {
-			return "User Content.";
+			return "Enterpress Content.";
 		}
 		
 		@GetMapping("/admin")

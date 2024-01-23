@@ -6,8 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.WebUtils;
 
 import com.justAnotherVitor.MoneyFlow.config.security.services.UserDetailsImpl;
 
@@ -18,6 +20,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Component
 @PropertySource(value = {"classpath:application.properties"})
@@ -31,7 +35,31 @@ public class JwtUtils {
 	@Value("${jwt.jwtExpirationMs}")
 	private int jwtExpirationMs;
 	
-	public String generateJwtToken(Authentication authentication)
+	@Value("${jwt.jwtCookieName}")
+	private String jwtCookie;
+	
+	public String getJwtFromCookies(HttpServletRequest request) {
+		Cookie cookie = WebUtils.getCookie(request, jwtCookie);
+		if(cookie != null) {
+			return cookie.getValue();
+		}else {
+			return null;
+		}
+	}
+	
+	public ResponseCookie generateJwtCookie(Authentication authentication)
+	{
+		String jwt = generateJwtFromUsername(authentication);
+		ResponseCookie cookie = ResponseCookie.from(jwtCookie,jwt).path("/api").build();
+		return cookie;
+	}
+	
+	public ResponseCookie getCleanJwtCookie() {
+		ResponseCookie cookie = ResponseCookie.from(jwtCookie,null).path("/api").build();
+		return cookie;
+	}
+	
+	public String generateJwtFromUsername(Authentication authentication)
 	{
 		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 		

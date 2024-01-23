@@ -5,6 +5,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -53,7 +55,6 @@ public class AuthController {
 		JwtUtils jwtUtils;
 		
 		@PostMapping(value="/login")
-		@CrossOrigin(origins="localhost:4200" ,maxAge =3600, allowCredentials = "true")
 		public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest)
 		{
 			Authentication authentication = authenticationManager.authenticate(
@@ -61,23 +62,22 @@ public class AuthController {
 			
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			
-			String jwt = jwtUtils.generateJwtToken(authentication);
+			ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(authentication);
 			
 			UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+			
 			List<String> roles = userDetails.getAuthorities().stream()
 					.map(item-> item.getAuthority())
 					.collect(Collectors.toList());
 			
-			return ResponseEntity.ok(new JwtResponse(jwt,
+			return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE,jwtCookie.toString()).body(new JwtResponse(
 					userDetails.getId(),
-					"Bearer",
 					userDetails.getUsername(),
 					userDetails.getEmail(),
 					roles));
 		}
 		
 		@PostMapping(value="/signup")
-		@CrossOrigin(origins="localhost:4200" ,maxAge =3600, allowCredentials = "true")
 		public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupRequest)
 		{
 			if(userService.UsernameExists(signupRequest.getUsername())) {
