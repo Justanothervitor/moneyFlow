@@ -2,12 +2,6 @@
     <a class="tittleStyle" href="#">MoneyFlow</a>
     <nav class="navStyle">
     <div routerLinkActive="active">
-      @if(showAdminBoard){
-          <a href="/admin" routerLink="admin">Admin Board</a> |
-      }
-      @if(showEnterpressBoard){
-          <a href="/enterpress" routerLink="enterpress">Enterpress Board</a> |
-      }
       @if(isLoggedIn){
           <a href="/user" routerLink="user">User</a> |
       }

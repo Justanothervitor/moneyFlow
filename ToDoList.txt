@@ -1,0 +1,25 @@
+To ReDo in MoneyFlow API
+
+Create Domains:[X]
+1)UserDomain -> AnnotationDomain,RolesDomain
+2)RolesDomain ->ENUM ERole
+3)AnnotationDomain
+
+Create Configuration Package:[X]...Partially
+1)Main -> MongoConfiguration,WebSecurityConfig
+2)Serializers-> (DataTimeSerializers,DataTimeDeserializer,AnnotationSerializer,AnnotationDeserializer)
+3)Services -> UserDetailsImpl,UserDetailsImplService
+4)JWT -> JwtUtils,AuthTokenFilter,AuthEntryPointJWT
+
+Create Repositories:[X]
+
+1)UserRepository -> UserDomain.findByUsername,Boolean.UsernameExists,Boolean.EmailExists,void.DeleteUser,UserDomain.SaveUser
+2)RolesRepository ->RolesDomain.findByRole
+3)AnnotationDomain -> AnnotationDomain.createAnnotation,AnnotationDomain.updateAnnotattion,void.deleteAnnotation,AnnotationDomain.fetchAnnotations,
+AnnotationDomain.fetchAnnotationRecent
+
+
+Create Controllers:[]
+1)AuthController -> [POST]ResponseEntity<?>authenticateUser,[POST]ResponseEntity<?>signupUser,[POST]ResponseEntity<?>logout
+2)AnnotationController -> [POST]ResponseEntity<AnnotationDomain>createAnnotation,[UPDATE]ResponseEntity<AnnotationDomain>updateAnnotattion,
+[DELETE]ResponseEntity<Void>deleteAnnotation,[GET]ResponseEntity<AnnotationDomain<List>>,[GET]ResponseEntity<AnnotationDomain<List>>fetchAnnotationRecent

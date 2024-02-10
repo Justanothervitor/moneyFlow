@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-
+import { Injectable, booleanAttribute } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 const USER_KEY = 'auth-user';
 
 @Injectable({
@@ -7,19 +7,22 @@ const USER_KEY = 'auth-user';
 })
 export class StorageService {
 
-  constructor() {}
+  constructor(private cookieManager:CookieService) {}
 
   clean(): void{
     window.sessionStorage.clear();
   }
 
   public saveUser(user:any):void{
+    window.sessionStorage.removeItem(USER_KEY);
+    this.cookieManager.delete('SessionCookie');
     window.sessionStorage.setItem(USER_KEY,JSON.stringify(user));
   }
 
   public removeUser():void{
     window.sessionStorage.removeItem(USER_KEY);
-    window.sessionStorage.clear;
+    this.cookieManager.delete('SessionCookie');
+    window.sessionStorage.clear();
   }
 
   public getUser():any{
@@ -30,7 +33,6 @@ export class StorageService {
     }
     return {};
   }
-
   public isLoggedIn(): boolean{
     const user = window.sessionStorage.getItem(USER_KEY);
     if(user)
