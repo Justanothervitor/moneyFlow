@@ -15,6 +15,5 @@ FetchRecent foi alterado para pegar todas as Anotações independete do usúario
 Os métodos responsáveis por linkar uma anotação ao seu usúario criador foram alterados pois não estavam funcionando direito.
 Foi adicionado um filtro simples de CORS(Eu tinha esquecido de criar um quando eu refiz a API).
 
-==================================================================================================================================================================
 
 
