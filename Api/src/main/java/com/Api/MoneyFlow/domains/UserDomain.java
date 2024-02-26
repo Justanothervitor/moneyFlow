@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Document(collection="users")
 public class UserDomain implements Serializable {
@@ -25,6 +26,7 @@ public class UserDomain implements Serializable {
 	private String email;
 	private String password;
 	
+	@JsonProperty("Annotations")
 	@DocumentReference
 	@JsonBackReference
 	private List<AnnotationDomain> Annotations = new ArrayList<>();
@@ -32,7 +34,7 @@ public class UserDomain implements Serializable {
 	@DocumentReference
 	private Set<RolesDomain> Authorization = new HashSet<>();
 	
-	public UserDomain()
+	public UserDomain ()
 	{
 		
 	}
@@ -41,6 +43,11 @@ public class UserDomain implements Serializable {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+	}
+	
+	public UserDomain(String username)
+	{
+		this.username = username;
 	}
 	
 	public UserDomain(String username,String email,String password, List<AnnotationDomain> annotations)

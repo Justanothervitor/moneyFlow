@@ -1,18 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../_services/user.service';
+import { HomeservicesService } from '../_services/homeservices.service';
+import { StorageService } from '../_services/storage.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.scss'
 })
+
 export class HomeComponent implements OnInit{
+
   content?: string;
 
-  constructor(private userService: UserService){}
-  
+
+  constructor(private welcome:HomeservicesService,private storage:StorageService){}
+
   ngOnInit(): void {
-      this.userService.getPublicContent().subscribe({
+    if(!this.storage.isLoggedIn()){
+      this.welcome.getWelcome().subscribe({
         next: data => {
           this.content = data;
         },
@@ -23,7 +28,22 @@ export class HomeComponent implements OnInit{
           this.content = "Error with status" + err.status;
         }
         }
-      })
+      });
+    }else{
+      this.welcome.getWelcomeLogged().subscribe({
+        next: data => {
+          this.content = data;
+        },
+        error: err => {console.log(err)
+        if(err.error){
+          this.content = JSON.parse(err.error).message;
+        }else{
+          this.content = "Error with status" + err.status;
+        }
+        }
+      });
+    }
+
   }
 
 }

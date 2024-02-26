@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import com.Api.MoneyFlow.JwtCfg.JwtUtils;
 import com.Api.MoneyFlow.Templates.UserTemplate;
 import com.Api.MoneyFlow.domains.UserDomain;
 
@@ -14,6 +15,9 @@ public class UserRepositories implements UserTemplate{
 
 	@Autowired
 	private MongoTemplate template;
+	
+	@Autowired
+	private JwtUtils jwtUtils;
 	
 	private Query usernameQuery(String username) {
 		Query query = new Query(Criteria.where("username").is(username));
@@ -26,10 +30,23 @@ public class UserRepositories implements UserTemplate{
 		return query;
 	}
 	
+	private Query idQuery(String id)
+	{
+		Query query = new Query(Criteria.where("_id").is(id));
+		return query;
+	}
+	
 	@Override
 	public UserDomain findByUsername(String username) {
 		Query query =  usernameQuery(username);		
 		return this.template.findOne(query, UserDomain.class);
+	}
+	
+	@Override
+	public UserDomain getActualUser(String auth)
+	{
+		String username = this.jwtUtils.getUsernameFromJwtToken(auth);
+		return this.findByUsername(username);
 	}
 
 	@Override
@@ -64,6 +81,12 @@ public class UserRepositories implements UserTemplate{
 	@Override
 	public UserDomain saveUser(UserDomain user) {
 		return this.template.save(user);
+	}
+
+	@Override
+	public UserDomain getUserById(String id) {
+		Query query = idQuery(id);
+		return this.template.findOne(query, UserDomain.class);
 	}
 
 }

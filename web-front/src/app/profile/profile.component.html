@@ -3,20 +3,19 @@
     <div>
         <header>
             <h3>
-                <strong>{{currentUser.username}}</strong> Profile
+                <strong>{{currentUser.username}}</strong> profile
             </h3>
         </header>
         <p>
-            <strong>Email:</strong>
-            {{currentUser.email}}
+            <strong>Email:</strong>{{currentUser.email}}
         </p>
-        <strong>Roles:</strong>
+        <strong>Role:</strong>
         <ul>
-            @for(role of currentUser.roles;track role){
-                <li>{{ role }}</li>
+            @for(role of currentUser.role;track role){
+                <li>{{role}}</li>
             }
         </ul>
     </div>
 }@else {
-    <p>Please login!</p>
+    <p>Please login again!</p>
 }

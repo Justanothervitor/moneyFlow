@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../_services/auth.service';
+import { AuthServiceService } from '../_services/auth-service.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.scss'
 })
-export class RegisterComponent {
-  form : any ={
+export class RegisterComponent{
+
+  form: any ={
     username : null,
     email : null,
     password : null
@@ -17,12 +18,12 @@ export class RegisterComponent {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService:AuthService){ }
+  constructor(private autenticator:AuthServiceService){}
 
   onSubmit():void{
-    const {username,email,password} = this.form;
+    const { username, email , password } = this.form;
 
-    this.authService.register(username,email,password).subscribe({
+    this.autenticator.register(username,email,password).subscribe({
       next: data =>{
         console.log(data);
         this.isSucessful = true;

@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../_services/storage.service';
 
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrl: './profile.component.scss'
 })
-
 export class ProfileComponent implements OnInit{
-  currentUser:any;
 
-  constructor(private storageService:StorageService){ }
+  currentUser : any;
+
+  constructor(private storage:StorageService){}
 
   ngOnInit(): void {
-      this.currentUser = this.storageService.getUser();
+      this.currentUser = this.storage.getUser();
   }
-
 }

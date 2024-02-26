@@ -21,7 +21,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 @Component
-@PropertySource(value = {"classpath:application.properties"})
+@PropertySource(value= {"classpath:application.properties"})
 public class JwtUtils {
 
 	private static Logger logger = LoggerFactory.getLogger(JwtUtils.class);

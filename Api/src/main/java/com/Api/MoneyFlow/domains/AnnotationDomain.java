@@ -6,11 +6,12 @@ import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-@Document(collection="annotations")
+@Document(collection="Annotations")
 public class AnnotationDomain implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -24,10 +25,12 @@ public class AnnotationDomain implements Serializable {
 	
 	@JsonIgnore
 	@JsonManagedReference
+	@DocumentReference
 	private UserDomain user;
 	
 	
 	public AnnotationDomain(String noteId,String name,ZonedDateTime input,Double value,String description) {
+		super();
 		this.noteId = noteId;
 		this.name = name;
 		this.userInputData = input;
@@ -35,89 +38,88 @@ public class AnnotationDomain implements Serializable {
 		this.description = description;
 	}
 	
+	public AnnotationDomain(String name,Double value,ZonedDateTime input,String description,UserDomain user) {
+		super();
+		this.name = name;
+		this.value = value;
+		this.userInputData = input;
+		this.description = description;
+		this.user = user;
+	}
+	
 	public AnnotationDomain(String name,String description,Double value)
 	{
+		super();
 		this.name = name;
 		this.description = description;
 		this.value = value;
 	}
-
-
+		
+	public AnnotationDomain()
+	{
+		
+	}
+	
 	public String getNoteId() {
 		return noteId;
 	}
-
 
 	public void setNoteId(String noteId) {
 		this.noteId = noteId;
 	}
 
-
 	public String getName() {
 		return name;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
 	public Double getValue() {
 		return value;
 	}
-
 
 	public void setValue(Double value) {
 		this.value = value;
 	}
 
-
 	public ZonedDateTime getUserInputData() {
 		return userInputData;
 	}
-
 
 	public void setUserInputData(ZonedDateTime userInputData) {
 		this.userInputData = userInputData;
 	}
 
-
 	public String getDescription() {
 		return description;
 	}
-
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
 	public ZonedDateTime getDateOfCreation() {
 		return dateOfCreation;
 	}
-
 
 	public void setDateOfCreation(ZonedDateTime dateOfCreation) {
 		this.dateOfCreation = dateOfCreation;
 	}
 
-
 	public UserDomain getUser() {
 		return user;
 	}
-
 
 	public void setUser(UserDomain user) {
 		this.user = user;
 	}
 
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(noteId);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -130,7 +132,5 @@ public class AnnotationDomain implements Serializable {
 		AnnotationDomain other = (AnnotationDomain) obj;
 		return Objects.equals(noteId, other.noteId);
 	}
-	
-	
-
+		
 }

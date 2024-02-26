@@ -1,41 +1,36 @@
 import { Component } from '@angular/core';
 import { StorageService } from './_services/storage.service';
-import { AuthService } from './_services/auth.service';
-import { EventBusService } from './_shared/event-bus.service';
-import { Subscription } from 'rxjs';
+import { AuthServiceService } from './_services/auth-service.service';
+import { AnnotationsService } from './_services/annotations.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrl: './app.component.scss'
 })
 
 export class AppComponent {
-  private roles : string[] = [];
+  private role: string[] = [];
+  private userAnnotatitons: string[] = [];
   isLoggedIn = false;
-
   username? : string;
-  eventBusSub? : Subscription;
 
-  constructor(private storageService: StorageService, private authService: AuthService, private eventBusService: EventBusService){ }
+  constructor(private storage:StorageService,private authenticator:AuthServiceService,private annotations:AnnotationsService){}
 
-  ngOnInit(): void{
-    this.isLoggedIn = this.storageService.isLoggedIn();
+  ngOnInit():void {
+    this.isLoggedIn = this.storage.isLoggedIn();
 
-    if(this.isLoggedIn){
-      const user = this.storageService.getUser();
-      this.roles = user.roles;
-      
-
+    if(this.isLoggedIn)
+    {
+      const user = this.storage.getUser();
+      this.role = user.roles;
+      this.userAnnotatitons = user.annotations;
       this.username = user.username;
-      this.eventBusSub = this.eventBusService.on('logout',()=>{
-        this.logout();
-      });
     }
   }
 
   logout(): void{
-    this.authService.logout();
+    this.storage.logoff();
   }
-
+  
 }

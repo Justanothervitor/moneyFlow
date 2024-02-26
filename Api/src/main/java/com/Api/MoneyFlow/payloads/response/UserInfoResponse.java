@@ -9,9 +9,10 @@ public class UserInfoResponse {
 	private String id;
 	private String username;
 	private String email;
+	private List<AnnotationResponse> annotations;
 	private List<String> role;
 	
-	public UserInfoResponse(String token, String type, String id, String username, String email, List<String> role)
+	public UserInfoResponse(String token, String type, String id, String username, String email,List<AnnotationResponse>annotations, List<String> role)
 	{
 		super();
 		this.token = token;
@@ -19,6 +20,7 @@ public class UserInfoResponse {
 		this.id = id;
 		this.username = username;
 		this.email = email;
+		this.annotations = annotations;
 		this.role = role;
 	}
 	
@@ -53,6 +55,14 @@ public class UserInfoResponse {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public List<AnnotationResponse> getAnnotations() {
+		return annotations;
+	}
+
+	public void setAnnotations(List<AnnotationResponse> annotations) {
+		this.annotations = annotations;
+	}
+
 	public List<String> getRole() {
 		return role;
 	}

@@ -1,35 +1,35 @@
 <div>
     @if(!isLoggedIn){
         <form
-        name="registerForm"
+        name="loginForm"
         (ngSubmit) = "f.form.valid && onSubmit()" #f="ngForm" novalidate>
-    <div>
-        <label for="username">Username</label>
-        <input type="text" name="username" [(ngModel)] ="form.username"required
-         #username="ngModel" [ngClass]="{'is-valid': f.submitted && username.errors}"/>
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" name="username" class="form-control" [(ngModel)] ="form.username"
+        required #username="ngModel"[ngClass]="{'is-valid': f.submitted && username.errors}"/>
         @if (username.errors && f.submitted){
-        <div>Username is required</div>
+        <div class="alert alert-warning" role="alert">Username is required</div>
         }
-        <label for="password">Password</label>
-        <input type="password" name="password" [(ngModel)] ="form.password"required
-        minlength="6" #password="ngModel" [ngClass]="{'is-valid': f.submitted && password.errors}"/>
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control"  [(ngModel)] ="form.password"
+        required #password="ngModel" minlength="6" [ngClass]="{'is-valid': f.submitted && password.errors}"/>
         @if (password.errors && f.submitted){
             <div>
                 @if (password.errors['required']){
-                    <div>Password is required</div>
+                    <div class="alert alert-warning" role="alert">Password is required</div>
                 }
                 @if (password.errors['minlength']){
-                    <div>Password must at least 6 characters</div>
+                    <div class="alert alert-warning" role="alert">Password must at least 6 characters</div>
                 }
             </div>
         }
         <div>
             <div>
-                <button>Login</button>
+                <button class="btn btn-primary">Login</button>
             </div>
 
             @if (f.submitted && isLoginFailed){
-                <div>
+                <div class="alert alert-warning" role="alert">
                     Login failed!<br/>{{errorMessage}}
                 </div>
             }
@@ -37,6 +37,6 @@
     </div>
     </form>
     }@else{
-        <div>Logged in as {{roles}}.</div>
+        <div class="alert alert-sucess" role="alert">Logged in as {{role}}.</div>
     }
 </div>

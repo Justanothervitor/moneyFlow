@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Api.MoneyFlow.JwtCfg.JwtUtils;
+import com.Api.MoneyFlow.Repositories.AnnotationsRepositories;
 import com.Api.MoneyFlow.Repositories.RolesRepository;
 import com.Api.MoneyFlow.Repositories.UserRepositories;
 import com.Api.MoneyFlow.SecurityServices.UserDetailsImpl;
@@ -27,6 +28,7 @@ import com.Api.MoneyFlow.domains.RolesDomain;
 import com.Api.MoneyFlow.domains.UserDomain;
 import com.Api.MoneyFlow.payloads.request.LoginRequest;
 import com.Api.MoneyFlow.payloads.request.SignupRequest;
+import com.Api.MoneyFlow.payloads.response.AnnotationResponse;
 import com.Api.MoneyFlow.payloads.response.MessageResponse;
 import com.Api.MoneyFlow.payloads.response.UserInfoResponse;
 
@@ -34,7 +36,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/auth")
-@CrossOrigin(origins="localhost:4200",maxAge=3600,allowCredentials="true")
+@CrossOrigin(origins={"http://localhost:4200"},maxAge=3600,allowCredentials="true")
 public class AuthController {
 
 	@Autowired
@@ -52,7 +54,10 @@ public class AuthController {
 	@Autowired
 	PasswordEncoder passwordEnconder;
 	
-	@PostMapping("login")
+	@Autowired
+	AnnotationsRepositories annotationRepo;
+	
+	@PostMapping("/login")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest login)
 	{
 		Authentication authentication = authenticationManager.authenticate(
@@ -66,11 +71,15 @@ public class AuthController {
 				.map(item->item.getAuthority())
 				.collect(Collectors.toList());
 		
+		List<AnnotationResponse> placeHolder = userRepositories.getActualUser(jwt).getAnnotations().stream()
+				.map(x->new AnnotationResponse(x)).collect(Collectors.toList());
+		
+		
 		return ResponseEntity.ok(new UserInfoResponse(jwt,"Bearer",userDetails.getId(),userDetails.getUsername(),
-				userDetails.getEmail(),role));
+				userDetails.getEmail(),placeHolder,role));
 	}
 	
-	@PostMapping("signup")
+	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signup)
 	{
 		if(userRepositories.usernameExists(signup.getUsername()))

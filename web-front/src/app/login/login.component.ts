@@ -1,51 +1,56 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../_services/auth.service';
+import { Component,OnInit } from '@angular/core';
+import { AuthServiceService } from '../_services/auth-service.service';
 import { StorageService } from '../_services/storage.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.scss'
 })
+
 export class LoginComponent implements OnInit {
+
   form : any ={
     username : null,
-    password: null
+    password : null
   };
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  roles : string[] = [];
+  role: string[] = [];
+  annotation: string[] = [];
 
-  constructor(private authService: AuthService, private storageService: StorageService){}
-  
+  constructor(private authenticator:AuthServiceService,private storage:StorageService){}
+
   ngOnInit(): void {
-      if(this.storageService.isLoggedIn()){
+      if(this.storage.isLoggedIn()){
+
         this.isLoggedIn = true;
-        this.roles = this.storageService.getUser().roles;
+        this.role = this.storage.getUser().role;
+        this.annotation = this.storage.getUser().annotations;
       }
   }
 
-  onSubmit(): void {
+  onSubmit(): void{
     const { username, password } = this.form;
 
-    this.authService.login(username,password).subscribe({
-      next: data =>{
-        this.storageService.saveUser(data);
+    this.authenticator.login(username,password).subscribe({
+      next : data => {
+        this.storage.saveUser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.storageService.getUser().roles;
+        this.role = this.storage.getUser().role;
+        this.annotation = this.storage.getUser().annotation;
         this.reloadPage();
       },
-      error: err => {
+      error:err =>{
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       }
     });
   }
-
-  reloadPage(): void{
+  reloadPage():void{
     window.location.reload();
   }
 }

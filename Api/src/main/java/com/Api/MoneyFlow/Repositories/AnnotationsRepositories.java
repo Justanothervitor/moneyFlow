@@ -9,10 +9,12 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import com.Api.MoneyFlow.Templates.AnnotationTemplate;
 import com.Api.MoneyFlow.domains.AnnotationDomain;
 import com.Api.MoneyFlow.domains.UserDomain;
+import com.Api.MoneyFlow.payloads.request.InputAnnotationRequest;
 
 @Repository
 public class AnnotationsRepositories implements AnnotationTemplate{
@@ -20,25 +22,43 @@ public class AnnotationsRepositories implements AnnotationTemplate{
 	@Autowired
 	private MongoTemplate template;
 	
-	private Query dataQuery ()
+	@Autowired 
+	private UserRepositories userRepo;
+	
+	private String parseAuthentication(String authentication)
 	{
-		ZonedDateTime value = ZonedDateTime.now();
-		Query query = new Query(Criteria.where("dateOfCreation").is(value));
-		return query;
+		
+		if(StringUtils.hasText(authentication)&&authentication.startsWith("Bearer"))
+		{
+			return authentication.substring(7,authentication.length());
+		}
+		return null;
 	}
-
-	private void updateUser(AnnotationDomain obj)
+	
+	private AnnotationDomain updateUserAndAdd(AnnotationDomain obj)
 	{
 		template.update(UserDomain.class)
-		.matching(Criteria.where("id").is(obj.getUser().getId()))
-		.apply(new Update().push("annotations").value(obj));
+		.matching(Criteria.where("_id").is(obj.getUser().getId()))
+		.apply(new Update().push("Annotations").value(obj))
+		.first();
 		
+		return obj;
+		
+	}
+	
+	private AnnotationDomain updateUserAndRemove(AnnotationDomain obj)
+	{
+		template.update(UserDomain.class)
+		.matching(Criteria.where("_id").is(obj.getUser().getId()))
+		.apply(new Update().pull("Annotations",obj))
+		.first();
+		return obj;
 	}
 	
 	private AnnotationDomain updateUserAndAnnotation(AnnotationDomain obj)
 	{
 		Query query = new Query(Criteria.where("id").is(obj.getUser().getId())
-				.and("annotations").is(obj.getUser().getAnnotations())
+				.and("Annotations").is(obj.getUser().getAnnotations())
 				.and("noteId").is(obj.getNoteId()));
 		Update update = new Update().set("name", obj.getName())
 				.set("value",obj.getValue()).set("description", obj.getDescription());
@@ -52,16 +72,10 @@ public class AnnotationsRepositories implements AnnotationTemplate{
 		return query;
 	}
 	
-	@Override
-	public List<AnnotationDomain> fetchAnnotations() {
-		
-		return this.template.findAll(AnnotationDomain.class);
-	}
 
 	@Override
 	public List<AnnotationDomain> fecthAnnotationRecent() {
-		Query query = dataQuery();
-		return this.template.find(query, AnnotationDomain.class);
+		return this.template.findAll(AnnotationDomain.class);
 	}
 
 	@Override
@@ -71,25 +85,33 @@ public class AnnotationsRepositories implements AnnotationTemplate{
 	}
 
 	@Override
-	public AnnotationDomain createAnnotation(AnnotationDomain obj) {
-		updateUser(obj);
-		return this.template.save(obj);
+	public AnnotationDomain createAnnotation(InputAnnotationRequest input) {
+		if(input.getInputDate() != null)
+		{
+			input.setInputDate(ZonedDateTime.now());
+		}
+		AnnotationDomain obj = new AnnotationDomain(input.getName(),input.getValue(),
+				input.getInputDate(),input.getDescription(),userRepo.getActualUser(parseAuthentication(input.getAuth())));
+		this.template.save(obj);
+		return updateUserAndAdd(obj);
+		
 	}
 
 	@Override
-	public AnnotationDomain updateAnnotation(String id,AnnotationDomain obj) {
+	public AnnotationDomain updateAnnotation(String id,InputAnnotationRequest input) {
 	AnnotationDomain toUpdate = fetchOneById(id);
-		toUpdate.setName(obj.getName());
-		toUpdate.setValue(obj.getValue());
-		toUpdate.setDescription(obj.getDescription());
+		toUpdate.setName(input.getName());
+		toUpdate.setValue(input.getValue());
+		toUpdate.setDescription(input.getDescription());
 		return updateUserAndAnnotation(toUpdate);
 	}
 
 	@Override
 	public void deleteAnnotation(String id) {
 		Query query = idQuery(id);
-		this.template.findAndRemove(query, AnnotationDomain.class);
+		AnnotationDomain toDelete = template.findOne(query, AnnotationDomain.class);
+		this.template.remove(updateUserAndRemove(toDelete));
 		
 	}
-
+	
 }

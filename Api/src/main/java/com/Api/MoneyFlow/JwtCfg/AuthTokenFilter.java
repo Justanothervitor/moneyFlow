@@ -29,7 +29,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 	@Autowired
 	UserDetailsServiceImpl userDetailsService;
 	
-	@Autowired
+
 	public AuthTokenFilter(JwtUtils jwtUtils,UserDetailsServiceImpl userDetailsService)
 	{
 		this.jwtUtils = jwtUtils;

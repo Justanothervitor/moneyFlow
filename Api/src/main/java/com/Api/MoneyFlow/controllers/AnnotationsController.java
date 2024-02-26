@@ -15,50 +15,45 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Api.MoneyFlow.Repositories.AnnotationsRepositories;
 import com.Api.MoneyFlow.domains.AnnotationDomain;
+import com.Api.MoneyFlow.payloads.request.InputAnnotationRequest;
 import com.Api.MoneyFlow.payloads.response.MessageResponse;
 
 @RestController
 @RequestMapping("api/data")
-@CrossOrigin(origins="localhost:4200",maxAge=3600,allowCredentials="true")
+@CrossOrigin(origins={"http://localhost:4200"},maxAge=3600,allowCredentials="true")
 public class AnnotationsController {
 
 	@Autowired
 	private AnnotationsRepositories annotationsRepo;
 	
-	@GetMapping("/home")
+	@GetMapping("/recent")
 	public ResponseEntity<List<AnnotationDomain>> getRecentAnnotations()
 	{
-		return ResponseEntity.ok(annotationsRepo.fecthAnnotationRecent());
+		return ResponseEntity.ok().body(annotationsRepo.fecthAnnotationRecent());
 	}
-	
-	@GetMapping("/all")
-	public ResponseEntity<List<AnnotationDomain>> getAllAnnotations()
-	{
-		return ResponseEntity.ok(annotationsRepo.fetchAnnotations());
-	}
-	
-	@GetMapping("/{id}")
+
+	/*@GetMapping("/{id}")
 	public ResponseEntity<AnnotationDomain> getOneById(@RequestBody String id)
 	{
-		return ResponseEntity.ok(annotationsRepo.fetchOneById(id));
-	}
+		return ResponseEntity.ok().body(annotationsRepo.fetchOneById(id));
+	}*/
 	
 	@PostMapping("/add")
-	public ResponseEntity<AnnotationDomain> createAnnotation(@RequestBody AnnotationDomain obj)
+	public ResponseEntity<AnnotationDomain> createAnnotation(@RequestBody InputAnnotationRequest input)
 	{
-		return ResponseEntity.ok(annotationsRepo.createAnnotation(obj));
+		return ResponseEntity.ok(annotationsRepo.createAnnotation(input));
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<AnnotationDomain> updateAnnotation(@RequestBody String id, AnnotationDomain obj)
+	public ResponseEntity<AnnotationDomain> updateAnnotation(@RequestBody String id, @RequestBody InputAnnotationRequest input)
 	{
-		return ResponseEntity.ok(annotationsRepo.updateAnnotation(id, obj));
+		return ResponseEntity.ok().body(annotationsRepo.updateAnnotation(id, input));
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteAnnotation(@RequestBody String id)
 	{
 		annotationsRepo.deleteAnnotation(id);
-		return ResponseEntity.ok(new MessageResponse("Annotation Deleted!"));
+		return ResponseEntity.ok().body(new MessageResponse("Annotation Deleted!"));
 	}
 }
