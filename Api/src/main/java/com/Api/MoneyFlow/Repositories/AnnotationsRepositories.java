@@ -1,64 +1,60 @@
 package com.Api.MoneyFlow.Repositories;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 
+import com.Api.MoneyFlow.Payloads.Response.AnnotationResponse;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.StringUtils;
 
+import com.Api.MoneyFlow.SecurityServices.AuthServiceImpl;
 import com.Api.MoneyFlow.Templates.AnnotationTemplate;
-import com.Api.MoneyFlow.domains.AnnotationDomain;
-import com.Api.MoneyFlow.domains.UserDomain;
-import com.Api.MoneyFlow.payloads.request.InputAnnotationRequest;
+import com.Api.MoneyFlow.Domains.AnnotationDomain;
+import com.Api.MoneyFlow.Domains.UserDomain;
+import com.Api.MoneyFlow.Payloads.Request.InputAnnotationRequest;
 
 @Repository
 public class AnnotationsRepositories implements AnnotationTemplate{
 
 	@Autowired
-	private MongoTemplate template;
+	protected MongoTemplate template;
 	
-	@Autowired 
-	private UserRepositories userRepo;
-	
-	private String parseAuthentication(String authentication)
-	{
-		
-		if(StringUtils.hasText(authentication)&&authentication.startsWith("Bearer"))
-		{
-			return authentication.substring(7,authentication.length());
-		}
-		return null;
-	}
-	
-	private AnnotationDomain updateUserAndAdd(AnnotationDomain obj)
+	@Autowired
+	protected AuthServiceImpl authService;
+
+
+	protected AnnotationDomain updateUserAndAdd(@NotNull AnnotationDomain obj)
 	{
 		template.update(UserDomain.class)
 		.matching(Criteria.where("_id").is(obj.getUser().getId()))
-		.apply(new Update().push("Annotations").value(obj))
+		.apply(new Update().push("UserAnnotations").value(obj))
 		.first();
 		
 		return obj;
-		
 	}
 	
-	private AnnotationDomain updateUserAndRemove(AnnotationDomain obj)
+	protected Query fetchBasedInUser(@NotNull UserDomain obj)
+	{
+		return new Query(Criteria.where("User").is(obj));
+	}
+	
+	protected AnnotationDomain updateUserAndRemove(@NotNull AnnotationDomain obj)
 	{
 		template.update(UserDomain.class)
 		.matching(Criteria.where("_id").is(obj.getUser().getId()))
-		.apply(new Update().pull("Annotations",obj))
+		.apply(new Update().pull("UserAnnotations",obj))
 		.first();
 		return obj;
 	}
 	
-	private AnnotationDomain updateUserAndAnnotation(AnnotationDomain obj)
+	protected AnnotationDomain updateUserAndAnnotation(@NotNull AnnotationDomain obj)
 	{
 		Query query = new Query(Criteria.where("id").is(obj.getUser().getId())
-				.and("Annotations").is(obj.getUser().getAnnotations())
+				.and("UserAnnotations").is(obj.getUser().getUserAnnotations())
 				.and("noteId").is(obj.getNoteId()));
 		Update update = new Update().set("name", obj.getName())
 				.set("value",obj.getValue()).set("description", obj.getDescription());
@@ -66,39 +62,34 @@ public class AnnotationsRepositories implements AnnotationTemplate{
 		return obj;
 	}
 	
-	private Query idQuery(String id)
+	protected Query idQuery(@NotNull String id)
 	{
-		Query query = new Query(Criteria.where("noteId").is(id));
-		return query;
+        return new Query(Criteria.where("noteId").is(id));
 	}
 	
 
 	@Override
-	public List<AnnotationDomain> fecthAnnotationRecent() {
-		return this.template.findAll(AnnotationDomain.class);
+	public List<AnnotationResponse> fetchAnnotationRecent() {
+		Query query = fetchBasedInUser(authService.returnUser());
+        return template.find(query, AnnotationDomain.class).stream().map(AnnotationResponse::new).toList();
 	}
 
 	@Override
-	public AnnotationDomain fetchOneById(String id) {
-		Query query = idQuery(id);
+	public AnnotationDomain fetchOneById(@NotNull String id) {
+		final Query query = idQuery(id);
 		return this.template.findOne(query,AnnotationDomain.class);
 	}
 
 	@Override
-	public AnnotationDomain createAnnotation(InputAnnotationRequest input) {
-		if(input.getInputDate() != null)
-		{
-			input.setInputDate(ZonedDateTime.now());
-		}
-		AnnotationDomain obj = new AnnotationDomain(input.getName(),input.getValue(),
-				input.getInputDate(),input.getDescription(),userRepo.getActualUser(parseAuthentication(input.getAuth())));
+	public AnnotationDomain createAnnotation(@NotNull InputAnnotationRequest input) {
+		AnnotationDomain obj = new AnnotationDomain(input,authService.returnUser());
 		this.template.save(obj);
 		return updateUserAndAdd(obj);
 		
 	}
 
 	@Override
-	public AnnotationDomain updateAnnotation(String id,InputAnnotationRequest input) {
+	public AnnotationDomain updateAnnotation(@NotNull String id, @NotNull InputAnnotationRequest input) {
 	AnnotationDomain toUpdate = fetchOneById(id);
 		toUpdate.setName(input.getName());
 		toUpdate.setValue(input.getValue());
@@ -107,11 +98,12 @@ public class AnnotationsRepositories implements AnnotationTemplate{
 	}
 
 	@Override
-	public void deleteAnnotation(String id) {
+	public void deleteAnnotation(@NotNull String id) {
 		Query query = idQuery(id);
 		AnnotationDomain toDelete = template.findOne(query, AnnotationDomain.class);
-		this.template.remove(updateUserAndRemove(toDelete));
-		
+		if(toDelete != null) {
+			this.template.remove(updateUserAndRemove(toDelete));
+		}
 	}
 	
 }

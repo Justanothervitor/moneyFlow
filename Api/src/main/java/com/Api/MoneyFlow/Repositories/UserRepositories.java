@@ -6,34 +6,27 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.Api.MoneyFlow.JwtCfg.JwtUtils;
 import com.Api.MoneyFlow.Templates.UserTemplate;
-import com.Api.MoneyFlow.domains.UserDomain;
+import com.Api.MoneyFlow.Domains.UserDomain;
 
 @Repository
 public class UserRepositories implements UserTemplate{
 
 	@Autowired
-	private MongoTemplate template;
+	protected MongoTemplate template;
 	
-	@Autowired
-	private JwtUtils jwtUtils;
-	
-	private Query usernameQuery(String username) {
-		Query query = new Query(Criteria.where("username").is(username));
-		return query;
+	protected Query usernameQuery(String username) {
+		return new Query(Criteria.where("username").is(username));
 	}
 	
-	private Query emailQuery(String email)
+	protected Query emailQuery(String email)
 	{
-		Query query = new Query(Criteria.where("email").is(email));
-		return query;
+		return new Query(Criteria.where("email").is(email));
 	}
 	
-	private Query idQuery(String id)
+	protected Query idQuery(String id)
 	{
-		Query query = new Query(Criteria.where("_id").is(id));
-		return query;
+		return new Query(Criteria.where("_id").is(id));
 	}
 	
 	@Override
@@ -41,34 +34,17 @@ public class UserRepositories implements UserTemplate{
 		Query query =  usernameQuery(username);		
 		return this.template.findOne(query, UserDomain.class);
 	}
-	
-	@Override
-	public UserDomain getActualUser(String auth)
-	{
-		String username = this.jwtUtils.getUsernameFromJwtToken(auth);
-		return this.findByUsername(username);
-	}
 
 	@Override
 	public Boolean usernameExists(String username) {
 		Query query = usernameQuery(username);
-		if(template.findOne(query, UserDomain.class)!= null)
-		{
-			return true;
-		}
-		else {
-			return false;
-		}
+        return template.findOne(query, UserDomain.class) != null;
 	}
 
 	@Override
 	public Boolean emailExists(String email) {
 		Query query = emailQuery(email);
-		if(template.findOne(query, UserDomain.class) != null) {
-			return true;
-		}else {
-			return false;
-		}
+        return template.findOne(query, UserDomain.class) != null;
 	}
 
 	@Override
@@ -79,8 +55,8 @@ public class UserRepositories implements UserTemplate{
 	}
 
 	@Override
-	public UserDomain saveUser(UserDomain user) {
-		return this.template.save(user);
+	public void saveUser(UserDomain user) {
+		this.template.save(user);
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,29 +16,29 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.Api.MoneyFlow.JwtCfg.AuthEntryPoint;
-import com.Api.MoneyFlow.JwtCfg.AuthTokenFilter;
-import com.Api.MoneyFlow.JwtCfg.JwtUtils;
-import com.Api.MoneyFlow.SecurityServices.UserDetailsServiceImpl;
+import com.Api.MoneyFlow.MainCfg.JwtCfg.AuthEntryPoint;
+import com.Api.MoneyFlow.MainCfg.JwtCfg.AuthTokenFilter;
+import com.Api.MoneyFlow.MainCfg.JwtCfg.JwtUtils;
+import com.Api.MoneyFlow.SecurityServices.AuthServiceImpl;
 
 @Configuration
 @EnableMethodSecurity
 public class WebSecurityConfig {
 
 	@Autowired
-	UserDetailsService userDetailsService;
+	protected UserDetailsService userDetailsService;
 	
 	@Autowired
-	private AuthEntryPoint unauthorizedHandler;
+	protected AuthEntryPoint unauthorizedHandler;
 	
 	@Autowired
-	JwtUtils jwtUtils;
+	protected JwtUtils jwtUtils;
 	
 	@Autowired
-	UserDetailsServiceImpl userDetailsServiceImpl;
+	protected AuthServiceImpl authService;
 	
 	public AuthTokenFilter authenticationJwtTokenFilter() {
-		return new AuthTokenFilter(jwtUtils,userDetailsServiceImpl);
+		return new AuthTokenFilter(jwtUtils,authService);
 	}
 	
 	public DaoAuthenticationProvider authenticationProvider()
@@ -51,21 +52,21 @@ public class WebSecurityConfig {
 	}
 	
 	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception{
+	AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception{
 		return authConfig.getAuthenticationManager();
 	}
 	
 	@Bean
-	public PasswordEncoder passwordEnconder()
+	PasswordEncoder passwordEnconder()
 	{
 		return new BCryptPasswordEncoder();
 	}
 	
 	@Bean
-	public SecurityFilterChain appSecurity(HttpSecurity http) throws Exception{
+	SecurityFilterChain appSecurity(HttpSecurity http) throws Exception{
 		
 		http
-		.csrf(csrf->csrf.disable())
+		.csrf(AbstractHttpConfigurer::disable)
 		.exceptionHandling(exception-> exception.authenticationEntryPoint(unauthorizedHandler))
 		.sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 		.authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**").permitAll()

@@ -15,5 +15,21 @@ FetchRecent foi alterado para pegar todas as Anotações independete do usúario
 Os métodos responsáveis por linkar uma anotação ao seu usúario criador foram alterados pois não estavam funcionando direito.
 Foi adicionado um filtro simples de CORS(Eu tinha esquecido de criar um quando eu refiz a API).
 
+21/07/2024 - 19:29
+=======================================================================================================================================================================
+
+#Alterações no site:
+
+Agora a criação de notas esta funcionando no site,graças a adição de um conversor de timezone.
+
+#Alterações na API.
+
+Adicionado um novo atributo no AnnotationDomain, originalTimeZone que guarda a timezone original do request.
+
+#Docker
+
+Adição de um Dockerfile para criar um container tanto do serviço tanto do banco de dados utilizado.
+
+
 
 

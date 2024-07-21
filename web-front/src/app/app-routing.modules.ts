@@ -1,12 +1,12 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { NgModule} from "@angular/core";
+import { Routes,RouterModule } from "@angular/router";
 
-import { RegisterComponent } from "./register/register.component";
-import { LoginComponent } from "./login/login.component";
-import { HomeComponent } from "./home/home.component";
-import { ProfileComponent } from "./profile/profile.component";
-import { AnnotationAllviewComponent } from "./annotation-allview/annotation-allview.component";
-import { AnnotationCreationComponent } from "./annotation-creation/annotation-creation.component";
+import { LoginComponent } from "./Components/login/login.component";
+import { RegisterComponent } from "./Components/register/register.component";
+import { HomeComponent } from "./Components/home/home.component";
+import { ProfileComponent } from "./Components/profile/profile.component";
+import { AnnotationAllviewComponent } from "./Components/annotation-allview/annotation-allview.component";
+import { AnnotationCreationComponent } from "./Components/annotation-creation/annotation-creation.component";
 
 const routes: Routes = [
 
@@ -23,5 +23,4 @@ const routes: Routes = [
     imports:[RouterModule.forRoot(routes)],
     exports:[RouterModule]
 })
-
 export class AppRoutingModule { }

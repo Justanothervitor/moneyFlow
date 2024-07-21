@@ -1,33 +1,34 @@
-<div class="container text-center">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-    <a href="#" class="navbar-brand">MoneyFlow</a>
-    <ul class="navbar-nav me-auto mb-5 mb-lg-10" routerLinkActive="active">
-      @if(isLoggedIn){
+<div class="container text-center row">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container justify-content-end">
+    <a href="#" routerLinkActive="/" class= "navbar-brand fs-1" >MoneyFlow</a>
+    <ul class="nav nav-pills nav-justified">
+      @if(!isLoggedIn){
         <li class="nav-item">
-          <a href="/annotations"  routerLink="annotations">Your Annotations</a> |
+          <a class="nav-link" routerLink="/login">Login</a>
         </li>
+        
         <li class="nav-item">
-          <a href="/create"  routerLink="create">Create a Annotation</a> |
-        </li>
-        <li class="nav-item">
-          <a href="/profile"  routerLink="profile">Profile</a> |
-        </li>
-        <li class="nav-item">
-          <a href (click) ="logout()">Logout</a>
-        </li>
+          <a class="nav-link" routerLink="/register">Register</a>
+        </li>   
       }
-      @if(!isLoggedIn)
+      @if(isLoggedIn)
       {
         <li class="nav-item">
-          <a href="/login" routerLink="login">Login</a> |
+          <a class="nav-link" routerLink="/annotations">Your annotations</a>
         </li>
         <li class="nav-item">
-          <a href="/register"  routerLink="register">Register</a>
+          <a class="nav-link" routerLink="/create">Create a annotation</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/profile">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a href (click)="logout()" class="nav-link">Logout</a>
         </li>
       }
     </ul>
-  </div>
+    </div>
   </nav>
 
 <router-outlet></router-outlet>

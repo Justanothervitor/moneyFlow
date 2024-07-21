@@ -7,8 +7,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.Api.MoneyFlow.Templates.RolesTemplate;
-import com.Api.MoneyFlow.domains.ERole;
-import com.Api.MoneyFlow.domains.RolesDomain;
+import com.Api.MoneyFlow.Domains.ERole;
+import com.Api.MoneyFlow.Domains.RolesDomain;
 
 @Repository
 public class RolesRepository implements RolesTemplate{
@@ -16,10 +16,9 @@ public class RolesRepository implements RolesTemplate{
 	@Autowired
 	private MongoTemplate template;
 	
-	private Query roleQuery (ERole role)
+	protected Query roleQuery (ERole role)
 	{
-		Query query = new Query(Criteria.where("role").is(role));
-		return query;
+		return new Query(Criteria.where("role").is(role));
 	}
 	
 	@Override
