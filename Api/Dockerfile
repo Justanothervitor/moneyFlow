@@ -1,7 +1,8 @@
-FROM openjdk:17
+FROM amazoncorretto:17
+WORKDIR /app
 ARG JAR_FILE=target/*.jar
-COPY ./target/Api-0.0.1.jar app.jar
+COPY ./Api/target/Api-0.0.1.jar app.jar
+RUN ls -a
 EXPOSE 8080
-EXPOSE 8888
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
 

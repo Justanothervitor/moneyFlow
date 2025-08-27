@@ -1,0 +1,69 @@
+services:
+
+  database_prod:
+    image: 'mongo:latest'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: $USER_PROD
+      MONGO_INITDB_ROOT_PASSWORD: $PASSWORD_PROD
+
+    volumes:
+      - dbdata:/data/db
+      - type: bind
+        source: ./mongo-entrypoint
+        target: /docker-entrypoint-initdb.d
+
+    ports:
+      - '$MONGODB_PROD_LOCAL_PORT:$MONGODB_PROD_DOCKER_PORT'
+    container_name: database-prod
+    networks:
+      - spring-mongo-prod
+
+  api-back:
+    environment:
+      - 'SPRING_DATA_MONGODB_URI=mongodb://$USER_PROD:$PASSWORD_PROD@database-prod:$MONGODB_PROD_DOCKER_PORT/'
+      - 'JWT_JWTSECRET=2031920wsokfaijfinakjxmkdnaufbiejroi293i40905ikrowjddola0si9'
+      - 'JWT_EXPIRATIONMS=360000000'
+
+    container_name: api-back
+
+    build:
+      dockerfile: ./Api/Dockerfile
+    ports:
+      - '8888:8080'
+    links:
+      - database_prod
+
+    depends_on:
+      - database_prod
+
+    networks:
+      - spring-mongo-prod
+      - spring-angular
+
+  web-front:
+    container_name: web-front
+    build:
+      dockerfile: ./web-front/Dockerfile
+
+    ports:
+      - '4200:80'
+
+    links:
+      -  api-back
+
+    depends_on:
+      - api-back
+
+    networks:
+      - spring-angular
+
+
+networks:
+  spring-mongo-prod:
+     driver: bridge
+
+  spring-angular:
+    driver: bridge
+
+volumes:
+  dbdata:

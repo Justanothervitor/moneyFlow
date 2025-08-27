@@ -1,44 +1,58 @@
-<div class="container text-center">
+<div>
     @if(isLoggedIn)
     {
-        <div class="row text-center">
+        <div class="card needs-validation">
         <form
-        name ="creationForm" 
+        name ="creationForm"
         (ngSubmit) ="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-        <div class="mb-5 justify-content-center">
-            <label for="name" class="form-label">Name:</label>
-            <input type="text" name="name" class="form-control" [(ngModel)] ="form.name"required
+        <div>
+          <div class="row mb-3">
+            <label for="name" class="col-sm-2 col-form-label">Nome:</label>
+            <div class="col-sm-10">
+            <input type="text" name="name" class="form-control" [(ngModel)] ="form.name" required
             #name="ngModel"[ngClass] ="{'is-valid': f.submitted && name.errors}"/>
+            </div>
+            </div>
             @if (name.errors && f.submitted)
             {
-                <div class="alert alert-warning" role="alert">Name is required</div>
+                <div class="alert alert-warning" role="alert">Não é possível enviar a anotação sem preencher o campo de nome!</div>
             }
-            <label for="value" class="form-label">Value:</label>
-            <input type="number" step="0.01" name="value" class="form-control" [(ngModel)] ="form.value"required
-             #value="ngModel"[ngClass] ="{'is-valid': f.submitted && value.errors}"/>
+            <div class="row mb-3">
+              <label for="value" class="col-sm-2 col-form-label">Valor:</label>
+              <div class="col-sm-10">
+                <input type="number" step="0.01" name="value" class="form-control" [(ngModel)] ="form.value" required
+                       #value="ngModel"[ngClass] ="{'is-valid': f.submitted && value.errors}"/>
+              </div>
+            </div>
+
             @if (value.errors && f.submitted)
             {
-                <div class="alert alert-warning" role="alert">Value is required</div>
+                <div class="alert alert-warning" role="alert">Não é possível enviar a anotação sem preencher o campo de valor!</div>
             }
-            <label for="date" class="form-label">Date:</label>
-            <input type="datetime-local" name="date" class="form-control" [(ngModel)] ="form.date"required
-            #date="ngModel"/>
-            <label for="description" class="form-label">Description:</label>
-            <input type="text" name="description" class="form-control" [(ngModel)] ="form.description"required
-            #description="ngModel"/>
-            <div>
-                <button class="btn btn-primary">Submit Annotation</button>
+          <div class="row mb-3">
+            <label for="date" class="col-sm-2 col-form-label">Data:</label>
+            <div class="col-sm-10">
+              <input type="datetime-local" name="date" class="form-control" [(ngModel)] ="form.userInputDate" required #date="ngModel"/>
             </div>
+          </div>
+            <div class="row mb-3">
+              <label for="description" class="col-sm-2 col-form-label">Descrição:</label>
+              <div class="col-sm-10">
+                <input type="text" name="description" class="form-control" [(ngModel)] ="form.description" required #description="ngModel"/>
+              </div>
+            </div>
+
+                <button class="btn btn-primary">Enviar</button>
 
             @if (f.submitted && isAnnotationCreationFailed){
                 <div class="alert alert-warning" role="alert">
-                    Failed to create a Annotation!<br/>{{errorMessage}}
+                    Falha ao criar a anotação!<br/>{{errorMessage}}
                 </div>
             }
         </div>
     </form>
 </div>
     }@else {
-        <div class="alert alert-warning"> You cannot make a Annotation without being logged!</div>
+        <div class="alert alert-warning"> <h4>Você não pode criar uma anotação sem estar logado!!</h4></div>
     }
 </div>

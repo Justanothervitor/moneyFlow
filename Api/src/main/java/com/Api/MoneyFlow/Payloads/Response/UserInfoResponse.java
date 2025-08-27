@@ -18,7 +18,6 @@ public class UserInfoResponse {
 	
 	public UserInfoResponse(String token, String type, String id, String username, String email,List<String> role)
 	{
-		super();
 		this.token = token;
 		this.type = type;
 		this.id = id;

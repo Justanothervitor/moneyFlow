@@ -1,10 +1,12 @@
 package com.Api.MoneyFlow.MainCfg;
 
+import com.Api.MoneyFlow.Repositories.UserRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,20 +24,19 @@ import com.Api.MoneyFlow.MainCfg.JwtCfg.JwtUtils;
 import com.Api.MoneyFlow.SecurityServices.AuthServiceImpl;
 
 @Configuration
-@EnableMethodSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
 
-	@Autowired
+
+    @Autowired
 	protected UserDetailsService userDetailsService;
-	
-	@Autowired
+    @Autowired
 	protected AuthEntryPoint unauthorizedHandler;
-	
-	@Autowired
+    @Autowired
 	protected JwtUtils jwtUtils;
-	
-	@Autowired
+    @Autowired
 	protected AuthServiceImpl authService;
+
 	
 	public AuthTokenFilter authenticationJwtTokenFilter() {
 		return new AuthTokenFilter(jwtUtils,authService);
@@ -70,12 +71,13 @@ public class WebSecurityConfig {
 		.exceptionHandling(exception-> exception.authenticationEntryPoint(unauthorizedHandler))
 		.sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 		.authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**").permitAll()
-				.requestMatchers("/api/data/**").permitAll()
-				.requestMatchers("api/home/**").permitAll().anyRequest().authenticated());
+				.requestMatchers("/api/data/**").permitAll().anyRequest().authenticated()).
+		formLogin(formLogin -> formLogin.loginPage("/login").permitAll()).rememberMe(Customizer.withDefaults());
 		http.authenticationProvider(authenticationProvider());
 		http.addFilterBefore(authenticationJwtTokenFilter(),UsernamePasswordAuthenticationFilter.class);
 		return http.build();
 	}
-	
+
+
 	
 }

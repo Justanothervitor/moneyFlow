@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
-import { AuthService } from '../../Services&Helpers/_services/auth.service';
+import { AuthService } from '../../ServicesAndHelpers/_services/auth.service';
+import {formRegister} from "../../Models/formRegister";
 
 @Component({
   selector: 'app-register',
@@ -8,10 +9,10 @@ import { AuthService } from '../../Services&Helpers/_services/auth.service';
 })
 export class RegisterComponent{
 
-  form: any ={
-    username : null,
-    email : null,
-    password : null
+  form: formRegister ={
+    username : "",
+    email : "",
+    password : ""
   };
 
   isSucessful = false;
@@ -21,9 +22,9 @@ export class RegisterComponent{
   constructor(private autenticator:AuthService){}
 
   onSubmit():void{
-    const { username, email , password } = this.form;
+    const request = this.form;
 
-    this.autenticator.register(username,email,password).subscribe({
+    this.autenticator.register(request).subscribe({
       next: data =>{
         console.log(data);
         this.isSucessful = true;

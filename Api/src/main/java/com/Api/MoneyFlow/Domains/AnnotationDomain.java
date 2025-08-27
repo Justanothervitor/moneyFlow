@@ -49,7 +49,7 @@ public class AnnotationDomain implements Serializable {
 		this.value = req.getValue();
 		if(req.getInputDate() != null)
 		{
-			this.originalTimeZone = req.getInputDate().substring(23);
+			this.originalTimeZone = req.getInputDate();
 			this.userInputData = ZonedDateTime.parse(req.getInputDate(),FMT);
 		}
 		this.description = req.getDescription();

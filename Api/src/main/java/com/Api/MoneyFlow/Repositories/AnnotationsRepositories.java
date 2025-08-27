@@ -2,6 +2,8 @@ package com.Api.MoneyFlow.Repositories;
 
 import java.util.List;
 
+import com.Api.MoneyFlow.MainCfg.Converters.TimeZoneUtils;
+import com.Api.MoneyFlow.Payloads.Request.InputAnnotationPutRequest;
 import com.Api.MoneyFlow.Payloads.Response.AnnotationResponse;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,8 @@ public class AnnotationsRepositories implements AnnotationTemplate{
 
 	@Autowired
 	protected MongoTemplate template;
-	
 	@Autowired
 	protected AuthServiceImpl authService;
-
 
 	protected AnnotationDomain updateUserAndAdd(@NotNull AnnotationDomain obj)
 	{
@@ -33,7 +33,6 @@ public class AnnotationsRepositories implements AnnotationTemplate{
 		.matching(Criteria.where("_id").is(obj.getUser().getId()))
 		.apply(new Update().push("UserAnnotations").value(obj))
 		.first();
-		
 		return obj;
 	}
 	
@@ -66,7 +65,12 @@ public class AnnotationsRepositories implements AnnotationTemplate{
 	{
         return new Query(Criteria.where("noteId").is(id));
 	}
-	
+
+	/*protected Query nameQuery(@NotNull String request){
+		return new Query(Criteria.where("name"))
+	}*/
+
+
 
 	@Override
 	public List<AnnotationResponse> fetchAnnotationRecent() {
@@ -89,7 +93,7 @@ public class AnnotationsRepositories implements AnnotationTemplate{
 	}
 
 	@Override
-	public AnnotationDomain updateAnnotation(@NotNull String id, @NotNull InputAnnotationRequest input) {
+	public AnnotationDomain updateAnnotation(@NotNull String id, @NotNull InputAnnotationPutRequest input) {
 	AnnotationDomain toUpdate = fetchOneById(id);
 		toUpdate.setName(input.getName());
 		toUpdate.setValue(input.getValue());

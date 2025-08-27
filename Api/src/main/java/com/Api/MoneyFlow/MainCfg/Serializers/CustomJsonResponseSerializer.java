@@ -16,12 +16,11 @@ public class CustomJsonResponseSerializer extends JsonSerializer<AnnotationRespo
 	public void serialize(AnnotationResponse value, JsonGenerator gen, SerializerProvider serializers)
 			throws IOException {
 		gen.writeStartObject();
-		gen.writeObjectField("noteId",value.getId());
+		gen.writeObjectField("id",value.getId());
 		gen.writeObjectField("name", value.getName());
 		gen.writeObjectField("value",value.getValue());
-		gen.writeObjectField("dateInput", value.getDateInput());
+		gen.writeObjectField("userInputDate", value.getUserInputDate());
 		gen.writeObjectField("description", value.getDescription());
-		gen.writeObjectField("dateOfCreation",value.getDateOfCreation());
 		gen.writeEndObject();
 		
 	}

@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { StorageService } from '../../Services&Helpers/_services/storage.service';
+import { StorageService } from '../../ServicesAndHelpers/_services/storage.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,12 +14,9 @@ export class HomeComponent implements OnInit{
   constructor(private storage:StorageService){}
 
   ngOnInit(): void {
-    if(!this.storage.getAuthorization())
-      {
-        this.content ="Welcome to MoneyFlow" + this.storage.getUser().username;
-      }else{
-        this.content = "Welcome to MoneyFlow, please login to use your services";
-      }
+    if(this.storage.isLoggedIn()){
+      this.content = this.storage.getUser().username;
+    }
   }
 
 }

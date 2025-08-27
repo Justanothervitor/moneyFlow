@@ -1,5 +1,9 @@
 <div>
-    <header>
-        <p>{{content}}</p>
-    </header>
+    <span *ngIf="content;else defaultPage">
+      <h3>Bem vindo ao Moneyflow querido usuário {{content}} !</h3>
+    </span>
+
+  <ng-template #defaultPage>
+    <h3>Bem vindo ao Moneyflow por favor faça login para poder usufruir dos nossos serviços</h3>
+  </ng-template>
 </div>

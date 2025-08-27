@@ -11,8 +11,13 @@ import { HomeComponent } from "./Components/home/home.component";
 import { ProfileComponent } from "./Components/profile/profile.component";
 import { AnnotationAllviewComponent } from "./Components/annotation-allview/annotation-allview.component";
 import { AnnotationCreationComponent } from "./Components/annotation-creation/annotation-creation.component";
-import { HttpInterceptorProviders } from "./Services&Helpers/_interceptor/http.interceptor";
+import { HttpInterceptorProviders } from "./ServicesAndHelpers/_interceptor/http.interceptor";
 import { CommonModule } from "@angular/common";
+import { AnnotationViewComponent } from "./Components/annotation-view/annotation-view.component";
+import {LoadingComponent} from "./Components/loading/loading.component";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+
 
 
 @NgModule({
@@ -23,16 +28,18 @@ import { CommonModule } from "@angular/common";
         HomeComponent,
         ProfileComponent,
         AnnotationAllviewComponent,
-        AnnotationCreationComponent
+        AnnotationCreationComponent,
+        AnnotationViewComponent,
     ],
     imports: [
         BrowserModule,
         CommonModule,
         AppRoutingModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        LoadingComponent
     ],
-    providers : [HttpInterceptorProviders],
+    providers : [HttpInterceptorProviders,provideAnimationsAsync()],
     bootstrap : [AppComponent]
 })
 

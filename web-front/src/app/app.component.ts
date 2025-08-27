@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { StorageService } from './Services&Helpers/_services/storage.service';
-import { AuthService } from './Services&Helpers/_services/auth.service';
-import { AnnotationsService } from './Services&Helpers/_services/annotations.service';
+import { StorageService } from './ServicesAndHelpers/_services/storage.service';
+import { AuthService } from './ServicesAndHelpers/_services/auth.service';
+import { AnnotationsService } from './ServicesAndHelpers/_services/annotations.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,6 @@ import { AnnotationsService } from './Services&Helpers/_services/annotations.ser
 })
 
 export class AppComponent implements OnInit {
-  private role: string[] = [];
   isLoggedIn = false;
   username? : string;
 
@@ -22,7 +21,6 @@ export class AppComponent implements OnInit {
     if(this.isLoggedIn)
     {
       const user = this.storage.getUser();
-      this.role = user.roles;
       this.username = user.username;
     }
   }
@@ -30,5 +28,5 @@ export class AppComponent implements OnInit {
   logout(): void{
     this.storage.logoff();
   }
-  
+
 }

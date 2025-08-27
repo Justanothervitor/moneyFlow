@@ -21,7 +21,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.Getter;
 
-@PropertySource(value= {"classpath:application.properties"})
+@PropertySource(value= {"classpath:application-dev.properties"})
 @Component
 public class JwtUtils{
 	

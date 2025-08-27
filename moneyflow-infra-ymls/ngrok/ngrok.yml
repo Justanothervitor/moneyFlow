@@ -1,0 +1,18 @@
+version: 3
+agent:
+  authtoken: 2aYr9mkdIVUZHUz8wwMpA0Q8IhP_5qLne5j6aEApzZkh5vV3c
+
+tunnels:
+  frontend:
+     name : web-front
+     url: piranha-wanted-shark.ngrok-free.app
+     addr: 4200
+     proto: http
+     inspect: true
+  backend:
+     name : api
+     addr: 8888
+     proto: http
+  database:
+    addr: 7017
+    proto: tcp

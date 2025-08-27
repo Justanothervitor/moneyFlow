@@ -1,1 +1,90 @@
-<p>annotation-view works!</p>
+<div *ngIf="!wasError else errorScreen">
+  <div *ngIf="!enableDelete;else deleteForm">
+  <div *ngIf="!enableUpdate;else updateForm">
+  <div class="card card-container">
+    <div class="card-body">
+      <p>Nome:{{content?.name}}</p>
+      <p>Descrição:{{content?.description}}</p>
+      <p>Data:{{content?.userInputDate}}</p>
+      <p>Valor:R${{content?.value}}</p>
+    </div>
+  </div>
+    <span class="container-sm row-cols-auto justify-content-center">
+      <li>
+  <a (click)="enableUpdate=!enableUpdate" class="btn btn-secondary">Editar</a>
+      </li>
+      <li>
+        <a (click)="enableDelete=!enableDelete" class="btn btn-danger">Deletar</a>
+      </li>
+      </span>
+  </div>
+  </div>
+</div>
+
+<ng-template #errorScreen>
+  <div class="alert-danger">Error:{{content}}</div>
+</ng-template>
+
+<ng-template #updateForm>
+  <div>
+  <span class="row-cols-auto text-end"><button (click)="enableUpdate= !enableUpdate" class="btn btn-secondary">Cancelar</button></span>
+  <div class="card text-center">
+    <form
+      name ="creationForm"
+      (ngSubmit) ="f.form.valid && onSubmitHandleUpdate(id)" #f="ngForm" novalidate>
+      <div>
+        <div class="row mb-3">
+          <label for="name" class="col-sm-3 col-form-label">Nome:</label>
+          <div class="col-sm-5">
+            <input type="text" name="name" class="form-control" [placeholder]="content?.name" [(ngModel)] ="form.name" required
+                   #name="ngModel" [ngClass] ="{'is-valid': f.submitted && name.errors}"/>
+          </div>
+        </div>
+        @if (name.errors && f.submitted)
+        {
+          <div class="alert alert-warning" role="alert">O campo Nome deve ser preenchido!</div>
+        }
+        <div class="row mb-3">
+          <label for="value" class="col-sm-3 col-form-label">Valor:</label>
+          <div class="col-sm-5">
+            <input type="number" step="0.01" name="value" class="form-control" [placeholder]="content?.value" [(ngModel)] ="form.value" required
+                   #value="ngModel" [ngClass] ="{'is-valid': f.submitted && value.errors}"/>
+          </div>
+        </div>
+        @if (value.errors && f.submitted)
+        {
+          <div class="alert alert-warning" role="alert">O campo Valor deve ser preenchido!</div>
+        }
+        <div class="row mb-3">
+          <label for="description" class="col-sm-3 col-form-label">Descrição:</label>
+          <div class="col-sm-5">
+            <input type="text" name="description" class="form-control" [placeholder]="content?.description" [(ngModel)] ="form.description" required
+                   #description="ngModel"/>
+          </div>
+        </div>
+
+        <div>
+          <button class="btn btn-primary">Enviar</button>
+        </div>
+
+        @if (f.submitted && wasError){
+          <div class="alert alert-warning" role="alert">
+            {{message}
+          </div>
+        }
+      </div>
+    </form>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #deleteForm>
+  <div class="card card-container">
+    <div class="card-body">
+    <h4>Confimação</h4>
+    <p>Você quer realmente apagar esssa anotação?</p>
+    <button (click)="enableDelete= !enableDelete" class="btn btn-secondary">Cancelar</button>
+    <button (click)="onSubmitHandleDelete(id)" class="btn btn-danger">Apagar</button>
+    </div>
+    </div>
+</ng-template>

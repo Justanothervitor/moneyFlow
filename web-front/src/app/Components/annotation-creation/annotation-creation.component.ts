@@ -1,7 +1,8 @@
 import { Component,OnInit,LOCALE_ID,Inject } from '@angular/core';
-import { StorageService } from '../../Services&Helpers/_services/storage.service';
-import { AnnotationsService } from '../../Services&Helpers/_services/annotations.service';
+import { StorageService } from '../../ServicesAndHelpers/_services/storage.service';
+import { AnnotationsService } from '../../ServicesAndHelpers/_services/annotations.service';
 import { formatDate, getLocaleId } from '@angular/common';
+import {CreateAnnotation} from "../../Models/formCreateAnnotation";
 
 @Component({
   selector: 'app-annotation-creation',
@@ -10,11 +11,11 @@ import { formatDate, getLocaleId } from '@angular/common';
 })
 export class AnnotationCreationComponent implements OnInit{
 
-  form : any ={
-    name : null,
-    value: null,
-    date: null,
-    description: null
+  form : CreateAnnotation ={
+    name : "",
+    value: 0,
+    userInputDate: "",
+    description: ""
   };
 
   isLoggedIn = false;
@@ -30,12 +31,17 @@ export class AnnotationCreationComponent implements OnInit{
   }
 
   onSubmit():void{
-    const { name, value,date, description } = this.form;
-    const userInputDate = formatDate(date,"yyyy-MM-dd'T'HH:mm:ss.SSSZ",this.locale);
-    this.annotation.createAnnotation(name,value,userInputDate,description).subscribe({
+    const request = this.form;
+    const NRequest : CreateAnnotation ={
+      name : request.name,
+      value : request.value,
+      userInputDate : formatDate(request.userInputDate,"yyyy-MM-dd'T'HH:mm:ss.SSSZ",this.locale),
+      description : request.description
+    }
+    this.annotation.createAnnotation(NRequest).subscribe({
       next: data =>{
         console.log(data);
-        window.location.reload;
+        window.location.reload();
       },
       error: err =>{
         this.errorMessage = err.error.message;

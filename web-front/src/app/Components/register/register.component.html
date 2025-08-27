@@ -1,51 +1,64 @@
-<div class="col-md-12">
+<div>
     <div class="card card-container">
     @if(!isSucessful){
         <form
         name="registerForm"
         (ngSubmit) = "f.form.valid && onSubmit()" #f="ngForm" novalidate>
-    <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" name="username" class="form-control" [(ngModel)] ="form.username"required
-        minlength="4" maxlength="20" #username="ngModel" [ngClass]="{'is-valid': f.submitted && username.errors}"/>
+    <div>
+      <div class="row mb-3">
+        <label for="username" class="col-sm-3 col-form-label">Username:</label>
+        <div class="col-sm-5">
+          <input type="text" name="username" class="form-control" [(ngModel)] ="form.username" required
+                 minlength="4" maxlength="20" #username="ngModel" [ngClass]="{'is-valid': f.submitted && username.errors}"/>
+        </div>
+      </div>
         @if (username.errors && f.submitted){
             <div>
                 @if (username.errors['required']){
-                    <div class="alert alert-warning" role="alert">Username is required</div>
+                    <div class="alert alert-warning" role="alert">O campo Username deve ser preenchido!</div>
                 }
                 @if (username.errors['minlength']){
-                    <div class="alert alert-warning" role="alert">Username must at least 3 characters</div>
+                    <div class="alert alert-warning" role="alert">O campo Username deve ter pelo menos 3 caracteres!</div>
                 }
                 @if (username.errors['maxlenght']){
-                    <div class="alert alert-warning" role="alert">Username must at most 20 characters</div>
+                    <div class="alert alert-warning" role="alert">O campo Username deve ter até 20 caracteres!</div>
                 }
             </div>
         }
-        <label for="email" class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" [(ngModel)] ="form.email"required email
-        #email="ngModel" [ngClass]="{'is-valid': f.submitted && email.errors}"/>
+      <div class="row mb-3">
+        <label for="email" class="col-sm-3 col-form-label">Email:</label>
+        <div class="col-sm-7">
+          <input type="email" name="email" class="form-control" [(ngModel)] ="form.email" required email
+                 #email="ngModel" [ngClass]="{'is-valid': f.submitted && email.errors}"/>
+        </div>
+      </div>
         @if (email.errors && f.submitted){
             <div>
                 @if (email.errors['required']){
-                    <div class="alert alert-warning" role="alert">Email is required</div>
+                    <div class="alert alert-warning" role="alert">O campo email deve ser preenchido!</div>
                 }
                 @if (email.errors['email']){
-                    <div class="alert alert-warning" role="alert">Email must be a valid email</div>
+                    <div class="alert alert-warning" role="alert">O campo Email deve ser preenchido com um email valido!</div>
                 }
             </div>
-        }<label for="password" class="form-label">Password</label>
-        <input type="password" name="password" class="form-control" [(ngModel)] ="form.password"required
-        minlength="6" maxlength="40" #password="ngModel" [ngClass]="{'is-valid': f.submitted && password.errors}"/>
+        }
+      <div class="row mb-3">
+        <label for="password" class="col-sm-3 col-form-label">Senha:</label>
+        <div class="col-sm-5">
+          <input type="password" name="password" class="form-control" [(ngModel)] ="form.password" required
+                 minlength="6" maxlength="40" #password="ngModel" [ngClass]="{'is-valid': f.submitted && password.errors}"/>
+        </div>
+      </div>
         @if (password.errors && f.submitted){
             <div>
                 @if (password.errors['required']){
-                    <div class="alert alert-warning" role="alert">Password is required</div>
+                    <div class="alert alert-warning" role="alert">O campo Senha deve ser preenchido!</div>
                 }
                 @if (password.errors['minlength']){
-                    <div class="alert alert-warning" role="alert">Password must at least 6 characters</div>
+                    <div class="alert alert-warning" role="alert">O campo Senha deve ter pelo menos 6 caracteres!</div>
                 }
                 @if (password.errors['maxlenght']){
-                    <div class="alert alert-warning" role="alert">Password must at most 20 characters</div>
+                    <div class="alert alert-warning" role="alert">O campo Senha deve ter até 40 caracteres!</div>
                 }
             </div>
         }
@@ -63,7 +76,7 @@
     </div>
     </form>
     }@else{
-        <div class="alert alert-sucess" role="alert">Your registration is sucessful!</div>
+        <div class="alert alert-sucess" role="alert">Usuário registrado com sucesso, por favor realize o login!</div>
     }
 </div>
 </div>

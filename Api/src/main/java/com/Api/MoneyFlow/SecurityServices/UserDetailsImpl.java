@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import static io.jsonwebtoken.lang.Collections.isEmpty;
 
 public class UserDetailsImpl implements UserDetails{
-
 	
 	@Serial
 	private static final long serialVersionUID = 1L;

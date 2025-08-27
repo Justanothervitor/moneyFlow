@@ -1,25 +1,36 @@
 <div class="col-md-12">
-    <div class="card card-container">
     @if(!isLoggedIn){
-        <form 
+      <div class="card card-container">
+        <form
         name="loginForm"
         (ngSubmit) = "f.form.valid && onSubmit()" #f="ngForm" novalidate>
-        <label class="form-label">Username</label>
-        <input type="text" name="username" class="form-control" [(ngModel)] ='form.username'
-        required #username="ngModel"[ngClass]="{'is-valid': f.submitted && username.errors}"/>
+          <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Username:</label>
+            <div class="col-sm-5">
+              <input type="text" name="username" class="form-control" [(ngModel)] ='form.username'
+                     required #username="ngModel" [ngClass]="{'is-valid': f.submitted && username.errors}"/>
+            </div>
+          </div>
+
+
         @if (username.errors && f.submitted){
-        <div class="alert alert-warning" role="alert">Username is required</div>
+        <div class="alert alert-warning" role="alert">O campo de Username deve ser preenchido!</div>
         }
-        <label for="password" class="form-label">Password</label>
-        <input type="password" name="password" class="form-control" [(ngModel)] ="form.password"
-        required #password="ngModel" minlength="6" [ngClass]="{'is-valid': f.submitted && password.errors}"/>
+          <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Senha:</label>
+            <div class="col-sm-5">
+              <input type="password" name="password" class="form-control" [(ngModel)] ="form.password"
+                     required #password="ngModel" minlength="6" [ngClass]="{'is-valid': f.submitted && password.errors}"/>
+            </div>
+          </div>
+
         @if (password.errors && f.submitted){
             <div>
                 @if (password.errors['required']){
-                    <div class="alert alert-warning" role="alert">Password is required</div>
+                    <div class="alert alert-warning" role="alert">O campo Senha deve ser preenchido!</div>
                 }
                 @if (password.errors['minlength']){
-                    <div class="alert alert-warning" role="alert">Password must at least 6 characters</div>
+                    <div class="alert alert-warning" role="alert">O campo Senha deve ter pelo menos 6 caracteres!</div>
                 }
             </div>
         }
@@ -30,13 +41,14 @@
 
             @if (f.submitted && isLoginFailed){
                 <div class="alert alert-warning" role="alert">
-                    Login failed!<br/>{{errorMessage}}
+                    Falha no login!<br/>{{errorMessage}}
                 </div>
             }
         </div>
     </form>
+      </div>
     }@else{
-        <div class="alert alert-sucess" role="alert">Logged in as {{role}}.</div>
+        <div class="alert alert-success" role="alert">Logado como {{user.username}}.</div>
     }
-</div>
+
 </div>

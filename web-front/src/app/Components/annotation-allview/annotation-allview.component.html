@@ -1,14 +1,34 @@
-<div>
-<div class="boxStorage">
-    <div>
-        <ul *ngFor="let array of content;let i = index" class="card card-container">
-        <tr>noteId : {{array.noteId}}</tr>
-        <tr>name : {{array.name}}</tr>
-        <tr>dateInput : {{array.dateInput}}</tr>
-        <tr>value : {{array.value}}</tr>
-        <tr>description : {{array.description}}</tr>
-        <tr>dateOfCreation : {{array.dateOfCreation}}</tr>
-        </ul>
-    </div>
+<div class="container-fluid">
+<span *ngIf="isLoading; else content_tree">
+  <app-loading></app-loading>
+</span>
+
+  <ng-template #content_tree>
+    <div *ngIf="verifyContent(content); else noContent">
+      <div *ngIf="!selectedAnnotation; else viewAnnotation">
+        <div class="card-group">
+          <ul *ngFor="let item of content">
+            <div class="card">
+              <div class="card-body" (click)="onSelect(item)">
+                <p>Nome:{{item.name}}</p>
+                <p>Valor:R${{item.value}}</p>
+                <p>Descrição:{{item.description}}</p>
+                <p>Data:{{item.userInputDate}}</p>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+            </div>
+    <ng-template #noContent>
+      <h3>Você não tem nenhuma anotação que tal criar uma?</h3>
+    </ng-template>
+    <ng-template #viewAnnotation>
+      <div class="row-cols-3 justify-content-start"><button (click)= "selectedAnnotation = null" class="btn btn-secondary">Voltar para a página anterior</button></div>
+      <app-annotation-view (annotationEvent)="onSelect($event)" [id]="selectedAnnotation?.id"></app-annotation-view>
+    </ng-template>
+  </ng-template>
 </div>
-</div>
+
+
+

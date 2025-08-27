@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../Services&Helpers/_services/auth.service';
-import { StorageService } from '../../Services&Helpers/_services/storage.service';
+import { AuthService } from '../../ServicesAndHelpers/_services/auth.service';
+import { StorageService } from '../../ServicesAndHelpers/_services/storage.service';
+import {formLogin} from "../../Models/formLogin";
+import {User} from "../../Models/user";
 
 
 @Component({
@@ -11,39 +13,49 @@ import { StorageService } from '../../Services&Helpers/_services/storage.service
 
 export class LoginComponent implements OnInit {
 
-  form : any ={
-    username : null,
-    password : null
+  form: formLogin = {
+    username : "",
+    password: "",
   };
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  role: string[] = [];
-  annotation: string[] = [];
+  user : User ={
+    username : "",
+    email : "",
+    roles : [],
+  };
 
-  constructor(private authenticator:AuthService,private storage:StorageService){}
+  constructor(protected authenticator:AuthService,protected storage:StorageService){}
 
   ngOnInit(): void {
       if(this.storage.isLoggedIn()){
-
         this.isLoggedIn = true;
-        this.role = this.storage.getUser().role;
-        this.annotation = this.storage.getUser().annotations;
+        this.user = this.storage.getUser();
       }
   }
 
   onSubmit(): void{
-    const { username, password } = this.form;
+    const request = this.form;
 
-    this.authenticator.login(username,password).subscribe({
+    this.authenticator.login(request).subscribe({
       next : data => {
-        this.storage.saveUser(data);
+        if(data){
+          const userData : User ={
+            username: data?.username,
+            email: data?.email,
+            roles: data?.role,
+          };
+          const authData ={
+            type: data?.type,
+            token: data?.token,
+          }
 
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.role = this.storage.getUser().role;
-        this.annotation = this.storage.getUser().annotation;
-        this.reloadPage();
+          this.storage.saveUser(userData,authData)
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
+          this.reloadPage();
+        }
       },
       error:err =>{
         this.errorMessage = err.error.message;

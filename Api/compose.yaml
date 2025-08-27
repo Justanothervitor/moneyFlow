@@ -1,36 +1,9 @@
 services:
-  mongodb:
+  database_dev:
     image: 'mongo:latest'
     environment:
-      - 'MONGO_INITDB_DATABASE=mydatabase'
-      - 'MONGO_INITDB_ROOT_PASSWORD=secret'
-      - 'MONGO_INITDB_ROOT_USERNAME=root'
-    container_name: "mongodb"
+      - 'MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER_DEV'
+      - 'MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD_DEV'
+
     ports:
-      - '7017:27017'
-    networks:
-      - spring-mongo-net
-
-  api-back:
-    environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/
-      - SPRING_DATA_MONGODB_DATABASE=mydatabase
-      - SPRING_DATA_MONGODB_USER=root
-      - SPRING_DATA_MONGODB_PASSWORD=secret
-
-    container_name: api-back
-    build:
-      dockerfile: Dockerfile
-    ports:
-      - '8888:8080'
-    links:
-      - mongodb
-    networks:
-      - spring-mongo-net
-
-networks:
-  spring-mongo-net:
-     driver: bridge
-
-
-
+      - '$MONGODB_DEV_LOCAL_PORT:$MONGODB_DEV_DOCKER_PORT'

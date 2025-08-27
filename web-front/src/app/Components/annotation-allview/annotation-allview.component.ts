@@ -1,7 +1,7 @@
-import { Component,OnInit } from '@angular/core';
-import { AnnotationsService } from '../../Services&Helpers/_services/annotations.service';
-import { StorageService } from '../../Services&Helpers/_services/storage.service';
-import { DatePipe } from '@angular/common';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import { AnnotationsService } from '../../ServicesAndHelpers/_services/annotations.service';
+import { StorageService } from '../../ServicesAndHelpers/_services/storage.service';
+import {Annotation} from "../../Models/Annotation";
 
 @Component({
   selector: 'app-annotation-allview',
@@ -11,36 +11,46 @@ import { DatePipe } from '@angular/common';
 
 export class AnnotationAllviewComponent implements OnInit{
 
-  content?: any
+  selectedAnnotation?: Annotation | null;
+  content?: any;
+  isLoading = false;
 
-  constructor(private annotation:AnnotationsService,private storage:StorageService){}
+  constructor(protected annotationService: AnnotationsService, protected storageService: StorageService) {
+  }
 
-  ngOnInit(): void {
-
-      this.annotation.getAllAnotations().subscribe({
-        next : data=>{
-          this.isNullOrNot(data);
-          console.log(this.content);
-        },
-        error: err =>{ console.log(err);
-          if(err.error){
-            this.content = JSON.parse(err.error).message;
-          }else{
-            this.content = "Error with status" + err.status;
+  ngOnInit() {
+    this.isLoading = true;
+    if(!this.storageService.isLoggedIn()){
+      this.content = "Você precisa estar logado para usar essa função!";
+      console.log(this.content);
+      this.isLoading = false;
+    }else{
+      this.annotationService.getAllAnotations().subscribe(
+        {
+          next: data => {
+            if(!data){
+              this.content = "Você não tem nenhuma anotação, que tal criar uma?"
+              this.isLoading = false;
+            }else{
+              this.content = data;
+              this.isLoading = false;
+              console.log(this.content);
+            }
+          },error: err => {
+            this.content = err;
+            this.isLoading = false;
           }
         }
-      })
-  }
-  isNullOrNot(data:any):any
-  {
-    if(data==="[]")
-    {
-      return this.content = ("Você não tem nenhuma anotação.\n Que tal criar uma?");
-    }else{
-      return this.content = data;
+      )
     }
   }
-  /*onClick(event:MouseEvent):void{
-    event.
-  }*/
+
+  verifyContent(content:any):boolean{
+    return content && content.length > 0;
+
+  }
+
+  onSelect($event:any){
+   this.selectedAnnotation = $event;
+  }
 }
