@@ -1,6 +1,6 @@
 26/02/2024 - 00:12
 ==================================================================================================================================================================
-#Retrabalho do site [1/3]:
+# Retrabalho do site [1/3]:
 Site retrabalhado no Angular.
 Mudança do processador de CSS para SCSS que é o padrão do Angular.
 Adição parcial da Anotações financeiras do usuário,sendo elas por enquanto,O serviço de anotações,a parte de criação em annotation-creation, 
@@ -18,7 +18,7 @@ Foi adicionado um filtro simples de CORS(Eu tinha esquecido de criar um quando e
 21/07/2024 - 19:29
 =======================================================================================================================================================================
 
-#Alterações no site:
+# Alterações no site:
 
 Agora a criação de notas esta funcionando no site,graças a adição de um conversor de timezone.
 

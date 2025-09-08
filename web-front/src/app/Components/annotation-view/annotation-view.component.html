@@ -9,13 +9,15 @@
       <p>Valor:R${{content?.value}}</p>
     </div>
   </div>
-    <span class="container-sm row-cols-auto justify-content-center">
-      <li>
-  <a (click)="enableUpdate=!enableUpdate" class="btn btn-secondary">Editar</a>
+    <span class="container row p-5">
+      <ul class="nav nav-pills nav-justified">
+      <li class="nav-item ps-5 pe-4">
+  <button (click)="enableUpdate=!enableUpdate" class="btn btn-secondary nav-link">Editar</button>
       </li>
-      <li>
-        <a (click)="enableDelete=!enableDelete" class="btn btn-danger">Deletar</a>
+      <li class="nav-item ps-5 pe-4">
+        <button (click)="enableDelete=!enableDelete" class="btn btn-danger nav-link">Deletar</button>
       </li>
+        </ul>
       </span>
   </div>
   </div>

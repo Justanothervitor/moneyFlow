@@ -1,5 +1,6 @@
 package com.Api.MoneyFlow.SecurityServices;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,50 +14,38 @@ import com.Api.MoneyFlow.Repositories.UserRepositories;
 import com.Api.MoneyFlow.Domains.UserDomain;
 
 @Service
-public class AuthServiceImpl implements AuthService{
-	
-	protected UserRepositories userRepo;
-	protected JwtUtils jwtUtils;
-	
-	
-	public AuthServiceImpl(UserRepositories userRepo,JwtUtils jwtUtils)
-	{
-		this.userRepo = userRepo;
-		this.jwtUtils = jwtUtils;
-	}
-	
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserDomain user = this.userRepo.findByUsername(username);
-		if(user == null)
-		{
-			throw(new UsernameNotFoundException("User not found with username:"+username));
-		}
-		return new UserDetailsImpl(user);
-	}
+public class AuthServiceImpl implements AuthService {
 
-	@Override
-	public Authentication getCurrentAuthentication() {
-		return SecurityContextHolder.getContext().getAuthentication();
-	}
+    protected UserRepositories userRepo;
+    protected JwtUtils jwtUtils;
 
-	@Override
-	public UserDetailsImpl getCurrentUser() {
-		return (UserDetailsImpl) getCurrentAuthentication().getPrincipal();
-	}
 
-	@Override
-	public JwtUtils getCurrentToken() {
-		return new JwtUtils(
-                ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
-                .getRequest()
-                .getHeader("Authorization")
-);
-	}
+    public AuthServiceImpl(UserRepositories userRepo, JwtUtils jwtUtils) {
+        this.userRepo = userRepo;
+        this.jwtUtils = jwtUtils;
+    }
 
-	@Override
-	public UserDomain returnUser() {
-		return this.userRepo.findByUsername(jwtUtils.retrieveUsername());
-	}
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserDomain user = this.userRepo.findByUsername(username);
+        if (user == null) {
+            throw (new UsernameNotFoundException("User not found with username:" + username));
+        }
+        return new UserDetailsImpl(user);
+    }
 
+    @Override
+    public Authentication getCurrentAuthentication() {
+        return SecurityContextHolder.getContext().getAuthentication();
+    }
+
+    @Override
+    public UserDetailsImpl getCurrentUser() {
+        return (UserDetailsImpl) getCurrentAuthentication().getPrincipal();
+    }
+
+    @Override
+    public UserDomain getCurrentLoggedUser(String token) {
+        return this.userRepo.findByUsername(this.jwtUtils.getUsernameFromJwtToken(token));
+    }
 }

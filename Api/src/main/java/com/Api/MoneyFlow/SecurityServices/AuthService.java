@@ -1,5 +1,6 @@
 package com.Api.MoneyFlow.SecurityServices;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -10,8 +11,7 @@ public interface AuthService extends UserDetailsService{
 
 	Authentication getCurrentAuthentication();
 	UserDetailsImpl getCurrentUser();
-	JwtUtils getCurrentToken();
-	UserDomain returnUser();
+    UserDomain getCurrentLoggedUser(String token);
 	
 	
 }

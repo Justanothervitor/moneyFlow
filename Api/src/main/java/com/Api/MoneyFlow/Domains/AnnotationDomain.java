@@ -5,8 +5,10 @@ import com.Api.MoneyFlow.Payloads.Request.InputAnnotationRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import jakarta.annotation.Generated;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
@@ -20,7 +22,7 @@ import java.time.format.DateTimeFormatter;
 
 @Data
 @Document(collection="Annotations")
-@JsonDeserialize(using= CustomJsonResponseDeserializer.class)
+@JsonDeserialize(using=CustomJsonResponseDeserializer.class)
 public class AnnotationDomain implements Serializable {
 	
 	private static final DateTimeFormatter FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");

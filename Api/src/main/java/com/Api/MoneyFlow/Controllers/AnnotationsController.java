@@ -1,12 +1,12 @@
 package com.Api.MoneyFlow.Controllers;
 
+import com.Api.MoneyFlow.Domains.Exceptions.AnnotationNotFound;
 import com.Api.MoneyFlow.Payloads.Request.InputAnnotationPutRequest;
 import com.Api.MoneyFlow.Repositories.AnnotationsRepositories;
-import com.Api.MoneyFlow.Domains.AnnotationDomain;
 import com.Api.MoneyFlow.Payloads.Request.InputAnnotationRequest;
 import com.Api.MoneyFlow.Payloads.Response.AnnotationResponse;
-import com.Api.MoneyFlow.Payloads.Response.MessageResponse;
-import jakarta.validation.Valid;
+import com.Api.MoneyFlow.SecurityServices.AuthServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,23 +20,30 @@ public class AnnotationsController {
 
 	@Autowired
 	protected AnnotationsRepositories annotationsRepo;
+
+    @Autowired
+    protected AuthServiceImpl authService;
 	
 	@GetMapping("/recent")
-	public ResponseEntity<List<AnnotationResponse>> getRecentAnnotations()
+	public ResponseEntity<List<AnnotationResponse>> getRecentAnnotations(HttpServletRequest request)
 	{
-		return ResponseEntity.ok().body(annotationsRepo.fetchAnnotationRecent());
+        var user = authService.getCurrentLoggedUser(request.getHeader("Authorization").substring(7));
+		return ResponseEntity.ok().body(annotationsRepo.fetchAnnotationRecent(user));
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<AnnotationDomain> getOneById(@PathVariable final String id)
+	public ResponseEntity<AnnotationResponse> getOneById(@PathVariable final String id) throws AnnotationNotFound
 	{
-		return ResponseEntity.ok().body(annotationsRepo.fetchOneById(id));
-	}
+        AnnotationResponse response = new AnnotationResponse(this.annotationsRepo.fetchOneById(id));
+        return ResponseEntity.ok().body(response);
+    }
 	
 	@PostMapping("/add")
-	public ResponseEntity<AnnotationDomain> createAnnotation(@RequestBody final InputAnnotationRequest input)
+	public ResponseEntity<?> createAnnotation(HttpServletRequest request, @RequestBody final InputAnnotationRequest input)
 	{
-		return ResponseEntity.ok(annotationsRepo.createAnnotation(input));
+        var user = authService.getCurrentLoggedUser(request.getHeader("Authorization"));
+        this.annotationsRepo.createAnnotation(input,user);
+		return ResponseEntity.ok().build();
 	}
 
 	/*@PostMapping("/search")
@@ -46,15 +53,16 @@ public class AnnotationsController {
 	}*/
 	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<AnnotationDomain> updateAnnotation(@PathVariable final String id, @RequestBody final InputAnnotationPutRequest input)
+	public ResponseEntity<?> updateAnnotation(@PathVariable final String id, @RequestBody final InputAnnotationPutRequest input)
 	{
-		return ResponseEntity.ok().body(annotationsRepo.updateAnnotation(id, input));
+        this.annotationsRepo.updateAnnotation(id, input);
+		return ResponseEntity.accepted().build();
 	}
 	
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> deleteAnnotation(@PathVariable final String id)
 	{
-		annotationsRepo.deleteAnnotation(id);
+		this.annotationsRepo.deleteAnnotation(id);
 		return ResponseEntity.noContent().build();
 	}
 }

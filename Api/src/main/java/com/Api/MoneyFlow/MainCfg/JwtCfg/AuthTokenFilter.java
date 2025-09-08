@@ -47,8 +47,9 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		if(authService.getCurrentToken()== null)
+		if(request.getHeader("Authorization")!=null && !request.getHeader("Authorization").equalsIgnoreCase("Bearer "))
 		{
+        System.out.println(response.getHeader("Authorization"));
 		String jwt = setAuthentication(request);
 		if(jwt!=null) {
 			response.setHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));
@@ -89,9 +90,9 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 	{
 		String authHeader = request.getHeader("Authorization");
 		
-		if(StringUtils.hasText(authHeader)&&authHeader.startsWith("Bearer"))
+		if(StringUtils.hasText(authHeader)&&authHeader.startsWith("Bearer "))
 		{
-			return authHeader.substring(7);
+			return authHeader.split(" ")[1].trim();
 		}
 		return null;
 	}

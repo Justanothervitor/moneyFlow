@@ -1,3 +1,17 @@
 <div>
-  <h3>Página não finalizada!</h3>
+  <span *ngIf="!isLoading else loading">
+   <div class="card card-container">
+     <ul class="">
+       <li> Nome: {{currentUser.username}}</li>
+       <li> Email : {{currentUser.email}}</li>
+       <li>Cargo : {{currentUser.role}}</li>
+     </ul>
+   </div>
+  </span>
+
+  <ng-template #loading>
+    <span>
+       <app-loading></app-loading>
+    </span>
+  </ng-template>
 </div>

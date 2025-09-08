@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.Api.MoneyFlow.Payloads.Response.ProfileResponse;
+import com.Api.MoneyFlow.SecurityServices.AuthServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,11 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.Api.MoneyFlow.MainCfg.JwtCfg.JwtUtils;
 import com.Api.MoneyFlow.Repositories.RolesRepository;
@@ -53,6 +52,9 @@ public class AuthController {
 	@Autowired
 	protected PasswordEncoder passwordEncoder;
 
+    @Autowired
+    protected AuthServiceImpl authService;
+
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest login)
@@ -67,10 +69,8 @@ public class AuthController {
 		List<String> role = userDetails.getAuthorities().stream()
 				.map(GrantedAuthority::getAuthority)
 				.collect(Collectors.toList());
-		
-		
-		return ResponseEntity.ok().body(new UserInfoResponse(jwt,"Bearer",userDetails.getId(),userDetails.getUsername(),
-				userDetails.getEmail(),role));
+
+		return ResponseEntity.ok().body(new UserInfoResponse(jwt,userDetails.getId(),userDetails.getUsername(),userDetails.getEmail(),role));
 	}
 	
 	@PostMapping("/signup")
@@ -96,5 +96,13 @@ public class AuthController {
 		
 		return ResponseEntity.ok().body(new MessageResponse("User registered successfully!"));
 	}
-	
+
+    @GetMapping("profile")
+    public ResponseEntity<ProfileResponse> getProfileData(HttpServletRequest request)
+    {
+       var auth = request.getHeader("Authorization").substring("Bearer ".length());
+        var user = this.authService.getCurrentLoggedUser(auth);
+        return  ResponseEntity.ok().body(new ProfileResponse(user.getUsername(),user.getEmail(),user.getAuthorization().stream().findFirst().get().getName()));
+    }
+
 }

@@ -5,92 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8121bdc8-eeb0-413b-bab5-b76436f943a2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/MainCfg/RunOnlyOnce.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/MainCfg/WebApplicationInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Payloads/Request/InputAnnotationPutRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Payloads/Request/InputSearchRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api/src/main/resources/application-dev.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api/src/main/resources/application-production.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/moneyflow-infra-ymls/ngrok/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/moneyflow-infra-ymls/ngrok/ngrok.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-front/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-front/mime.types" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-front/nginx.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-front/src/app/Models/Annotation.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-front/src/app/Models/LoginResponse.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-front/src/app/Models/formCreateAnnotation.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-front/src/app/Models/formLogin.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-front/src/app/Models/formRegister.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-front/src/app/Models/formUpdateAnnotation.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-front/src/app/Models/formUpdateUser.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-front/src/app/Models/user.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-front/src/environments/environment.production.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Domains/Exceptions/AnnotationNotFound.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Payloads/Response/ProfileResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Api/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Api/compose.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Api/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Controllers/AnnotationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Controllers/AnnotationsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Controllers/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Domains/AnnotationDomain.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Domains/AnnotationDomain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/MainCfg/JwtCfg/AuthTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/MainCfg/JwtCfg/AuthTokenFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/MainCfg/JwtCfg/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/MainCfg/JwtCfg/JwtUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/MainCfg/Serializers/CustomJsonResponseSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/MainCfg/Serializers/CustomJsonResponseSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/MainCfg/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/MainCfg/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Payloads/Response/AnnotationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Payloads/Response/AnnotationResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Payloads/Response/UserInfoResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Payloads/Response/UserInfoResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Repositories/AnnotationsRepositories.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Repositories/AnnotationsRepositories.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/SecurityServices/UserDetailsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/SecurityServices/UserDetailsImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Repositories/UserRepositories.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Repositories/UserRepositories.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/SecurityServices/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/SecurityServices/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/SecurityServices/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/SecurityServices/AuthServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Templates/AnnotationTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Templates/AnnotationTemplate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/src/test/java/com/Api/MoneyFlow/ApiApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Api/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToDoList.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/annotation-allview/annotation-allview.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/annotation-allview/annotation-allview.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/annotation-allview/annotation-allview.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/annotation-allview/annotation-allview.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/annotation-allview/annotation-allview.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/annotation-allview/annotation-allview.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/annotation-creation/annotation-creation.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/annotation-creation/annotation-creation.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/annotation-creation/annotation-creation.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/annotation-creation/annotation-creation.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/annotation-creation/annotation-creation.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/annotation-creation/annotation-creation.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.md" beforeDir="false" afterPath="$PROJECT_DIR$/log.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/annotation-view/annotation-view.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/annotation-view/annotation-view.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/annotation-view/annotation-view.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/annotation-view/annotation-view.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/annotation-view/annotation-view.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/annotation-view/annotation-view.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/home/home.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/home/home.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/home/home.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/home/home.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/login/login.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/login/login.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/login/login.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/profile/profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/profile/profile.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/profile/profile.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/profile/profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/register/register.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/register/register.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/register/register.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Components/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/Components/register/register.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Services&amp;Helpers/_interceptor/http.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/ServicesAndHelpers/_interceptor/http.interceptor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Services&amp;Helpers/_services/annotations.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/ServicesAndHelpers/_services/annotations.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Services&amp;Helpers/_services/annotations.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/ServicesAndHelpers/_services/annotations.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Services&amp;Helpers/_services/auth.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/ServicesAndHelpers/_services/auth.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Services&amp;Helpers/_services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/ServicesAndHelpers/_services/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Services&amp;Helpers/_services/storage.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/ServicesAndHelpers/_services/storage.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/Services&amp;Helpers/_services/storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/ServicesAndHelpers/_services/storage.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/app-routing.modules.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/app-routing.modules.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/app.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/app/proxy.conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/proxy.conf.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-front/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-front/src/app/ServicesAndHelpers/_interceptor/http.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/ServicesAndHelpers/_interceptor/http.interceptor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-front/src/app/ServicesAndHelpers/_services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/ServicesAndHelpers/_services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-front/src/app/ServicesAndHelpers/_services/storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/app/ServicesAndHelpers/_services/storage.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-front/src/environments/environment.production.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-front/src/environments/environment.production.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,45 +63,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Docker.Api/Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.compose.yaml.database_prod: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.compose.yaml: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Api [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Api [install].executor&quot;: &quot;Run&quot;,
-    &quot;Notification.DisplayName-DoNotAsk-Database detector&quot;: &quot;Database detector&quot;,
-    &quot;Notification.DoNotAsk-Database detector&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ApiApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/vitorlinx/Documentos/Projects/JavaExtract/Faculdade&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/vitorlinx/Documentos/Projects/JavaExtract/moneyFlow/web-front/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.Api/Dockerfile.executor": "Run",
+    "Docker.compose.yaml.database_prod: Compose Deployment.executor": "Run",
+    "Docker.compose.yaml: Compose Deployment.executor": "Run",
+    "Maven.Api [clean].executor": "Run",
+    "Maven.Api [install].executor": "Run",
+    "Notification.DisplayName-DoNotAsk-Database detector": "Database detector",
+    "Notification.DoNotAsk-Database detector": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ApiApplication.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/vitorlinx/Documentos/Projects/JavaExtract/Faculdade",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
+    "ts.external.directory.path": "/home/vitorlinx/Documentos/Projects/JavaExtract/moneyFlow/web-front/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mongo&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mongo"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Api/src/main/resources" />
@@ -231,8 +172,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.23892.409" />
-        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-IU-252.23892.409" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
+        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
       </set>
     </attachedChunks>
   </component>
@@ -304,6 +245,14 @@
       <workItem from="1756063462306" duration="12000" />
       <workItem from="1756162152688" duration="4079000" />
       <workItem from="1756248831981" duration="3633000" />
+      <workItem from="1756506761755" duration="1896000" />
+      <workItem from="1756509639066" duration="1647000" />
+      <workItem from="1756511492134" duration="4020000" />
+      <workItem from="1756598122156" duration="10000" />
+      <workItem from="1756653668672" duration="648000" />
+      <workItem from="1757111165694" duration="9762000" />
+      <workItem from="1757125739177" duration="2129000" />
+      <workItem from="1757360906532" duration="6097000" />
     </task>
     <servers />
   </component>
@@ -333,6 +282,43 @@
           <properties class="org.springframework.data.mongodb.UncategorizedMongoDbException" package="org.springframework.data.mongodb" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/MainCfg/JwtCfg/AuthTokenFilter.java</url>
+          <line>47</line>
+          <properties class="com.Api.MoneyFlow.MainCfg.JwtCfg.AuthTokenFilter" method="doFilterInternal">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Controllers/AnnotationsController.java</url>
+          <line>27</line>
+          <properties class="com.Api.MoneyFlow.Controllers.AnnotationsController" method="getRecentAnnotations">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Repositories/AnnotationsRepositories.java</url>
+          <line>73</line>
+          <properties class="com.Api.MoneyFlow.Repositories.AnnotationsRepositories" method="fetchAnnotationRecent">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Repositories/AnnotationsRepositories.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Repositories/AnnotationsRepositories.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

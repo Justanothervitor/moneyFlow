@@ -20,7 +20,7 @@ export class StorageService {
     window.localStorage.removeItem(LOCAL_KEY);
     window.localStorage.removeItem(AUTH_KEY);
     window.localStorage.setItem(LOCAL_KEY,JSON.stringify(user));
-    window.localStorage.setItem(AUTH_KEY,JSON.stringify(auth))
+    window.localStorage.setItem(AUTH_KEY,auth.token)
   }
 
   /*public saveAnnotationToBeAltered(annotation:any):void{

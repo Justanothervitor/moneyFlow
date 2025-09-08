@@ -12,9 +12,13 @@ import com.Api.MoneyFlow.Domains.UserDomain;
 @Repository
 public class UserRepositories implements UserTemplate{
 
-	@Autowired
 	protected MongoTemplate template;
-	
+
+    @Autowired
+    public UserRepositories(MongoTemplate template) {
+        this.template = template;
+    }
+
 	protected Query usernameQuery(String username) {
 		return new Query(Criteria.where("username").is(username));
 	}

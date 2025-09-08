@@ -10,16 +10,14 @@ import java.util.List;
 public class UserInfoResponse {
 
 	protected String token;
-	protected String type = "Bearer";
 	protected String id;
 	protected String username;
 	protected String email;
 	protected List<String> role;
 	
-	public UserInfoResponse(String token, String type, String id, String username, String email,List<String> role)
+	public UserInfoResponse(String token, String id, String username, String email,List<String> role)
 	{
 		this.token = token;
-		this.type = type;
 		this.id = id;
 		this.username = username;
 		this.email = email;

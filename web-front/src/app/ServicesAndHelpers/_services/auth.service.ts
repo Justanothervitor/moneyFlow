@@ -17,8 +17,6 @@ export class AuthService {
 
   constructor(private http:HttpClient) { }
 
-
-
   login(data:formLogin):Observable<LoginResponse|null>
   {
     return this.http.post<LoginResponse>(AUTH_END+'login',data,httpOptions);
@@ -27,6 +25,11 @@ export class AuthService {
   register(data:formRegister):Observable<any>
   {
     return this.http.post(AUTH_END+'signup',data,httpOptions);
+  }
+
+  requestProfileData():Observable<any>
+  {
+    return this.http.get(AUTH_END+'profile',httpOptions);
   }
 
 }

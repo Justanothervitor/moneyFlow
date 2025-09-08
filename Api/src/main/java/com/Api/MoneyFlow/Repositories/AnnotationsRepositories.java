@@ -1,8 +1,8 @@
 package com.Api.MoneyFlow.Repositories;
 
 import java.util.List;
+import java.util.Objects;
 
-import com.Api.MoneyFlow.MainCfg.Converters.TimeZoneUtils;
 import com.Api.MoneyFlow.Payloads.Request.InputAnnotationPutRequest;
 import com.Api.MoneyFlow.Payloads.Response.AnnotationResponse;
 import jakarta.validation.constraints.NotNull;
@@ -13,7 +13,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
-import com.Api.MoneyFlow.SecurityServices.AuthServiceImpl;
 import com.Api.MoneyFlow.Templates.AnnotationTemplate;
 import com.Api.MoneyFlow.Domains.AnnotationDomain;
 import com.Api.MoneyFlow.Domains.UserDomain;
@@ -22,18 +21,19 @@ import com.Api.MoneyFlow.Payloads.Request.InputAnnotationRequest;
 @Repository
 public class AnnotationsRepositories implements AnnotationTemplate{
 
-	@Autowired
 	protected MongoTemplate template;
-	@Autowired
-	protected AuthServiceImpl authService;
 
-	protected AnnotationDomain updateUserAndAdd(@NotNull AnnotationDomain obj)
+    @Autowired
+    public AnnotationsRepositories(MongoTemplate template) {
+        this.template = Objects.requireNonNull(template,"template is required");
+    }
+
+	protected void updateUserAndAdd(@NotNull AnnotationDomain obj)
 	{
 		template.update(UserDomain.class)
 		.matching(Criteria.where("_id").is(obj.getUser().getId()))
 		.apply(new Update().push("UserAnnotations").value(obj))
 		.first();
-		return obj;
 	}
 	
 	protected Query fetchBasedInUser(@NotNull UserDomain obj)
@@ -50,7 +50,7 @@ public class AnnotationsRepositories implements AnnotationTemplate{
 		return obj;
 	}
 	
-	protected AnnotationDomain updateUserAndAnnotation(@NotNull AnnotationDomain obj)
+	protected void updateUserAndAnnotation(@NotNull AnnotationDomain obj)
 	{
 		Query query = new Query(Criteria.where("id").is(obj.getUser().getId())
 				.and("UserAnnotations").is(obj.getUser().getUserAnnotations())
@@ -58,7 +58,6 @@ public class AnnotationsRepositories implements AnnotationTemplate{
 		Update update = new Update().set("name", obj.getName())
 				.set("value",obj.getValue()).set("description", obj.getDescription());
 		this.template.updateFirst(query, update, UserDomain.class);
-		return obj;
 	}
 	
 	protected Query idQuery(@NotNull String id)
@@ -71,35 +70,34 @@ public class AnnotationsRepositories implements AnnotationTemplate{
 	}*/
 
 
-
 	@Override
-	public List<AnnotationResponse> fetchAnnotationRecent() {
-		Query query = fetchBasedInUser(authService.returnUser());
-        return template.find(query, AnnotationDomain.class).stream().map(AnnotationResponse::new).toList();
+	public List<AnnotationResponse> fetchAnnotationRecent(UserDomain requested) {
+		Query query = fetchBasedInUser(requested);
+        List<AnnotationResponse> response = template.find(query, AnnotationDomain.class).stream().map(AnnotationResponse::new).toList();
+        return response;
 	}
 
 	@Override
-	public AnnotationDomain fetchOneById(@NotNull String id) {
+	public AnnotationDomain fetchOneById(@NotNull String id){
 		final Query query = idQuery(id);
-		return this.template.findOne(query,AnnotationDomain.class);
+        return this.template.findOne(query, AnnotationDomain.class);
 	}
 
 	@Override
-	public AnnotationDomain createAnnotation(@NotNull InputAnnotationRequest input) {
-		AnnotationDomain obj = new AnnotationDomain(input,authService.returnUser());
+	public void createAnnotation(@NotNull InputAnnotationRequest input,UserDomain requested) {
+		AnnotationDomain obj = new AnnotationDomain(input,requested);
 		this.template.save(obj);
-		return updateUserAndAdd(obj);
-		
+		updateUserAndAdd(obj);
 	}
 
 	@Override
-	public AnnotationDomain updateAnnotation(@NotNull String id, @NotNull InputAnnotationPutRequest input) {
+	public void updateAnnotation(@NotNull String id, @NotNull InputAnnotationPutRequest input) {
 	AnnotationDomain toUpdate = fetchOneById(id);
 		toUpdate.setName(input.getName());
 		toUpdate.setValue(input.getValue());
 		toUpdate.setDescription(input.getDescription());
-		return updateUserAndAnnotation(toUpdate);
-	}
+        updateUserAndAnnotation(toUpdate);
+    }
 
 	@Override
 	public void deleteAnnotation(@NotNull String id) {

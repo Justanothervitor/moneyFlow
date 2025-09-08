@@ -10,6 +10,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,6 +25,7 @@ import com.Api.MoneyFlow.MainCfg.JwtCfg.JwtUtils;
 import com.Api.MoneyFlow.SecurityServices.AuthServiceImpl;
 
 @Configuration
+@EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
 
@@ -71,8 +73,8 @@ public class WebSecurityConfig {
 		.exceptionHandling(exception-> exception.authenticationEntryPoint(unauthorizedHandler))
 		.sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 		.authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**").permitAll()
-				.requestMatchers("/api/data/**").permitAll().anyRequest().authenticated()).
-		formLogin(formLogin -> formLogin.loginPage("/login").permitAll()).rememberMe(Customizer.withDefaults());
+                .requestMatchers("/api/data/**").permitAll().anyRequest().authenticated())
+        .formLogin(formLogin -> formLogin.loginPage("/login").permitAll()).rememberMe(Customizer.withDefaults());
 		http.authenticationProvider(authenticationProvider());
 		http.addFilterBefore(authenticationJwtTokenFilter(),UsernamePasswordAuthenticationFilter.class);
 		return http.build();
