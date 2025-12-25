@@ -1,0 +1,34 @@
+services:
+
+  database-prod:
+    image: 'postgres:latest'
+    container_name: database_prod
+    environment:
+      POSTGRES_USER : $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB : $POSTGRES_DB
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+    ports:
+      - '$POSTGRES_PORT_EXTERNAL:$POSTGRES_PORT_INTERNAL'
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+    networks:
+      - private
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  private:
+    driver: bridge

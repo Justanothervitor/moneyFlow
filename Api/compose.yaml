@@ -1,9 +1,0 @@
-services:
-  database_dev:
-    image: 'mongo:latest'
-    environment:
-      - 'MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER_DEV'
-      - 'MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD_DEV'
-
-    ports:
-      - '$MONGODB_DEV_LOCAL_PORT:$MONGODB_DEV_DOCKER_PORT'
