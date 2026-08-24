@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import { AnnotationsService } from '../../ServicesAndHelpers/_services/annotations.service';
 import { StorageService } from '../../ServicesAndHelpers/_services/storage.service';
-import {Annotation} from "../../Models/Annotation";
+import {Annotation} from "../../Models/annotation";
 
 @Component({
   selector: 'app-annotation-allview',

@@ -1,9 +1,11 @@
 package com.justanothervitor.api_2.repositories;
 
-import com.justanothervitor.api_2.models.AuthProvider;
+import com.justanothervitor.api_2.models.Enums.AuthProvider;
+import com.justanothervitor.api_2.models.Role;
 import com.justanothervitor.api_2.models.User;
-import com.justanothervitor.api_2.models.payloads.request.UserUpdatePayload;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

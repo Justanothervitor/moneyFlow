@@ -2,6 +2,7 @@ package com.justanothervitor.api_2.config.auth.services;
 
 import com.justanothervitor.api_2.config.auth.CustomOAuth2User;
 import com.justanothervitor.api_2.models.*;
+import com.justanothervitor.api_2.models.Enums.AuthProvider;
 import com.justanothervitor.api_2.repositories.RoleRepositories;
 import com.justanothervitor.api_2.repositories.UserRepositories;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {environment} from "../../../environments/environment";
 import {CreateAnnotation} from "../../Models/formCreateAnnotation";
-import {Annotation} from "../../Models/Annotation";
+import {Annotation} from "../../Models/annotation";
 import {UpdateAnnotation} from "../../Models/formUpdateAnnotation";
 
 const DATA_END = environment.apiUrl+"data/";

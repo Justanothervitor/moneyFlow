@@ -1,11 +1,11 @@
-CREATE TYPE "AuthProvider" AS ENUM(
+CREATE TYPE authProvider AS ENUM(
     'GOOGLE',
     'FACEBOOK',
     'LOCAL'
 );
 
-ALTER TABLE "Users"
-    ADD COLUMN "provider" "AuthProvider" ,
-    ADD COLUMN "enabled" BOOLEAN NOT NULL,
-    ADD COLUMN "providerId" VARCHAR(255) NOT NULL,
-    ADD COLUMN "emailVerified" BOOLEAN NOT NULL;
+ALTER TABLE users
+    ADD COLUMN IF NOT EXISTS provider authProvider DEFAULT 'LOCAL',
+    ADD COLUMN IF NOT EXISTS enabled BOOLEAN NOT NULL DEFAULT false,
+    ADD COLUMN IF NOT EXISTS providerid VARCHAR(255),
+    ADD COLUMN IF NOT EXISTS emailverified BOOLEAN NOT NULL DEFAULT false;

@@ -1,5 +1,7 @@
 package com.justanothervitor.api_2.models;
 
+import com.justanothervitor.api_2.models.Enums.AuthProvider;
+
 import java.util.Map;
 
 public class OAuth2UserInfoFactory {

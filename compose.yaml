@@ -1,69 +1,158 @@
 services:
 
-  database_prod:
-    image: 'mongo:latest'
+  database-dev:
+    image: 'docker.io/postgres:latest'
+    container_name: database_dev
     environment:
-      MONGO_INITDB_ROOT_USERNAME: $USER_PROD
-      MONGO_INITDB_ROOT_PASSWORD: $PASSWORD_PROD
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+    ports:
+      - '$POSTGRES_PORT_EXTERNAL:$POSTGRES_PORT_INTERNAL'
 
     volumes:
-      - dbdata:/data/db
-      - type: bind
-        source: ./mongo-entrypoint
-        target: /docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
 
-    ports:
-      - '$MONGODB_PROD_LOCAL_PORT:$MONGODB_PROD_DOCKER_PORT'
-    container_name: database-prod
+    healthcheck:
+      test: [ "CMD-SHELL","pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
     networks:
-      - spring-mongo-prod
+      - spring-postgres-dev
 
-  api-back:
+  api:
+    container_name: api
+
     environment:
-      - 'SPRING_DATA_MONGODB_URI=mongodb://$USER_PROD:$PASSWORD_PROD@database-prod:$MONGODB_PROD_DOCKER_PORT/'
-      - 'JWT_JWTSECRET=2031920wsokfaijfinakjxmkdnaufbiejroi293i40905ikrowjddola0si9'
-      - 'JWT_EXPIRATIONMS=360000000'
-
-    container_name: api-back
+      - "spring.application.name=Api2.0"
+      - "spring.flyway.driver-class-name=org.postgresql"
+      - "spring.flyway.user=moneyflow_dev_environment"
+      - "spring.flyway.password=239302531jkfdmfaksojvunxklxmcqccujwojqwrk12"
+      - "spring.flyway.schemas=moneyflow_dev_database"
+      - "spring.flyway.baseline-on-migrate=true"
+      - "spring.jpa.hibernate.ddl-auto=none"
+      - "spring.jpa.show-sql=true"
+      - "spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect"
+      - "spring.datasource.url=jdbc:postgresql://database_dev/moneyflow_dev_database"
+      - "jwt.secret=450e444afc6a63f8f76c8e80d3a54db0dc40cd4b341e900db0291b4d1c617b56"
+      - "jwt.expirationMs=360000"
+      - "spring.security.oauth2.client.registration.google.client-id=652781714114-4nj5h782rfhi8dgm3eb0bn622oi73ist.apps.googleusercontent.com"
+      - "spring.security.oauth2.client.registration.google.client-secret=$GOOGLE_SECRET"
+      - "spring.security.oauth2.client.registration.google.scope=openid,profile,email"
+      - "spring.security.oauth2.client.registration.google.redirect-uri=http://localhost:8080/api/v2/login/oauth2/code/google"
+      - "spring.mail.host=smtp.gmail.com"
+      - "spring.mail.port=587"
+      - "spring.mail.username=moneyflow.justanothervitor@gmail.com"
+      - "spring.mail.password=${SPRING_MAIL_KEY}"
+      - "spring.mail.properties.mail.smtp.auth=true"
+      - "spring.mail.properties.mail.smtp.starttls.enable=true"
+      - "spring.mail.properties.mail.smtp.starttls.required=true"
+      - "spring.mail.properties.mail.smtp.connectiontimeout=5000"
+      - "spring.mail.properties.mail.smtp.timeout=5000"
+      - "spring.mail.properties.mail.smtp.writetimeout=5000"
+      - "app.mail.from=moneyflow.justanothervitor@gmail.com"
+      - "app.mail.from-name=Moneyflow"
+      - "app.verification.code-length=6"
+      - "app.verification.code-expiration-minutes=10"
+      - "app.verification.max-attempts=3"
+      - "app.frontend.url=http://localhost:3000"
+      - "server.port=443"
+      - "server.ssl.enabled=true"
+      - "server.ssl.key.store="
+      - "server.ssl.key-store=file:${SSL_DESTINATION}"
+      - "server.ssl.key-store-password=${SSL_KEYSTORE_PASSWORD}"
+      - "server.ssl.key-store-type=PKCS12"
+      - "server.ssl.key-alias=production"
+      - "server.ssl.protocol=TLS"
+      - "server.ssl.enabled-protocols=TLSv1.3"
+      - "server.ssl.ciphers=TLS_AES_256_GCM_SHA384,TLS_CHACHA20_POLY1305_SHA256"
+      - "server.forward-headers-strategy=framework"
 
     build:
-      dockerfile: ./Api/Dockerfile
+      dockerfile: Dockerfile
+      context: Api2.0
     ports:
-      - '8888:8080'
+      - '8080'
+      - '8443'
     links:
-      - database_prod
+      - database-dev
 
     depends_on:
-      - database_prod
+      - database-dev
+
+    volumes:
+      - moneyflow_properties:/opt/moneyflow/myapp/conf
 
     networks:
-      - spring-mongo-prod
+      - spring-postgres-dev
       - spring-angular
 
-  web-front:
-    container_name: web-front
+  angular:
+    container_name: angular
     build:
       dockerfile: ./web-front/Dockerfile
 
     ports:
-      - '4200:80'
+      - "80"
 
     links:
-      -  api-back
+      -  api
 
     depends_on:
-      - api-back
+      - api
 
     networks:
       - spring-angular
 
+  nginx:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+      - '443:443'
+
+    volumes:
+      - certbot-certs:/etc/letsencrypt:ro
+      - certbot-webroot:/var/www/certbot:ro
+
+    depends_on:
+      - api
+      - angular
+
+    restart: unless-stopped
+
+    networks:
+      - spring-angular
+
+  certbot:
+    image: certbot/certbot:latest
+
+    volumes:
+      - certbot-certs:/etc/letsencrypt
+      - certbot-webroot:/var/www/certbot
+
+    entrypoint: >
+      certbot certonly --webroot
+      --webroot-path=/var/www/certbot
+      --email vitorhugomoreiradelac@gmail.com
+      --agree-tos
+      --no-eff-email
+      -d money-flow.app -d www.money-flow.app
 
 networks:
-  spring-mongo-prod:
+  spring-postgres-dev:
      driver: bridge
 
   spring-angular:
     driver: bridge
 
 volumes:
-  dbdata:
+  postgres_data:
+  moneyflow_properties:
+  certbot-webroot:
+  certbot-certs:

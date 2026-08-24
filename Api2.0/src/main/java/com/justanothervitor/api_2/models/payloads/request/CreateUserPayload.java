@@ -11,7 +11,6 @@ public class CreateUserPayload {
     private String email;
     private String password;
 
-
     public CreateUserPayload(String username, String email, String password) {
         this.username = username;
         this.email = email;

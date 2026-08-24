@@ -5,11 +5,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UpdatePassword {
+public class UpdatePasswordRequest {
 
     private String password;
 
-    public UpdatePassword(String password) {
+    public UpdatePasswordRequest(String password)
+    {
         this.password = password;
     }
 

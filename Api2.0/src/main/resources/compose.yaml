@@ -1,8 +1,8 @@
 services:
 
-  database-prod:
+  database-dev:
     image: 'postgres:latest'
-    container_name: database_prod
+    container_name: database_dev
     environment:
       POSTGRES_USER : $POSTGRES_USER
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
@@ -27,7 +27,6 @@ services:
 
 volumes:
   postgres_data:
-    driver: local
 
 networks:
   private:

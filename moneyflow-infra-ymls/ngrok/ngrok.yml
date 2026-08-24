@@ -1,6 +1,6 @@
 version: 3
 agent:
-  authtoken: 2aYr9mkdIVUZHUz8wwMpA0Q8IhP_5qLne5j6aEApzZkh5vV3c
+  authtoken: {}
 
 tunnels:
   frontend:

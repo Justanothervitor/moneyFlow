@@ -5,30 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8121bdc8-eeb0-413b-bab5-b76436f943a2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/exceptions/NotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/models/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/models/ERole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/models/EnumTag.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/models/Notes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/models/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/models/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/repositories/CategoryRepositories.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/repositories/NotesRepositories.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/repositories/RoleRepositories.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/repositories/UserRepositories.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/services/UserServices.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Api2.0/src/main/resources/compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Controllers/AnnotationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Controllers/AnnotationsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Controllers/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/MainCfg/MongoCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/MainCfg/MongoCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/MainCfg/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/MainCfg/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Repositories/AnnotationsRepositories.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Repositories/AnnotationsRepositories.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Repositories/RolesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Repositories/RolesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Repositories/UserRepositories.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Repositories/UserRepositories.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moneyflow-infra-ymls/ngrok/ngrok.yml" beforeDir="false" afterPath="$PROJECT_DIR$/moneyflow-infra-ymls/ngrok/ngrok.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +16,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
+        <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Dockerfile" />
         <option value="Class" />
       </list>
     </option>
@@ -45,12 +27,82 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/postgresql/postgresql/42.7.8/postgresql-42.7.8.jar!/org/postgresql/core/v3/ConnectionFactoryImpl.class" root0="SKIP_INSPECTION" />
+  </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
   <component name="MavenImportPreferences">
-    <option name="explicitlyEnabledProfiles" value="native" />
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.000159960132307" />
+      <entry key="MS500" value="1.1741014387709778" />
+      <entry key="S2" value="1.6562190558576362" />
+      <entry key="S5" value="2.0738530229667984" />
+      <entry key="S10" value="2.596686798746197" />
+      <entry key="S30" value="3.6195042918093745" />
+      <entry key="S60" value="5.078242824343481" />
+      <entry key="M2" value="7.200956827014864" />
+      <entry key="M5" value="9.736960087026068" />
+      <entry key="M10" value="11.078580836059023" />
+      <entry key="M15" value="11.635532292452437" />
+      <entry key="M30" value="12.485661725881606" />
+      <entry key="H1" value="15.77853667395073" />
+      <entry key="H2" value="25.947840880998818" />
+      <entry key="H4" value="43.829950197196176" />
+      <entry key="D1" value="504.4420071276792" />
+      <entry key="W1" value="1124.5575424412987" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="1.567694496006394E-83" />
+      <entry key="S2" value="2.8810526797566297E-21" />
+      <entry key="S5" value="1.0433365457223333E-8" />
+      <entry key="S10" value="1.861559909222427E-4" />
+      <entry key="S30" value="0.14023233046505787" />
+      <entry key="S60" value="0.7469722940196716" />
+      <entry key="M2" value="1.790980023240292" />
+      <entry key="M5" value="3.9318053848925754" />
+      <entry key="M10" value="6.122820130689204" />
+      <entry key="M15" value="7.324390307117254" />
+      <entry key="M30" value="9.093435299880575" />
+      <entry key="H1" value="12.647625248312792" />
+      <entry key="H2" value="22.070070306413808" />
+      <entry key="H4" value="36.90009580485465" />
+      <entry key="D1" value="195.49606888658747" />
+      <entry key="W1" value="369.9706817240156" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9203308189536388" />
+      <entry key="MS500" value="1.15378433129261" />
+      <entry key="S2" value="1.6473385009518895" />
+      <entry key="S5" value="2.0552361589550294" />
+      <entry key="S10" value="2.5703147861056204" />
+      <entry key="S30" value="3.7363116932533282" />
+      <entry key="S60" value="5.801091696355966" />
+      <entry key="M2" value="8.970067110432824" />
+      <entry key="M5" value="13.652184167005796" />
+      <entry key="M10" value="17.189135315102448" />
+      <entry key="M15" value="18.950291877706032" />
+      <entry key="M30" value="21.573074436827994" />
+      <entry key="H1" value="28.421083322054887" />
+      <entry key="H2" value="48.01218767953193" />
+      <entry key="H4" value="80.72453142315469" />
+      <entry key="D1" value="699.9308339965883" />
+      <entry key="W1" value="1494.526124622337" />
+    </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -60,53 +112,70 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.Api/Dockerfile.executor": "Run",
-    "Docker.compose.yaml.database_prod: Compose Deployment.executor": "Run",
-    "Docker.compose.yaml: Compose Deployment.executor": "Run",
-    "Maven.Api [clean].executor": "Run",
-    "Maven.Api [install].executor": "Run",
-    "Notification.DisplayName-DoNotAsk-Database detector": "Database detector",
-    "Notification.DoNotAsk-Database detector": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.ApiApplication.executor": "Run",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/vitorlinx/Documentos/Projects/JavaExtract/moneyFlow",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
-    "ts.external.directory.path": "/home/vitorlinx/Documentos/Projects/JavaExtract/moneyFlow/web-front/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Docker.Api/Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.Api2.0/Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.compose.yaml.database_prod: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.compose.yaml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.resources/compose.yaml.database-dev: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.resources/compose.yaml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Api [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Api [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Api_2 [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Api_2 [install].executor&quot;: &quot;Run&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-Database detector&quot;: &quot;Database detector&quot;,
+    &quot;Notification.DoNotAsk-Database detector&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ApiApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.Application.executor&quot;: &quot;Run&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/Vitorlinx/Documentos/ProgramingProjects/DioBootCamps/Java/Project05/Banco-Digital&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Docker&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/Vitorlinx/Documentos/ProgramingProjects/Java/moneyFlow/web-front/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mongo"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;,
+      &quot;mongo&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/moneyflow-infra-ymls/nginx" />
+      <recent name="$PROJECT_DIR$/Api2.0" />
       <recent name="$PROJECT_DIR$/Api/src/main/resources" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/Api" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.ApiApplication">
+  <component name="RunManager" selected="Spring Boot.Application">
     <configuration name="ApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="ACTIVE_PROFILES" value="dev" />
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-17" />
@@ -127,8 +196,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="Api" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.justanothervitor.api_2.Application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.justanothervitor.api_2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
         <settings />
       </deployment>
       <method v="2" />
@@ -154,14 +243,41 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="resources/compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker2">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="Api2.0/src/main/resources/compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="resources/compose.yaml.database-dev: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker2">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="database-dev" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="Api2.0/src/main/resources/compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Docker.compose.yaml.database_prod: Compose Deployment" />
       <item itemvalue="Docker.compose.yaml: Compose Deployment" />
+      <item itemvalue="Docker.compose.yaml.database_prod: Compose Deployment" />
+      <item itemvalue="Docker.resources/compose.yaml: Compose Deployment" />
+      <item itemvalue="Docker.resources/compose.yaml.database-dev: Compose Deployment" />
       <item itemvalue="Spring Boot.ApiApplication" />
+      <item itemvalue="Spring Boot.Application" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.compose.yaml.database_prod: Compose Deployment" />
+        <item itemvalue="Spring Boot.Application" />
+        <item itemvalue="Docker.resources/compose.yaml: Compose Deployment" />
+        <item itemvalue="Docker.resources/compose.yaml.database-dev: Compose Deployment" />
+        <item itemvalue="Docker.resources/compose.yaml.database-dev: Compose Deployment" />
         <item itemvalue="Docker.compose.yaml: Compose Deployment" />
       </list>
     </recent_temporary>
@@ -169,8 +285,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
+        <option value="bundled-jdk-30f59d01ecdd-34e2839f716b-intellij.indexing.shared.core-IU-262.9437.185" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.9437.185" />
       </set>
     </attachedChunks>
   </component>
@@ -254,6 +370,87 @@
       <workItem from="1757381788639" duration="257000" />
       <workItem from="1757542448066" duration="5054000" />
       <workItem from="1762541977090" duration="459000" />
+      <workItem from="1767557286703" duration="923000" />
+      <workItem from="1767636302441" duration="15628000" />
+      <workItem from="1767721287727" duration="21316000" />
+      <workItem from="1768914210826" duration="124000" />
+      <workItem from="1770754311121" duration="24000" />
+      <workItem from="1770759564715" duration="1059000" />
+      <workItem from="1770761723866" duration="3648000" />
+      <workItem from="1770840768827" duration="2175000" />
+      <workItem from="1770842954420" duration="1762000" />
+      <workItem from="1770850774846" duration="109000" />
+      <workItem from="1770852104562" duration="6766000" />
+      <workItem from="1770925003103" duration="2401000" />
+      <workItem from="1770934371604" duration="114000" />
+      <workItem from="1770935754800" duration="1426000" />
+      <workItem from="1770938812632" duration="115000" />
+      <workItem from="1770940051393" duration="1139000" />
+      <workItem from="1771011341963" duration="2928000" />
+      <workItem from="1771014565270" duration="423000" />
+      <workItem from="1771021742447" duration="3040000" />
+      <workItem from="1771519836742" duration="340000" />
+      <workItem from="1771531275307" duration="607000" />
+      <workItem from="1771617956574" duration="1275000" />
+      <workItem from="1771631323627" duration="5374000" />
+      <workItem from="1771871346451" duration="6933000" />
+      <workItem from="1771885072783" duration="7488000" />
+      <workItem from="1771973459761" duration="2221000" />
+      <workItem from="1772653526331" duration="759000" />
+      <workItem from="1772749382321" duration="1683000" />
+      <workItem from="1772753327601" duration="9000" />
+      <workItem from="1772844300750" duration="492000" />
+      <workItem from="1773086004265" duration="607000" />
+      <workItem from="1773093898419" duration="396000" />
+      <workItem from="1773440329342" duration="886000" />
+      <workItem from="1773691939211" duration="2000" />
+      <workItem from="1773706651135" duration="26000" />
+      <workItem from="1773708280095" duration="32000" />
+      <workItem from="1773787658618" duration="323000" />
+      <workItem from="1773787999176" duration="1482000" />
+      <workItem from="1775005862896" duration="433000" />
+      <workItem from="1775081298601" duration="2059000" />
+      <workItem from="1775324904994" duration="1215000" />
+      <workItem from="1775409600557" duration="477000" />
+      <workItem from="1775501902984" duration="30000" />
+      <workItem from="1775503584405" duration="273000" />
+      <workItem from="1775610457735" duration="275000" />
+      <workItem from="1775632181505" duration="5000" />
+      <workItem from="1775671985606" duration="732000" />
+      <workItem from="1775674141188" duration="1080000" />
+      <workItem from="1775697112870" duration="1325000" />
+      <workItem from="1775767729579" duration="694000" />
+      <workItem from="1775859721778" duration="895000" />
+      <workItem from="1776206214134" duration="3982000" />
+      <workItem from="1777580389790" duration="4151000" />
+      <workItem from="1777666968789" duration="5585000" />
+      <workItem from="1777703481168" duration="453000" />
+      <workItem from="1777747780120" duration="4288000" />
+      <workItem from="1777914696433" duration="1997000" />
+      <workItem from="1777924675037" duration="120000" />
+      <workItem from="1779496712403" duration="10582000" />
+      <workItem from="1779687138541" duration="157000" />
+      <workItem from="1779732164475" duration="1227000" />
+      <workItem from="1779825244113" duration="2000" />
+      <workItem from="1779839256101" duration="1874000" />
+      <workItem from="1779907241429" duration="3765000" />
+      <workItem from="1779920854754" duration="4308000" />
+      <workItem from="1779996669487" duration="2074000" />
+      <workItem from="1780425462116" duration="751000" />
+      <workItem from="1780510184032" duration="340000" />
+      <workItem from="1780512704333" duration="7000" />
+      <workItem from="1782082512989" duration="39000" />
+      <workItem from="1782082598307" duration="7000" />
+      <workItem from="1782082911380" duration="20000" />
+      <workItem from="1782083838858" duration="6000" />
+      <workItem from="1782083867288" duration="6000" />
+      <workItem from="1782083894974" duration="12000" />
+      <workItem from="1782085738521" duration="117000" />
+      <workItem from="1782085955681" duration="8000" />
+      <workItem from="1783025589451" duration="2372000" />
+      <workItem from="1783198478355" duration="1410000" />
+      <workItem from="1783968468042" duration="7280000" />
+      <workItem from="1784222289228" duration="10306000" />
     </task>
     <servers />
   </component>
@@ -269,12 +466,25 @@
     <option featureType="dependencySupport" implementationName="java:org.springframework.data:spring-data-commons" />
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
     <option featureType="dependencySupport" implementationName="java:org.hibernate.validator:hibernate-validator" />
+    <option featureType="com.intellij.fileTypeFactory" implementationName="nginx.conf" />
     <option featureType="dependencySupport" implementationName="java:org.springframework:spring-webmvc" />
     <option featureType="dependencySupport" implementationName="java:org.projectlombok:lombok" />
     <option featureType="dependencySupport" implementationName="executable:docker" />
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.conf" />
     <option featureType="dependencySupport" implementationName="javascript:npm:@angular/core" />
     <option featureType="dependencySupport" implementationName="java:org.springframework.boot:spring-boot" />
     <option featureType="dependencySupport" implementationName="java:jakarta.xml.ws:jakarta.xml.ws-api" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -282,6 +492,10 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="org.springframework.data.mongodb.UncategorizedMongoDbException" package="org.springframework.data.mongodb" />
           <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.postgresql.util.PSQLException" package="org.postgresql.util" />
+          <option name="timeStamp" value="21" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Controllers/AnnotationsController.java</url>
@@ -305,6 +519,51 @@
           <url>file://$PROJECT_DIR$/Api/src/main/java/com/Api/MoneyFlow/Repositories/AnnotationsRepositories.java</url>
           <line>21</line>
           <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/config/SetupRolesAndCategories.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/config/SetupRolesAndCategories.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/config/SetupRolesAndCategories.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/config/SetupRolesAndCategories.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/config/SetupRolesAndCategories.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/config/SetupRolesAndCategories.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/config/SetupRolesAndCategories.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/config/SetupRolesAndCategories.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Api2.0/src/main/java/com/justanothervitor/api_2/config/SetupRolesAndCategories.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

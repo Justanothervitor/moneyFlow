@@ -2,7 +2,7 @@ import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/c
 import { StorageService } from '../../ServicesAndHelpers/_services/storage.service';
 import { AnnotationsService } from '../../ServicesAndHelpers/_services/annotations.service';
 import {UpdateAnnotation} from "../../Models/formUpdateAnnotation";
-import {Annotation} from "../../Models/Annotation";
+import {Annotation} from "../../Models/annotation";
 
 
 

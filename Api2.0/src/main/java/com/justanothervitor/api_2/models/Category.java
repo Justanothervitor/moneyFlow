@@ -1,11 +1,12 @@
 package com.justanothervitor.api_2.models;
 
+import com.justanothervitor.api_2.models.Enums.EnumTag;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
+
 @Data
-@Table(name = "Categories")
+@Entity(name = "categories")
 public class Category {
 
     @Id
@@ -14,5 +15,6 @@ public class Category {
     private String name;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "etag")
     private EnumTag tag;
 }

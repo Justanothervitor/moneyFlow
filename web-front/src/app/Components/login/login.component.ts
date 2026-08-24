@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
   user : User ={
     username : "",
     email : "",
-    roles : [],
   };
 
   constructor(protected authenticator:AuthService,protected storage:StorageService){}
@@ -44,10 +43,8 @@ export class LoginComponent implements OnInit {
           const userData : User ={
             username: data?.username,
             email: data?.email,
-            roles: data?.role,
           };
           const authData ={
-            type: data?.type,
             token: data?.token,
           }
 
@@ -63,6 +60,11 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
+  loginWithGoogle():void{
+    window.location.href = '${}'
+  }
+
   reloadPage():void{
     window.location.reload();
   }

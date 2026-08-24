@@ -1,2 +1,7 @@
 .env
-
+Api2.0/src/main/resources/application.properties
+.idea
+.mvn
+private-key.pem
+certificate.pem
+keystore.p12

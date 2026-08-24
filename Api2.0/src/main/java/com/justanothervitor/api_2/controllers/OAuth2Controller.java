@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v2/oauth2")
+@RequestMapping("/api/v1/security/oauth2")
 public class OAuth2Controller {
 
-    @GetMapping("/userr")
+    @GetMapping("/user")
     public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal CustomOAuth2User oauth2User)
     {
         if(oauth2User == null){
