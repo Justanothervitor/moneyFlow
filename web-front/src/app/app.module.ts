@@ -14,7 +14,8 @@ import { AnnotationCreationComponent } from "./Components/annotation-creation/an
 import { HttpInterceptorProviders } from "./ServicesAndHelpers/_interceptor/http.interceptor";
 import { CommonModule } from "@angular/common";
 import { AnnotationViewComponent } from "./Components/annotation-view/annotation-view.component";
-import {LoadingComponent} from "./Components/loading/loading.component";
+import { LoadingComponent } from "./Components/loading/loading.component";
+import { OAuth2RedirectComponent } from "./Components/oauth2-redirect/oauth2-redirect.component";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
@@ -30,6 +31,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
         AnnotationAllviewComponent,
         AnnotationCreationComponent,
         AnnotationViewComponent,
+        OAuth2RedirectComponent,
     ],
     imports: [
         BrowserModule,

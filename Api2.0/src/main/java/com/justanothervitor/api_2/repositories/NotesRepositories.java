@@ -20,7 +20,7 @@ public interface NotesRepositories extends JpaRepository<Notes,Long>, JpaSpecifi
 
     Optional<Notes> findByName(String name);
 
-    Page<Notes> findByCategoryId(int id, Pageable pageable);
+    //Page<Notes> findByCategoryId(int id, Pageable pageable);
 
     @Query("SELECT n FROM notes n WHERE n.price BETWEEN :minPrice and :maxPrice")
     Page<Notes> findByPrice(@Param("minPrice")BigDecimal minPrice, @Param("maxPrice")BigDecimal maxPrice, Pageable pageable);

@@ -5,8 +5,11 @@ import {environment} from "../../../environments/environment";
 import {CreateAnnotation} from "../../Models/formCreateAnnotation";
 import {Annotation} from "../../Models/annotation";
 import {UpdateAnnotation} from "../../Models/formUpdateAnnotation";
+import {NotesFilterRequest} from "../../Models/notesFilterRequest";
+import {NotePagesResponse} from "../../Models/notePagesResponse";
 
-const DATA_END = environment.apiUrl+"data/";
+const DATA_END = environment.apiEndPointDataNotes + "/";
+const NOTES_API = '/api/v1/data/notes';
 
 const httpOptions = environment.httpOptions;
 @Injectable({
@@ -15,6 +18,14 @@ const httpOptions = environment.httpOptions;
 export class AnnotationsService {
 
   constructor(protected http:HttpClient) { }
+
+  /**
+   * Pesquisa notas com filtro, paginação e ordenação.
+   * Backend: POST /api/v1/data/notes/search
+   */
+  searchAnnotations(filter: NotesFilterRequest): Observable<NotePagesResponse<Annotation>> {
+    return this.http.post<NotePagesResponse<Annotation>>(NOTES_API + '/search', filter);
+  }
 
   createAnnotation(data:CreateAnnotation):Observable<any>
   {
@@ -41,3 +52,4 @@ export class AnnotationsService {
     return this.http.delete(DATA_END+"delete/"+id,httpOptions);
   }
 }
+

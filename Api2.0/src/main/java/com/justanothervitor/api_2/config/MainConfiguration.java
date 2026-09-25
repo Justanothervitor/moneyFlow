@@ -76,8 +76,8 @@ public class MainConfiguration {
                                 .userService(customOauth2Service))
                         .successHandler(this.oAuth2AuthenticationSucessHandler)
                         .failureHandler(this.oAuth2AuthenticationFailureHandler)
-                ).addFilterBefore(jwtFetcherFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(filterChain, JwtFilterChain.class);
+                ).addFilterBefore(filterChain, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(fetcherFilter, JwtFilterChain.class);
         return http.build();
 
     }

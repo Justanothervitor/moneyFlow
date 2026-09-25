@@ -26,7 +26,7 @@ services:
     container_name: moneyflow-api-dev
     build:
       dockerfile: Dockerfile
-      context: Api2.0
+      context: ../../Api2.0
     environment:
       - 'SPRING_APPLICATION_NAME=Api2.0'
       - 'SPRING_FLYWAY_DRIVER_CLASS_NAME=org.postgresql'
@@ -34,7 +34,7 @@ services:
       - 'SPRING_FLYWAY_PASSWORD=$POSTGRES_PASSWORD'
       - 'SPRING_FLYWAY_SCHEMAS=$POSTGRES_DB'
       - 'SPRING_FLYWAY_BASELINE_ON_MIGRATE=true'
-      - 'SPRING_JPA_HIBERNATE_DDL_AUTO=none'
+      - 'SPRING_JPA_HIBERNATE_DDL_AUTO=update'
       - 'SPRING_JPA_SHOW_SQL=true'
       - 'SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect'
       - 'SPRING_DATASOURCE_URL=jdbc:postgresql://moneyflow-database-dev/$POSTGRES_DB'
@@ -43,7 +43,7 @@ services:
       - 'SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID'
       - 'SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT_SECRET=$GOOGLE_SECRET'
       - 'SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_SCOPE=openid,profile,email'
-      - 'SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_REDIRECT_URI=http://localhost:8080/api/v2/login/oauth2/code/google'
+      - 'SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_REDIRECT_URI=$GOOGLE_URL'
       - 'SPRING_MAIL_HOST=smtp.gmail.com'
       - 'SPRING_MAIL_PORT=587'
       - 'SPRING_MAIL_USERNAME=$MAIL_USERNAME'
@@ -59,7 +59,7 @@ services:
       - 'APP_VERIFICATION_CODE_LENGTH=6'
       - 'APP_VERIFICATION_CODE_EXPIRATION_MINUTES=10'
       - 'APP_VERIFICATION_MAX_ATTEMPTS=3'
-      - 'APP_FRONTEND_URL=http://localhost:3000'
+      - 'APP_FRONTEND_URL=$FRONTEND_URL'
     ports:
       - '8080:8080'
     depends_on:
@@ -75,7 +75,7 @@ services:
     container_name: moneyflow-angular-dev
     build:
       dockerfile: Dockerfile
-      context: web-front
+      context: ../../web-front
     expose:
       - "80"
     depends_on:

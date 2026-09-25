@@ -1,12 +1,17 @@
 {
-    "/url":
-    {
-        "target" : "http://localhost:8888",
-        "secure" : "false",
-        "pathRewrite" :{
-            "^/url" : ""
+    "/url": {
+        "target": "http://localhost:8888",
+        "secure": false,
+        "pathRewrite": {
+            "^/url": ""
         },
-        "changeOrigin" : true,
-        "logLevel" : "debug"
+        "changeOrigin": true,
+        "logLevel": "debug"
+    },
+    "/api": {
+        "target": "http://localhost:8888",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
     }
 }

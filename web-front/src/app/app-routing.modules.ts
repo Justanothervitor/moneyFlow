@@ -8,6 +8,7 @@ import { ProfileComponent } from "./Components/profile/profile.component";
 import { AnnotationAllviewComponent } from "./Components/annotation-allview/annotation-allview.component";
 import { AnnotationCreationComponent } from "./Components/annotation-creation/annotation-creation.component";
 import { AnnotationViewComponent } from "./Components/annotation-view/annotation-view.component";
+import { OAuth2RedirectComponent } from "./Components/oauth2-redirect/oauth2-redirect.component";
 
 const routes: Routes = [
 
@@ -18,6 +19,7 @@ const routes: Routes = [
     {path : 'annotations',component:AnnotationAllviewComponent},
     {path : 'create',component:AnnotationCreationComponent},
     {path : 'annotations/:id',component:AnnotationViewComponent},
+    {path : 'oauth2/redirect', component: OAuth2RedirectComponent},
     {path : '',redirectTo: 'home', pathMatch: 'full'}
 ];
 

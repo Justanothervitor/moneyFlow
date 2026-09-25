@@ -1,0 +1,90 @@
+/* ─── Wrapper ──────────────────────────────────────────────────────────── */
+.annotations-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 24px;
+}
+
+/* ─── Barra de Pesquisa ────────────────────────────────────────────────── */
+.search-bar {
+  .input-group {
+    max-width: 600px;
+  }
+
+  .input-group-text {
+    border-right: none;
+  }
+
+  .form-control {
+    border-left: none;
+
+    &:focus {
+      box-shadow: none;
+      border-color: #ced4da;
+    }
+  }
+}
+
+/* ─── Grid de Cards ────────────────────────────────────────────────────── */
+.card-group-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+/* ─── Card de Anotação ─────────────────────────────────────────────────── */
+.annotation-card {
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .card-body {
+    padding: 16px 20px;
+  }
+
+  .card-title {
+    color: #333;
+    margin-bottom: 8px;
+  }
+}
+
+/* ─── Estado Vazio ─────────────────────────────────────────────────────── */
+.empty-state {
+  padding: 40px 20px;
+
+  p {
+    margin-bottom: 12px;
+  }
+}
+
+/* ─── Paginação ────────────────────────────────────────────────────────── */
+.pagination {
+  .page-link {
+    cursor: pointer;
+    font-size: 14px;
+    padding: 6px 14px;
+    color: #333;
+    border-color: #dee2e6;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+
+  .page-item.active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+  }
+
+  .page-item.disabled .page-link {
+    color: #adb5bd;
+    pointer-events: none;
+  }
+}

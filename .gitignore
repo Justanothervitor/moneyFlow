@@ -1,7 +1,13 @@
-.env
+moneyflow-infra-ymls/docker/.env.dev
 Api2.0/src/main/resources/application.properties
 .idea
 .mvn
 private-key.pem
 certificate.pem
 keystore.p12
+.mcp.json
+moneyflow-infra-ymls/docker/.env.prod
+moneyflow-infra-ymls/docker/duckdns
+moneyflow-infra-ymls/docker/letsencrypt
+moneyflow-infra-ymls/docker/data
+moneyflow-infra-ymls/docker/init-scripts

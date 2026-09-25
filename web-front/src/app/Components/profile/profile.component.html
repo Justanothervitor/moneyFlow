@@ -1,12 +1,90 @@
-<div>
+<div class="profile-wrapper">
   <span *ngIf="!isLoading else loading">
-   <div class="card card-container">
-     <ul class="">
-       <li> Nome: {{currentUser.username}}</li>
-       <li> Email : {{currentUser.email}}</li>
-       <li>Cargo : {{currentUser.role}}</li>
-     </ul>
-   </div>
+
+    <!-- ─── Dados do Usuário ──────────────────────────────── -->
+    <div class="card card-container mb-4">
+      <h5 class="mb-3">👤 Dados da Conta</h5>
+      <ul class="list-unstyled mb-0">
+        <li class="mb-1"><strong>Nome:</strong> {{ currentUser.username }}</li>
+        <li class="mb-1"><strong>Email:</strong> {{ currentUser.email }}</li>
+        <li class="mb-1"><strong>Cargo:</strong> {{ currentUser.role ?? 'Usuário' }}</li>
+      </ul>
+    </div>
+
+    <!-- ─── Segurança — 2FA ───────────────────────────────── -->
+    <div class="card card-container">
+      <h5 class="mb-1">🔐 Segurança</h5>
+      <p class="text-muted small mb-3">Autenticação em Dois Fatores (2FA)</p>
+
+      <!-- Badge de status -->
+      <div class="d-flex align-items-center gap-3 mb-3">
+        @if (twoFactorEnabled) {
+          <span class="badge-2fa badge-2fa--active">✅ Ativo</span>
+        } @else {
+          <span class="badge-2fa badge-2fa--inactive">⚪ Inativo</span>
+        }
+
+        @if (!twoFactorEnabled && !isDisabling2FA) {
+          <button class="btn btn-sm btn-outline-primary" (click)="enable2FA()" [disabled]="is2FALoading">
+            @if (is2FALoading) {
+              <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+            }
+            Ativar 2FA
+          </button>
+        }
+
+        @if (twoFactorEnabled && !isDisabling2FA) {
+          <button class="btn btn-sm btn-outline-danger" (click)="startDisabling2FA()" [disabled]="is2FALoading">
+            Desativar 2FA
+          </button>
+        }
+      </div>
+
+      <!-- Formulário de confirmação para desativar -->
+      @if (isDisabling2FA) {
+        <div class="disable-2fa-form">
+          <p class="text-muted small mb-2">
+            Para desativar o 2FA, confirme sua senha atual:
+          </p>
+          <div class="mb-2">
+            <input type="password" class="form-control form-control-sm"
+                   [(ngModel)]="disable2FAPassword"
+                   placeholder="Senha atual" />
+          </div>
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-danger" (click)="confirmDisable2FA()" [disabled]="is2FALoading">
+              @if (is2FALoading) {
+                <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+              }
+              Confirmar desativação
+            </button>
+            <button class="btn btn-sm btn-outline-secondary" (click)="cancelDisabling2FA()">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      }
+
+      <!-- Mensagens de feedback -->
+      @if (twoFASuccessMessage) {
+        <div class="alert alert-success mt-3 mb-0 py-2" role="alert">
+          {{ twoFASuccessMessage }}
+        </div>
+      }
+      @if (twoFAErrorMessage) {
+        <div class="alert alert-danger mt-3 mb-0 py-2" role="alert">
+          {{ twoFAErrorMessage }}
+        </div>
+      }
+
+      <!-- Descrição informativa -->
+      <hr class="my-3" />
+      <p class="text-muted small mb-0">
+        O 2FA adiciona uma camada extra de segurança à sua conta. Ao ativar,
+        um código de verificação será enviado ao seu email sempre que você fizer login.
+      </p>
+    </div>
+
   </span>
 
   <ng-template #loading>
@@ -15,3 +93,4 @@
     </span>
   </ng-template>
 </div>
+
